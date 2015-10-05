@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Foundation | Welcome</title>
     <link rel="stylesheet" href="css/foundation.css" />
-    <link rel="stylesheet" href="css/app.css" />
+
     <script src="js/vendor/modernizr.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.1.0/fabric.all.min.js" ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-
+      <script src="js/app.js"></script>
+      <link rel="stylesheet" href="css/app.css" />
   </head>
   <body>
 
@@ -23,6 +24,7 @@
                   <li><a href="#" class="button">Add Clip Art</a></li>
                   <li><a href="#" class="button">Upload Image</a></li>
                   <li><a href="#" class="button">Personalize</a></li>
+                  <li><a href="#" class="button customMenuItem"> &nbsp; &nbsp;</a></li>
               </ul>
           </div>
           <hr/>
@@ -42,9 +44,17 @@
           <br>
           <img class="ThumbImg" src="img/back.png">
           <br>
+          <img class="ThumbImg" src="http://placehold.it/400x300&text=[img]">
+          <br>
+          <img class="ThumbImg" src="http://placehold.it/400x300&text=[img]">
+
       </div>
       <div class="large-5 columns">
-          <img src="img/front.png">
+          <div id="FrontViewDiv">
+
+              <canvas id="FrontViewCanvas" ></canvas>
+
+          </div>
       </div>
 
       <div class="large-4 columns">
@@ -59,6 +69,7 @@
                   </fieldset>
               </form>
           </div>
+
       </div>
 
   </div>

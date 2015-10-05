@@ -15,8 +15,14 @@
 .ThumbImg
 {
     border: 1px solid grey;
+    width: 78px;
+    height: 93px;
+    margin: 6px;
 }
-
+.customMenuItem
+{
+    width: 220px;
+}
 #text-properties .input-text-1, #add-text .input-text-1 {
     overflow: hidden;
     resize: none;
@@ -39,6 +45,15 @@ fieldset {
     border: 0;
     margin: 0;
     padding: 0;
+}
+#FrontViewDiv{
+    background-image: URL('../img/front.png');
+    /* background-position: 20px 20px; */
+    height: 430px;
+    /* width: 200px; */
+    /* position: relative; */
+    /* background-repeat: no-repeat; */
+    background-size: cover;
 }
 user agent stylesheetfieldset {
     display: block;
@@ -93,4 +108,11 @@ user agent stylesheetfieldset {
     padding: 9px;
     font-size: 12px;
     text-align: center;
+}
+#FrontViewCanvas
+{
+    width: 50%;
+    height: 70%;
+
+    margin: 60px 99px;
 }
