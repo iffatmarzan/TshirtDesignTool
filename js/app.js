@@ -4,13 +4,15 @@ var TShirtDesignTool =
     init: function()
     {
         var _this = TShirtDesignTool;
-        _this.drawText();
+        //var Text=$('#add-text-form textarea').val();
+        //_this.drawText(Text);
     }
-    , drawText: function()
+    , drawText: function(Text)
     {
+        Text==""?Text="dot dot dot":Text=Text;
         var canvas = new fabric.Canvas('FrontViewCanvas');
 
-        var SampleText = new fabric.Text('hello, world.', {
+        var SampleText = new fabric.Text(Text, {
             left: canvas.getWidth() / 2,
             top: canvas.getHeight() / 2
         });
@@ -26,4 +28,8 @@ var TShirtDesignTool =
 $(document).ready(function()
 {
    TShirtDesignTool.init();
+    $('#add-text-form a').bind("click",function(){
+        var Text=$('#add-text-form textarea').val();
+        TShirtDesignTool.drawText(Text);
+    });
 });
