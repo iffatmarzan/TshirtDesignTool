@@ -18,9 +18,9 @@
   <div class="row">
       <div class="large-12 columns">
           <div class="nav-bar left">
-              <ul class="button-group">
+              <ul id="nav-bar-list" class="button-group">
                   <li><a href="#" class="button">Choose Shirt</a></li>
-                  <li><a href="#" class="button">Add Text</a></li>
+                  <li><a href="#" onclick='return TShirtDesignTool.changeToAddTextPanel()' class="button">Add Text</a></li>
                   <li><a href="#" class="button">Add Clip Art</a></li>
                   <li><a href="#" class="button">Upload Image</a></li>
                   <li><a href="#" class="button">Personalize</a></li>
@@ -57,7 +57,7 @@
               <form id="add-text-form" class="content">
                   <textarea class="text full input-text-1" name=""></textarea>
                   <fieldset>
-                      <a href="#" title="Add" class="primary-button full">Add Text</a>
+                      <a href="#" onclick='return TShirtDesignTool.drawText()' title="Add" class="primary-button full">Add Text</a>
                   </fieldset>
               </form>
           </div>
