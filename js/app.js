@@ -33,7 +33,9 @@ var TShirtDesignTool =
         return;
     var SampleText = new fabric.Text(Text, {
         left: canvas.getWidth() / 2,
-        top: canvas.getHeight() / 2
+        top: canvas.getHeight() / 2,
+        fontFamily: 'sans-serif',
+        fontSize:30
     });
 
     SampleText.on('selected', function() {
@@ -45,25 +47,26 @@ var TShirtDesignTool =
         console.log('Text added');
     });
 
-    SampleText.on('onkeydown', function(e) {
-       // not fired
+    SampleText.on('moving', function(e) {
+        //console.log('moving fired');
+
     });
 
     window.canvas.add(SampleText);
     TShirtDesignTool.changeToEditorPanel(Text);
     return;
-} // end of drawText
+}                                                       // end of drawText
     ,changeToEditorPanel:function(Text){
     $('#textPanel').empty();
     $('#textPanel').css("border","1px solid darkgray");
       var editorPanel=' <h6>Text Properties:</h6>'+
              '<textarea name="" onkeyup="return TShirtDesignTool.updateText(this.value)">'+Text+'</textarea>'+
-             '<select name="font">'+
-             '<option value="" selected>Change font</option><option value="1">OldSansBlack</option>'+
-             '<option value="2">Megazine</option><option value="3" >Typodermic</option><option value="4">Impact</option>'+
+             '<select name="font" onchange="return TShirtDesignTool.changeTextFont(this.value)">'+
+             '<option value="sans-serif" selected>sans-serif</option><option value="OldSansBlack">OldSansBlack</option>'+
+             '<option value="Megazine">Megazine</option><option value="monospace" >monospace</option><option value="Impact">Impact</option>'+
             '</select>';
     $('#textPanel').append(editorPanel);
-}   //end of changeToEditorPanel
+}                                            //end of changeToEditorPanel
     ,changeToAddTextPanel: function(){
         $('#textPanel').empty();
         $('#textPanel').removeAttr('style');
@@ -84,9 +87,12 @@ var TShirtDesignTool =
     window.canvas.getActiveObject().text=e;
     canvas.renderAll();
 }
+    ,changeTextFont: function(e){
+    window.canvas.getActiveObject().fontFamily=e;
+    window.canvas.renderAll();
+}
 
-
-};
+};                 //end of TShirtDesignTool
 
 $(document).ready(function () {
     TShirtDesignTool.init();
@@ -96,9 +102,11 @@ $(document).ready(function () {
             var activeObject=window.canvas.getActiveObject();
             if(activeObject!==null){
                 window.canvas.remove(activeObject);
+                TShirtDesignTool.changeToAddTextPanel();
             }
             window.canvas.renderAll();
-        }};
+        }
+    };
 
 
 });
