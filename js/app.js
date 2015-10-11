@@ -3,6 +3,7 @@ var TShirtDesignTool =
     init: function () {
         var _this = TShirtDesignTool;
         _this.canvasInit();
+
        // _this.drawText("Hello world");
 
         //window.canvas.on('mouse:down', function(options) {
@@ -34,13 +35,15 @@ var TShirtDesignTool =
     var SampleText = new fabric.Text(Text, {
         left: canvas.getWidth() / 2,
         top: canvas.getHeight() / 2,
+        //left: 380,
+        //top:370,
         fontFamily: 'sans-serif',
         fontSize:30
     });
 
     SampleText.on('selected', function() {
        // console.log('Text is selected');
-        TShirtDesignTool.changeToEditorPanel(SampleText.text);
+        TShirtDesignTool.changeToEditorPanel();
     });
 
     SampleText.on('added', function() {
@@ -48,7 +51,23 @@ var TShirtDesignTool =
     });
 
     SampleText.on('moving', function(e) {
-        //console.log('moving fired');
+      //  console.log(e.e.clientX);
+
+        if(e.e.clientX <= 475 ){
+            window.canvas.getActiveObject().set('left',25);
+        }
+
+        if(e.e.clientX >= 790){
+            window.canvas.getActiveObject().set('left',385);
+        }
+
+        if(e.e.clientY <= 100){
+            window.canvas.getActiveObject().set('top',10);
+        }
+        if(e.e.clientY >=400){
+            window.canvas.getActiveObject().set('top',400);
+        }
+        window.canvas.renderAll();
 
     });
 
@@ -56,15 +75,20 @@ var TShirtDesignTool =
     TShirtDesignTool.changeToEditorPanel(Text);
     return;
 }                                                       // end of drawText
-    ,changeToEditorPanel:function(Text){
+    ,changeToEditorPanel:function(){
+    var selectedObjecct=window.canvas.getActiveObject();
     $('#textPanel').empty();
     $('#textPanel').css("border","1px solid darkgray");
       var editorPanel=' <h6>Text Properties:</h6>'+
-             '<textarea name="" onkeyup="return TShirtDesignTool.updateText(this.value)">'+Text+'</textarea>'+
-             '<select name="font" onchange="return TShirtDesignTool.changeTextFont(this.value)">'+
+             '<textarea name="" onkeyup="return TShirtDesignTool.updateText(this.value)">'+selectedObjecct.text+'</textarea>'+
+             '<select name="font" onchange="return TShirtDesignTool.setTextFont(this.value)">'+
              '<option value="sans-serif" selected>sans-serif</option><option value="OldSansBlack">OldSansBlack</option>'+
              '<option value="Megazine">Megazine</option><option value="monospace" >monospace</option><option value="Impact">Impact</option>'+
-            '</select>';
+             '</select>'+
+             '<b>Spacing: </b><input type="number"  min="1" max="10" value="1" onchange="return TShirtDesignTool.setTextSpacing(this.value)" >'+
+             '<br/><b>Color: </b><input type="color" onchange="return TShirtDesignTool.setTextColor(this.value)" value='+selectedObjecct.fill+'>'+
+             '<br/><b>Arc :</b><br/> <input type="range"  min="-50" max="50" value="0" onchange="return TShirtDesignTool.setTextArc(this.value)"/><br>';
+
     $('#textPanel').append(editorPanel);
 }                                            //end of changeToEditorPanel
     ,changeToAddTextPanel: function(){
@@ -82,21 +106,30 @@ var TShirtDesignTool =
         $('#textPanel').append(addTextPanel);
 }
     ,updateText: function(e){
-    //var activeObject=window.canvas.getActiveObject();
-    //activeObject.setAttribute('text',this.value);
     window.canvas.getActiveObject().text=e;
     canvas.renderAll();
 }
-    ,changeTextFont: function(e){
+    ,setTextFont: function(e){
     window.canvas.getActiveObject().fontFamily=e;
     window.canvas.renderAll();
+}
+    ,setTextSpacing:function(e){
+
+}
+    ,setTextColor:function(e){
+         window.canvas.getActiveObject().fill=e;
+        canvas.renderAll();
+
+}
+    ,setTextArc:function(e){
+
 }
 
 };                 //end of TShirtDesignTool
 
 $(document).ready(function () {
-    TShirtDesignTool.init();
 
+    TShirtDesignTool.init();
     document.onkeydown = function(e) {
         if (46 === e.keyCode || e.keyCode===110) {
             var activeObject=window.canvas.getActiveObject();
@@ -106,7 +139,6 @@ $(document).ready(function () {
             }
             window.canvas.renderAll();
         }
-    };
-
+    }
 
 });
