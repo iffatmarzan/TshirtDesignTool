@@ -158,6 +158,22 @@ user agent stylesheetfieldset {
     width:30px;
 }
 #textPanel input[type=range]{
+    margin-top: 15px;
     width:200px;
 
+}
+#clipartPanel{
+    /*border:1px solid darkgray;*/
+    min-height:300px;
+    margin: 10px;
+    padding: 0px;
+}
+
+#clipartPanel h6{
+    font-weight: bold;
+    background-color: whitesmoke;
+    padding: 10px 0px 10px 10px;
+    margin: 0px;
+    border-bottom: 1px solid darkgray;
+    color: darkslategray;
 }

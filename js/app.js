@@ -46,7 +46,8 @@ var TShirtDesignTool =
                 left:canvas.getWidth() / 2,
                 top:canvas.getHeight() / 2,
                 fill: '#ff0000',
-                textAlign: 'center'
+                textAlign: 'center',
+                id:'CT'
             });
 
             //SampleText.on('selected', function() {
@@ -73,6 +74,7 @@ var TShirtDesignTool =
                                }
             }
             $('#textPanel').empty();
+            $('#clipartPanel').empty();
             $('#textPanel').css("border","1px solid darkgray");
               var editorPanel=' <h6>Text Properties:</h6>'+
                      '<textarea name="" onkeyup="return TShirtDesignTool.updateText(this.value)">'+selectedObject.text+'</textarea>'+
@@ -85,6 +87,7 @@ var TShirtDesignTool =
                      '<br/><b>ArcText :</b><input type="range"  min="-170" max="170" value="0" onchange="return TShirtDesignTool.setTextArc(this.value)"/><br>';
 
             $('#textPanel').append(editorPanel);
+            $('#clipartPanel').hide();
 }
     ,changeToAddTextPanel: function(){
         $('#textPanel').empty();
@@ -99,6 +102,7 @@ var TShirtDesignTool =
             '</form>'+
             '</div>';
         $('#textPanel').append(addTextPanel);
+        $('#clipartPanel').hide();
 }
     ,updateText: function(e){
             var activeObject=window.canvas.getActiveObject();
@@ -121,9 +125,8 @@ var TShirtDesignTool =
                 spacing:-10+parseInt(e)*2});
 
     if(activeObject.effect=='STRAIGHT')
-        activeObject.set({
-            spacing:e});
-
+       var ctext=activeObject.text.split("").join(String.fromCharCode(8239));
+        activeObject.setText(ctext);
                 canvas.renderAll();
 }
     ,setTextColor:function(e){
@@ -162,6 +165,19 @@ var TShirtDesignTool =
                 radius:1000-Math.abs(e)*5
                 });
             canvas.renderAll();
+}
+    ,changeToAddcliPartPanel:function(){
+    //$('#textPanel').removeAttr('style');
+    $('#textPanel').hide();
+    //$('#clipartPanel').empty();
+    $('#clipartPanel').css("border","1px solid darkgray");
+    //var clipartPanel='<h6>Clipart:</h6>'+
+    //                 '<div class="row">'+'' +
+    //                 '<div class="large-12 columns">'+
+    //                 '</div></div>';
+    //$('#clipartPanel').append(clipartPanel);
+    $('#clipartPanel').show();
+
 }
 
 };
