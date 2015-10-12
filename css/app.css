@@ -147,3 +147,13 @@ user agent stylesheetfieldset {
     border-radius: 2px;
     background-color: whitesmoke;
 }
+
+#textPanel b{
+    margin:10px 5px 10px 10%;
+}
+#textPanel input[type=number]{
+    width:30px;
+}
+#textPanel input[type=color]{
+    width:30px;
+}
