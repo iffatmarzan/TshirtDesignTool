@@ -72,7 +72,7 @@
         range: 5,
         smallFont: 10,
         largeFont: 30,
-        effect: 'curved',
+        effect: 'STRAIGHT',
         /**
          * Spacing between the letters
          * @type fabricNumber

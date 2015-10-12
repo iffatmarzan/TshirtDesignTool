@@ -43,12 +43,10 @@ var TShirtDesignTool =
             //    fontSize:30
             //});
             var curveText= new fabric.CurvedText(Text,{
-                left:100,
-                top:100,
+                left:canvas.getWidth() / 2,
+                top:canvas.getHeight() / 2,
                 fill: '#ff0000',
-                textAlign: 'center',
-                spacing:1,
-                effect:'STRAIGHT'
+                textAlign: 'center'
             });
 
             //SampleText.on('selected', function() {
@@ -82,9 +80,9 @@ var TShirtDesignTool =
                      '<option value="sans-serif" selected>sans-serif</option><option value="OldSansBlack">OldSansBlack</option>'+
                      '<option value="Megazine">Megazine</option><option value="monospace" >monospace</option><option value="Impact">Impact</option>'+
                      '</select>'+
-                     '<b>Spacing: </b><input type="number"  min="0" max="10" value="1" onchange="return TShirtDesignTool.setTextSpacing(this.value)" >'+
+                     '<b>Spacing: </b><input type="number"  min="-5" max="10" value="0" onchange="return TShirtDesignTool.setTextSpacing(this.value)" >'+
                      '<b>Color: </b><input type="color" onchange="return TShirtDesignTool.setTextColor(this.value)" value='+selectedObject.fill+'>'+
-                     '<br/><b>ArcText :</b><input type="range"  min="-180" max="180" value="0" onchange="return TShirtDesignTool.setTextArc(this.value)"/><br>';
+                     '<br/><b>ArcText :</b><input type="range"  min="-170" max="170" value="0" onchange="return TShirtDesignTool.setTextArc(this.value)"/><br>';
 
             $('#textPanel').append(editorPanel);
 }
@@ -117,9 +115,16 @@ var TShirtDesignTool =
             var activeObject=window.canvas.getActiveObject();
             if(!activeObject)
                 activeObject=window.canvas.item(0);
+
+         if(activeObject.effect=='arc')
                 activeObject.set({
-                spacing:e});
-            canvas.renderAll();
+                spacing:-10+parseInt(e)*2});
+
+    if(activeObject.effect=='STRAIGHT')
+        activeObject.set({
+            spacing:e});
+
+                canvas.renderAll();
 }
     ,setTextColor:function(e){
             var activeObject=window.canvas.getActiveObject();
@@ -133,10 +138,28 @@ var TShirtDesignTool =
             var activeObject=window.canvas.getActiveObject();
             if(!activeObject)
                 activeObject=window.canvas.item(0);
+
+    if(parseInt(e)<10 && parseInt(e)>-10 ){
+        activeObject.set({
+            effect:'STRAIGHT',
+            spacing:0,
+
+        });
+        canvas.renderAll();
+        return;
+    }
+    if(activeObject.effect=='STRAIGHT')
+        activeObject.set({
+            effect:'arc',
+            spacing:-10,
+            textAlign: 'center'
+        });
+
             activeObject.set({
-                effect:'arc',
                 textAlign: 'center',
-                radius:360+e,
+                reverse:parseInt(e)<0,
+                spacing:activeObject.spacing,
+                radius:1000-Math.abs(e)*5
                 });
             canvas.renderAll();
 }

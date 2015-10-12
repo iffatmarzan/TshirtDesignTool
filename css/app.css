@@ -157,3 +157,7 @@ user agent stylesheetfieldset {
 #textPanel input[type=color]{
     width:30px;
 }
+#textPanel input[type=range]{
+    width:200px;
+
+}
