@@ -186,6 +186,10 @@
                     fixedLetterAngle = ((this.letters.item(0).fontSize + space) / this.radius) / (Math.PI/180);
                     textWidth = ((this.text.length+1) * (this.letters.item(0).fontSize + space));
                 }
+                else if (this.effect=='STRAIGHT') {
+                    //fixedLetterAngle = ((this.letters.item(0).fontSize + space) / this.radius) / (Math.PI/180);
+                    textWidth = ((this.text.length+1) * (this.letters.item(0).fontSize + space));
+                }
                 // Text align
                 if(this.get('textAlign')==='right'){
                     curAngle = 90-(((textWidth/2)/ this.radius) / (Math.PI/180));
@@ -238,6 +242,7 @@
                     }else if(this.effect==='STRAIGHT'){//STRAIGHT
                         //var newfont=(i*5)+15;
                         //this.letters.item(i).set('fontSize',(newfont));
+
                         this.letters.item(i).set('left', (width));
                         this.letters.item(i).set('top', (0));
                         this.letters.item(i).setAngle(0);

@@ -34,28 +34,34 @@ var TShirtDesignTool =
             var Text = $('#add-text-form textarea').val();
             if(Text==="")
                 return;
-            var SampleText = new fabric.Text(Text, {
-                left: canvas.getWidth() / 2,
-                top: canvas.getHeight() / 2,
-                //left: 380,
-                //top:370,
-                fontFamily: 'sans-serif',
-                fontSize:30
-            });
-            var curveText= new fabric.CurvedText("curved",{
-                left:50,
-                top:50,
+            //var SampleText = new fabric.Text(Text, {
+            //    left: canvas.getWidth() / 2,
+            //    top: canvas.getHeight() / 2,
+            //    //left: 380,
+            //    //top:370,
+            //    fontFamily: 'sans-serif',
+            //    fontSize:30
+            //});
+            var curveText= new fabric.CurvedText(Text,{
+                left:100,
+                top:100,
                 fill: '#ff0000',
-                radius:0,
-                spacing:20
+                textAlign: 'center',
+                spacing:1,
+                effect:'STRAIGHT'
             });
 
-            SampleText.on('selected', function() {
-               // console.log('Text is selected');
+            //SampleText.on('selected', function() {
+            //   // console.log('Text is selected');
+            //    TShirtDesignTool.changeToEditorPanel();
+            //});
+
+            curveText.on('selected', function() {
+                // console.log('Text is selected');
                 TShirtDesignTool.changeToEditorPanel();
             });
 
-            window.canvas.add(SampleText);
+            //window.canvas.add(SampleText);
             window.canvas.add(curveText);
             canvas.renderAll();
             TShirtDesignTool.changeToEditorPanel();
@@ -76,9 +82,9 @@ var TShirtDesignTool =
                      '<option value="sans-serif" selected>sans-serif</option><option value="OldSansBlack">OldSansBlack</option>'+
                      '<option value="Megazine">Megazine</option><option value="monospace" >monospace</option><option value="Impact">Impact</option>'+
                      '</select>'+
-                     '<b>Spacing: </b><input type="number"  min="1" max="10" value="1" onchange="return TShirtDesignTool.setTextSpacing(this.value)" >'+
+                     '<b>Spacing: </b><input type="number"  min="0" max="10" value="1" onchange="return TShirtDesignTool.setTextSpacing(this.value)" >'+
                      '<b>Color: </b><input type="color" onchange="return TShirtDesignTool.setTextColor(this.value)" value='+selectedObject.fill+'>'+
-                     '<br/><b>ArcText :</b><input type="range"  min="-50" max="50" value="0" onchange="return TShirtDesignTool.setTextArc(this.value)"/><br>';
+                     '<br/><b>ArcText :</b><input type="range"  min="-180" max="180" value="0" onchange="return TShirtDesignTool.setTextArc(this.value)"/><br>';
 
             $('#textPanel').append(editorPanel);
 }
@@ -100,7 +106,7 @@ var TShirtDesignTool =
             var activeObject=window.canvas.getActiveObject();
             if(!activeObject)
                 activeObject=window.canvas.item(0);
-            activeObject.text=e;
+            activeObject.setText(e);
             canvas.renderAll();
 }
     ,setTextFont: function(e){
@@ -108,17 +114,31 @@ var TShirtDesignTool =
             window.canvas.renderAll();
 }
     ,setTextSpacing:function(e){
-            //window.canvas.getActiveObject().set('spacing',e);
-            //canvas.renderAll();
+            var activeObject=window.canvas.getActiveObject();
+            if(!activeObject)
+                activeObject=window.canvas.item(0);
+                activeObject.set({
+                spacing:e});
+            canvas.renderAll();
 }
     ,setTextColor:function(e){
-         window.canvas.getActiveObject().fill=e;
-         canvas.renderAll();
+            var activeObject=window.canvas.getActiveObject();
+            if(!activeObject)
+                activeObject=window.canvas.item(0);
+            activeObject.setFill(e);
+            canvas.renderAll();
 
 }
     ,setTextArc:function(e){
-            //window.canvas.getActiveObject().set('radius',e);
-            //canvas.renderAll();
+            var activeObject=window.canvas.getActiveObject();
+            if(!activeObject)
+                activeObject=window.canvas.item(0);
+            activeObject.set({
+                effect:'arc',
+                textAlign: 'center',
+                radius:360+e,
+                });
+            canvas.renderAll();
 }
 
 };
