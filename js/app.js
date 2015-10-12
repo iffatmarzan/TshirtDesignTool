@@ -42,6 +42,13 @@ var TShirtDesignTool =
                 fontFamily: 'sans-serif',
                 fontSize:30
             });
+            var curveText= new fabric.CurvedText("curved",{
+                left:50,
+                top:50,
+                fill: '#ff0000',
+                radius:0,
+                spacing:20
+            });
 
             SampleText.on('selected', function() {
                // console.log('Text is selected');
@@ -49,10 +56,11 @@ var TShirtDesignTool =
             });
 
             window.canvas.add(SampleText);
+            window.canvas.add(curveText);
             canvas.renderAll();
             TShirtDesignTool.changeToEditorPanel();
             return;
-}                                                       // end of drawText
+}
     ,changeToEditorPanel:function(){
             var selectedObject=window.canvas.getActiveObject();
             if(!selectedObject){
@@ -69,8 +77,8 @@ var TShirtDesignTool =
                      '<option value="Megazine">Megazine</option><option value="monospace" >monospace</option><option value="Impact">Impact</option>'+
                      '</select>'+
                      '<b>Spacing: </b><input type="number"  min="1" max="10" value="1" onchange="return TShirtDesignTool.setTextSpacing(this.value)" >'+
-                     '<br/><b>Color: </b><input type="color" onchange="return TShirtDesignTool.setTextColor(this.value)" value='+selectedObject.fill+'>'+
-                     '<br/><b>Arc :</b><br/> <input type="range"  min="-50" max="50" value="0" onchange="return TShirtDesignTool.setTextArc(this.value)"/><br>';
+                     '<b>Color: </b><input type="color" onchange="return TShirtDesignTool.setTextColor(this.value)" value='+selectedObject.fill+'>'+
+                     '<br/><b>ArcText :</b><input type="range"  min="-50" max="50" value="0" onchange="return TShirtDesignTool.setTextArc(this.value)"/><br>';
 
             $('#textPanel').append(editorPanel);
 }
@@ -89,7 +97,10 @@ var TShirtDesignTool =
         $('#textPanel').append(addTextPanel);
 }
     ,updateText: function(e){
-            window.canvas.getActiveObject().text=e;
+            var activeObject=window.canvas.getActiveObject();
+            if(!activeObject)
+                activeObject=window.canvas.item(0);
+            activeObject.text=e;
             canvas.renderAll();
 }
     ,setTextFont: function(e){
