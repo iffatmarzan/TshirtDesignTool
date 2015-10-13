@@ -138,7 +138,30 @@ user agent stylesheetfieldset {
     border-radius: 2px;
 }
 
-#textPanel select{
+#EditorPanel{
+    min-height:300px;
+    margin: 10px;
+    padding: 0px;
+    border: 1px solid gray;
+    display:none;
+}
+#EditorPanel h6{
+    font-weight: bold;
+    background-color: whitesmoke;
+    padding: 10px 0px 10px 10px;
+    margin: 0px;
+    border-bottom: 1px solid darkgray;
+    color: darkslategray;
+}
+#EditorPanel textarea{
+    width:90%;
+    margin:15px 0px 10px 5%;
+    padding-left: 10px;
+    border: 1px solid darkgray;
+    border-radius: 2px;
+}
+
+#EditorPanel select{
     width:90%;
     height:40px;
     margin:5px 0px 10px 5%;
@@ -148,20 +171,23 @@ user agent stylesheetfieldset {
     background-color: whitesmoke;
 }
 
-#textPanel b{
+#EditorPanel b{
     margin:10px 5px 10px 10%;
 }
-#textPanel input[type=number]{
+#EditorPanel input[type=number]{
+    display:inline-block;
     width:40px;
 }
-#textPanel input[type=color]{
+#EditorPanel input[type=color]{
+    display:inline-block;
     width:30px;
 }
-#textPanel input[type=range]{
+#EditorPanel input[type=range]{
     margin-top: 15px;
     width:200px;
 
 }
+
 #clipartPanel{
     /*border:1px solid darkgray;*/
     min-height:300px;

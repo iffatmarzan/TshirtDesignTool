@@ -8,7 +8,6 @@ var TShirtDesignTool =
                 window.canvas = new fabric.Canvas('canvas');
                 canvas.setHeight(430);
                 canvas.setWidth(385);
-                //canvas.isDrawingMode=true;
                 canvas.renderAll();
                 canvas.on('object:moving', function (e) {
                     var obj = e.target;
@@ -69,40 +68,28 @@ var TShirtDesignTool =
     ,changeToEditorPanel:function(){
             var selectedObject=window.canvas.getActiveObject();
             if(!selectedObject){
-                selectedObject={'text':$('#textPanel textarea').val(),
-                                 'fill':'#000'
-                               }
+                selectedObject=window.canvas.item(0);
             }
-            $('#textPanel').empty();
-            $('#clipartPanel').empty();
-            $('#textPanel').css("border","1px solid darkgray");
-              var editorPanel=' <h6>Text Properties:</h6>'+
-                     '<textarea name="" onkeyup="return TShirtDesignTool.updateText(this.value)">'+selectedObject.text+'</textarea>'+
-                     '<select name="font" onchange="return TShirtDesignTool.setTextFont(this.value)">'+
-                     '<option value="sans-serif" selected>sans-serif</option><option value="OldSansBlack">OldSansBlack</option>'+
-                     '<option value="Megazine">Megazine</option><option value="monospace" >monospace</option><option value="Impact">Impact</option>'+
-                     '</select>'+
-                     '<b>Spacing: </b><input type="number"  min="-5" max="10" value="0" onchange="return TShirtDesignTool.setTextSpacing(this.value)" >'+
-                     '<b>Color: </b><input type="color" onchange="return TShirtDesignTool.setTextColor(this.value)" value='+selectedObject.fill+'>'+
-                     '<br/><b>ArcText :</b><input type="range"  min="-170" max="170" value="0" onchange="return TShirtDesignTool.setTextArc(this.value)"/><br>';
-
-            $('#textPanel').append(editorPanel);
+            $('#textPanel').hide();
             $('#clipartPanel').hide();
+            $('#EditorPanel').show();
+    $('#EditorPanel textarea').val(selectedObject.text);
+    $('#EditorPanel input[type=color]').val(selectedObject.fill);
+    $('#EditorPanel input[type=range]').val(selectedObject.radius);
+    $('#EditorPanel input[type=number]').val(selectedObject.spacing);
+
+    $('#EditorPanel select option').each(function(){
+        $this=$(this);
+        var value=$this.val();
+        if(value==selectedObject.fontFamily){
+            $this.attr('selected','selected');
+        }
+    });
 }
     ,changeToAddTextPanel: function(){
-        $('#textPanel').empty();
-        $('#textPanel').removeAttr('style');
-        var addTextPanel='<div class="panel">'+
-            '<h5>Add Text</h5>'+
-            '<form id="add-text-form" class="content">'+
-            '<textarea class="text full input-text-1" name=""></textarea>'+
-            '<fieldset>'+
-            '<a href="#" title="Add" onclick="return TShirtDesignTool.drawText()" class="primary-button full">Add Text</a>'+
-            '</fieldset>'+
-            '</form>'+
-            '</div>';
-        $('#textPanel').append(addTextPanel);
+        $('#EditorPanel').hide();
         $('#clipartPanel').hide();
+        $('#textPanel').show();
 }
     ,updateText: function(e){
             var activeObject=window.canvas.getActiveObject();
@@ -115,7 +102,7 @@ var TShirtDesignTool =
             var activeObject=window.canvas.getActiveObject();
             if(!activeObject)
                 activeObject=window.canvas.item(0);
-            activeObject.fontFamily=e;
+            activeObject.set('fontFamily',e);
             canvas.renderAll();
 }
     ,setTextSpacing:function(e){
@@ -169,18 +156,21 @@ var TShirtDesignTool =
                 });
             canvas.renderAll();
 }
-    ,changeToAddcliPartPanel:function(){
+    ,changeToClipartPanel:function(){
     //$('#textPanel').removeAttr('style');
     $('#textPanel').hide();
-    //$('#clipartPanel').empty();
-    $('#clipartPanel').css("border","1px solid darkgray");
-    //var clipartPanel='<h6>Clipart:</h6>'+
-    //                 '<div class="row">'+'' +
-    //                 '<div class="large-12 columns">'+
-    //                 '</div></div>';
-    //$('#clipartPanel').append(clipartPanel);
+    $('#EditorPanel').hide();
     $('#clipartPanel').show();
 
+}
+    ,addClipartToCanvas:function(ImageId){
+    var imgElement = document.getElementById(ImageId);
+    var imgInstance = new fabric.Image(imgElement, {
+        left: 100,
+        top: 100,
+        angle: 0
+    });
+    window.canvas.add(imgInstance);
 }
 
 };
