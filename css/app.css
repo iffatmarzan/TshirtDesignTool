@@ -165,8 +165,9 @@ user agent stylesheetfieldset {
 #clipartPanel{
     /*border:1px solid darkgray;*/
     min-height:300px;
-    margin: 10px;
+    margin: 0px;
     padding: 0px;
+    display: none;
 }
 
 #clipartPanel h6{
@@ -176,4 +177,8 @@ user agent stylesheetfieldset {
     margin: 0px;
     border-bottom: 1px solid darkgray;
     color: darkslategray;
+}
+
+.clipartImage{
+    padding:10px;
 }

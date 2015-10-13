@@ -112,15 +112,18 @@ var TShirtDesignTool =
             canvas.renderAll();
 }
     ,setTextFont: function(e){
-            window.canvas.getActiveObject().fontFamily=e;
-            window.canvas.renderAll();
+            var activeObject=window.canvas.getActiveObject();
+            if(!activeObject)
+                activeObject=window.canvas.item(0);
+            activeObject.fontFamily=e;
+            canvas.renderAll();
 }
     ,setTextSpacing:function(e){
             var activeObject=window.canvas.getActiveObject();
             if(!activeObject)
                 activeObject=window.canvas.item(0);
 
-         if(activeObject.effect=='arc')
+            if(activeObject.effect=='arc')
                 activeObject.set({
                 spacing:-10+parseInt(e)*2});
 
