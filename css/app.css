@@ -1,4 +1,4 @@
-.panel{
+/*.panel{
     border-style: solid;
     border-width: 1px;
     border-color: #d8d8d8;
@@ -6,7 +6,7 @@
     padding: 1.25rem;
     background: #f2f2f2;
     color: #333333;
-}
+}*/
 .EditPanel
 {
     height: 300px;
@@ -153,6 +153,12 @@ user agent stylesheetfieldset {
     border-bottom: 1px solid darkgray;
     color: darkslategray;
 }
+
+.editor-panel-tools{
+    padding: 15px;
+}
+
+/*
 #EditorPanel textarea{
     width:90%;
     margin:15px 0px 10px 5%;
@@ -177,25 +183,34 @@ user agent stylesheetfieldset {
 #EditorPanel input[type=number]{
     display:inline-block;
     width:40px;
+    cursor: pointer;
 }
+*/
 #EditorPanel input[type=color]{
-    display:inline-block;
-    width:30px;
+    /*display:inline-block;
+    width:30px;*/
+    cursor: pointer;
 }
+
+#EditorPanel select{
+    cursor: pointer;
+}
+/*
 #EditorPanel input[type=range]{
     margin-top: 15px;
     width:200px;
 
 }
-
+*/
+/*
 #clipartPanel{
     /*border:1px solid darkgray;*/
-    min-height:300px;
+    /*min-height:300px;
     margin: 0px;
     padding: 0px;
     display: none;
 }
-
+*/
 #clipartPanel h6{
     font-weight: bold;
     background-color: whitesmoke;

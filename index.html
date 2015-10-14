@@ -8,11 +8,10 @@
 
     <script src="js/vendor/modernizr.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.js" ></script>
-    <script src="js/app.js"></script>
-    <script src="js/foundation.min.js"></script>
-    <script src="js/curveText.class.js"></script>
 
-    <link rel="stylesheet" href="css/foundation.css" />
+
+
+      <link rel="stylesheet" href="css/foundation.css" />
     <link rel="stylesheet" href="css/app.css" />
 
 
@@ -58,12 +57,19 @@
 
           <div id="textPanel" class="large-4 columns">
               <div class="panel">
-                  <h5>Add Text</h5>
+
                   <form id="add-text-form" class="content">
-                      <textarea class="text full input-text-1" name=""></textarea>
-                      <fieldset>
-                          <a href="#" onclick='return TShirtDesignTool.drawText()' title="Add" class="primary-button full">Add Text</a>
-                      </fieldset>
+                      <div class="row">
+                          <div class="large-12 columns">
+                            <label><h5>Add Text</h5></label>
+                            <textarea class="text full input-text-1" name=""></textarea>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="large-12 columns">
+                              <a href="#" onclick='return TShirtDesignTool.drawText()' title="Add" class="button primary-button full">Add Text</a>
+                          </div>
+                      </div>
                   </form>
               </div>
           </div>
@@ -71,18 +77,71 @@
             <div id="EditorPanel" class="large-4 columns">
               <!--Default display none-->
                <h6>Text Properties:</h6>
-               <textarea name="" onkeyup="return TShirtDesignTool.updateText(this.value)"></textarea>
-               <select name="font" onchange="return TShirtDesignTool.setTextFont(this.value)">
-                  <option value="sans-serif">sans-serif</option>
-                  <option value="OldSansBlack">OldSansBlack</option>
-                  <option value="Megazine">Megazine</option>
-                  <option value="monospace" >monospace</option>
-                  <option value="Impact">Impact</option>
-               </select>
-               <b>Spacing: </b><input type="number"  min="-5" max="10" value="0" onchange="return TShirtDesignTool.setTextSpacing(this.value)" >
-               <b>Color: </b><input type="color" onchange="return TShirtDesignTool.setTextColor(this.value)" value='+selectedObject.fill+'>
-               <br/><b>ArcText :</b><input type="range"  min="-170" max="170" value="0" onchange="return TShirtDesignTool.setTextArc(this.value)"/>
-              <br>
+                <div class="editor-panel-tools">
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <textarea name="" class="radius" onkeyup="return TShirtDesignTool.updateText(this.value)"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="large-12 columns">
+                           <select name="font" class="radius"  onchange="return TShirtDesignTool.setTextFont(this.value)">
+                              <option value="sans-serif">sans-serif</option>
+                              <option value="OldSansBlack">OldSansBlack</option>
+                              <option value="Megazine">Megazine</option>
+                              <option value="monospace" >monospace</option>
+                              <option value="Impact">Impact</option>
+                           </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="large-6 columns">
+                            <div class="row">
+                                <div class="large-6 columns">
+                                    <label for="text-spacing" class=" inline"><b>Spacing: </b></label>
+                                </div>
+                                <div class="large-6 columns">
+                                    <input id="text-spacing" type="number" class="radius"   min="-5" max="10" value="0" onchange="return TShirtDesignTool.setTextSpacing(this.value)" >
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="large-6 columns">
+                            <div class="row">
+                                <div class="large-6 columns">
+                                    <label for="text-color" class=" inline"><b>Color: </b></label>
+                                </div>
+                                <div class="large-6 columns">
+                                    <input id="text-color" type="color" class="radius"  onchange="return TShirtDesignTool.setTextColor(this.value)" value='+selectedObject.fill+'>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <div class="row">
+                                <div class="large-4 columns">
+                                    <label for="text-arc" class="inline"><b>ArcText :</b></label>
+                                </div>
+                                <div class="large-8 columns">
+                                    <div id="text-arc" class="range-slider round" data-slider>
+                                        <span class="range-slider-handle" role="slider" tabindex="0"></span>
+                                        <span class="range-slider-active-segment"></span>
+                                        <input type="hidden">
+                                    </div>
+
+                                    <!--input id="text-arc" type="range"  min="-170" max="170" value="0" onchange="return TShirtDesignTool.setTextArc(this.value)"/-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
             <div id="clipartPanel" class="large-4 columns" >
@@ -107,6 +166,8 @@
         <script src="js/foundation.min.js"></script>
         <script src="js/app.js"></script>
         <script src="js/curveText.class.js"></script>
+
+
 
         <script>
           $(document).foundation();
