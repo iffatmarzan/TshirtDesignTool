@@ -4,98 +4,113 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Foundation | Welcome</title>
-    <link rel="stylesheet" href="css/foundation.css" />
 
-     <script src="js/vendor/modernizr.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.js" ></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-      <script src="js/app.js"></script>
-      <script src="js/foundation.min.js"></script>
-      <script src="js/curveText.class.js"></script>
-      <link rel="stylesheet" href="css/app.css" />
+
+    <script src="js/vendor/modernizr.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.js" ></script>
+    <script src="js/app.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script src="js/curveText.class.js"></script>
+
+    <link rel="stylesheet" href="css/foundation.css" />
+    <link rel="stylesheet" href="css/app.css" />
+
 
   </head>
+
   <body>
 
+      <div class="row">
+          <div class="large-12 columns">
+              <div class="nav-bar left">
+                  <ul id="nav-bar-list" class="button-group">
+                      <li><a href="#" class="button">Choose Shirt</a></li>
+                      <li><a href="#" onclick='return TShirtDesignTool.changeToAddTextPanel()' class="button">Add Text</a></li>
+                      <li><a href="#" onclick='return TShirtDesignTool.changeToClipartPanel()' class="button">Add Clip Art</a></li>
+                      <li><a href="#" class="button">Upload Image</a></li>
+                      <li><a href="#" class="button">Personalize</a></li>
+                      <li><a href="#" class="button customMenuItem"> &nbsp; &nbsp;</a></li>
+                  </ul>
+              </div>
+              <hr/>
 
-  <div class="row">
-      <div class="large-12 columns">
-          <div class="nav-bar left">
-              <ul id="nav-bar-list" class="button-group">
-                  <li><a href="#" class="button">Choose Shirt</a></li>
-                  <li><a href="#" onclick='return TShirtDesignTool.changeToAddTextPanel()' class="button">Add Text</a></li>
-                  <li><a href="#" onclick='return TShirtDesignTool.changeToClipartPanel()' class="button">Add Clip Art</a></li>
-                  <li><a href="#" class="button">Upload Image</a></li>
-                  <li><a href="#" class="button">Personalize</a></li>
-                  <li><a href="#" class="button customMenuItem"> &nbsp; &nbsp;</a></li>
-              </ul>
-          </div>
-          <hr/>
 
-
-      </div>
-  </div>
-
-  <div class="row">
-
-      <div class="large-2 columns">
-          <img class="ThumbImg" src="img/front-thumbnail.png">
-          <br>
-          <img class="ThumbImg" src="img/back.png">
-          <br>
-          <img class="ThumbImg" src="http://placehold.it/400x300&text=[img]">
-          <br>
-          <img class="ThumbImg" src="http://placehold.it/400x300&text=[img]">
-      </div>
-
-      <div class="large-5 columns">
-          <div id="FrontViewDiv">
-              <canvas id="canvas"></canvas>
           </div>
       </div>
 
-      <div id="textPanel" class="large-4 columns">
-          <div class="panel">
-              <h5>Add Text</h5>
-              <form id="add-text-form" class="content">
-                  <textarea class="text full input-text-1" name=""></textarea>
-                  <fieldset>
-                      <a href="#" onclick='return TShirtDesignTool.drawText()' title="Add" class="primary-button full">Add Text</a>
-                  </fieldset>
-              </form>
+      <div class="row">
+
+          <div class="large-2 columns">
+              <img class="ThumbImg" src="img/front-thumbnail.png">
+              <br>
+              <img class="ThumbImg" src="img/back.png">
+              <br>
+              <img class="ThumbImg" src="http://placehold.it/400x300&text=[img]">
+              <br>
+              <img class="ThumbImg" src="http://placehold.it/400x300&text=[img]">
           </div>
+
+          <div class="large-5 columns">
+              <div id="FrontViewDiv">
+                  <canvas id="canvas"></canvas>
+              </div>
+          </div>
+
+          <div id="textPanel" class="large-4 columns">
+              <div class="panel">
+                  <h5>Add Text</h5>
+                  <form id="add-text-form" class="content">
+                      <textarea class="text full input-text-1" name=""></textarea>
+                      <fieldset>
+                          <a href="#" onclick='return TShirtDesignTool.drawText()' title="Add" class="primary-button full">Add Text</a>
+                      </fieldset>
+                  </form>
+              </div>
+          </div>
+
+            <div id="EditorPanel" class="large-4 columns">
+              <!--Default display none-->
+               <h6>Text Properties:</h6>
+               <textarea name="" onkeyup="return TShirtDesignTool.updateText(this.value)"></textarea>
+               <select name="font" onchange="return TShirtDesignTool.setTextFont(this.value)">
+                  <option value="sans-serif">sans-serif</option>
+                  <option value="OldSansBlack">OldSansBlack</option>
+                  <option value="Megazine">Megazine</option>
+                  <option value="monospace" >monospace</option>
+                  <option value="Impact">Impact</option>
+               </select>
+               <b>Spacing: </b><input type="number"  min="-5" max="10" value="0" onchange="return TShirtDesignTool.setTextSpacing(this.value)" >
+               <b>Color: </b><input type="color" onchange="return TShirtDesignTool.setTextColor(this.value)" value='+selectedObject.fill+'>
+               <br/><b>ArcText :</b><input type="range"  min="-170" max="170" value="0" onchange="return TShirtDesignTool.setTextArc(this.value)"/>
+              <br>
+            </div>
+
+            <div id="clipartPanel" class="large-4 columns" >
+            <!--Default display none-->
+                <h6>Clipart:</h6>
+                <div class="clip-arts-holder">
+                    <ul class="small-block-grid-3">
+                        <li><img class="th" id="img1" onclick="return TShirtDesignTool.addClipartToCanvas(this.id)" src="http://ooshirts-clipart.s3.amazonaws.com/oootb9kb-000000.gif"><span class="caption">Caption 1</span></li>
+                        <li><img class="th" src="http://ooshirts-clipart.s3.amazonaws.com/oootb9kb-000000.gif"><span class="caption">Caption 2</span></li>
+                        <li><img class="th" src="http://ooshirts-clipart.s3.amazonaws.com/oootb9kb-000000.gif"><span class="caption">Caption 3</span></li>
+                        <li><img class="th" src="http://ooshirts-clipart.s3.amazonaws.com/oootb9kb-000000.gif"><span class="caption">Caption 4</span></li>
+                    </ul>
+                </div>
+            </div>
+
       </div>
 
-      <div id="EditorPanel" class="large-4 columns">
-          <!--Default display none-->
-           <h6>Text Properties:</h6>
-           <textarea name="" onkeyup="return TShirtDesignTool.updateText(this.value)"></textarea>
-           <select name="font" onchange="return TShirtDesignTool.setTextFont(this.value)">
-              <option value="sans-serif">sans-serif</option>
-              <option value="OldSansBlack">OldSansBlack</option>
-              <option value="Megazine">Megazine</option>
-              <option value="monospace" >monospace</option>
-              <option value="Impact">Impact</option>
-           </select>
-           <b>Spacing: </b><input type="number"  min="-5" max="10" value="0" onchange="return TShirtDesignTool.setTextSpacing(this.value)" >
-           <b>Color: </b><input type="color" onchange="return TShirtDesignTool.setTextColor(this.value)" value='+selectedObject.fill+'>
-           <br/><b>ArcText :</b><input type="range"  min="-170" max="170" value="0" onchange="return TShirtDesignTool.setTextArc(this.value)"/>
-          <br>
-      </div>
 
-      <div id="clipartPanel" class="large-4 columns" >
-          <!--Default display none-->
-          <h6>Clipart:</h6>
-          <ul class="small-block-grid-3">
-              <li><img class="th" id="img1" onclick="return TShirtDesignTool.addClipartToCanvas(this.id)" src="http://ooshirts-clipart.s3.amazonaws.com/oootb9kb-000000.gif"><span class="caption">Caption 1</span></li>
-              <li><img class="th" src="http://ooshirts-clipart.s3.amazonaws.com/oootb9kb-000000.gif"><span class="caption">Caption 2</span></li>
-              <li><img class="th" src="http://ooshirts-clipart.s3.amazonaws.com/oootb9kb-000000.gif"><span class="caption">Caption 3</span></li>
-              <li><img class="th" src="http://ooshirts-clipart.s3.amazonaws.com/oootb9kb-000000.gif"><span class="caption">Caption 4</span></li>
-          </ul>
-      </div>
+        <script src="js/vendor/jquery.js"></script>
+        <script src="js/vendor/fastclick.js"></script>
+        <script src="js/foundation/foundation.js"></script>
+        <script src="js/foundation.min.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/curveText.class.js"></script>
 
-  </div>
+        <script>
+          $(document).foundation();
+        </script>
 
-
-  </body>
+    </body>
 </html>
