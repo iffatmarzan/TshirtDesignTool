@@ -202,15 +202,14 @@ user agent stylesheetfieldset {
 
 }
 */
-/*
 #clipartPanel{
-    /*border:1px solid darkgray;*/
-    /*min-height:300px;
+    border:1px solid darkgray;
+    min-height:300px;
     margin: 0px;
     padding: 0px;
     display: none;
 }
-*/
+
 #clipartPanel h6{
     font-weight: bold;
     background-color: whitesmoke;
