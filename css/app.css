@@ -102,33 +102,33 @@ user agent stylesheetfieldset {
     /*border:1px solid red;*/
 }
 
-#textPanel{
+#text-panel{
     /*border:1px solid darkgray;*/
     min-height:100px;
     margin: 0px;
     padding: 0px;
 }
-#textPanel fieldset{
+#text-panel fieldset{
     text-align: center;
     height:45px;
 }
-#textPanel a{
+#text-panel a{
     height:40px;
 }
 
-#textPanel h5{
+#text-panel h5{
     padding: 10px;
     height:30px;
     font-weight: bold;
 }
-#EditorPanel{
+#editor-panel{
     min-height:300px;
     margin: 0px;
     padding:0px;
     border: 1px solid gray;
     display:none;
 }
-#EditorPanel h6{
+#editor-panel h6{
     font-weight: bold;
     background-color: whitesmoke;
     padding: 10px 0px 10px 10px;
@@ -142,17 +142,17 @@ user agent stylesheetfieldset {
 }
 
 
-#EditorPanel input[type=color]{
+#editor-panel input[type=color]{
     /*display:inline-block;
     width:30px;*/
     cursor: pointer;
 }
 
-#EditorPanel select{
+#editor-panel select{
     cursor: pointer;
 }
 
-#clipartPanel{
+#clip-art-panel{
     border:1px solid darkgray;
     min-height:300px;
     margin: 0px;
@@ -160,7 +160,7 @@ user agent stylesheetfieldset {
     display: none;
 }
 
-#clipartPanel h6{
+#clip-art-panel h6{
     font-weight: bold;
     background-color: whitesmoke;
     padding: 10px 0px 10px 10px;

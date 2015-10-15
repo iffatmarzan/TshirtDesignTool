@@ -1,3 +1,19 @@
+var panels = [ '#text-panel', '#editor-panel', '#clip-art-panel' ];
+
+
+function addPanel(panelToAdd) {
+
+    for(i=0; i< panels.length; i++)
+    {
+        $(panelToAdd).fadeIn(500);
+
+        if(panels[i] !== panelToAdd)
+        {
+            $(panels[i]).hide();
+        }
+    }
+}
+
 var TShirtDesignTool =
 {
     init: function () {
@@ -57,7 +73,7 @@ var TShirtDesignTool =
 
     }
     , drawText: function () {
-            var Text = $('#textPanel textarea').val();
+            var Text = $('#text-panel textarea').val();
             if(Text==="")
                 return;
             //var SampleText = new fabric.Text(Text, {
@@ -90,16 +106,15 @@ var TShirtDesignTool =
             if(!selectedObject){
                 selectedObject=window.canvas.item(0);
             }
-            $('#textPanel').hide();
-            $('#clipartPanel').hide();
-            $('#EditorPanel').show();
 
-            $('#EditorPanel textarea').val(selectedObject.text);
-            $('#EditorPanel input[type=color]').val(selectedObject.fill);
-            $('#EditorPanel input[type=range]').val(selectedObject.radius);
-            $('#EditorPanel input[type=number]').val(selectedObject.spacing);
+            addPanel('#editor-panel');
 
-            $('#EditorPanel select option').each(function(){
+            $('#editor-panel textarea').val(selectedObject.text);
+            $('#editor-panel input[type=color]').val(selectedObject.fill);
+            $('#editor-panel input[type=range]').val(selectedObject.radius);
+            $('#editor-panel input[type=number]').val(selectedObject.spacing);
+
+            $('#editor-panel select option').each(function(){
                 $this=$(this);
                 var value=$this.val();
                 if(value==selectedObject.fontFamily){
@@ -108,10 +123,10 @@ var TShirtDesignTool =
             });
     }
     , changeToAddTextPanel: function(){
-        $('#EditorPanel').hide();
-        $('#clipartPanel').hide();
-        $('#textPanel').show();
-        $('#textPanel textarea').val('');
+
+        addPanel('#text-panel');
+
+        $('#text-panel textarea').val('');
     }
     , updateText: function(e){
             var activeObject=window.canvas.getActiveObject();
@@ -184,12 +199,11 @@ var TShirtDesignTool =
         canvas.renderAll();
     }
     , changeToClipartPanel: function(){
-        //$('#textPanel').removeAttr('style');
-        $('#textPanel').hide();
-        $('#EditorPanel').hide();
-        $('#clipartPanel').show();
+        //$('#text-panel').removeAttr('style');
 
-    }
+        addPanel('#clip-art-panel');
+
+}
     , addClipartToCanvas: function(ImageId){
         var imgElement = document.getElementById(ImageId);
         var imgInstance = new fabric.Image(imgElement, {
