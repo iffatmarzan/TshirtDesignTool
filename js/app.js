@@ -1,29 +1,14 @@
-var panels = [ '#text-panel', '#editor-panel', '#clip-art-panel' ];
-
-
-function addPanel(panelToAdd) {
-
-    for(i=0; i< panels.length; i++)
-    {
-        $(panelToAdd).fadeIn(500);
-
-        if(panels[i] !== panelToAdd)
-        {
-            $(panels[i]).hide();
-        }
-    }
-}
-
 var TShirtDesignTool =
 {
-    init: function () {
+     panels:['#text-panel', '#editor-panel', '#clip-art-panel']
+    , init: function () {
         var _this = TShirtDesignTool;
         _this.canvasInit();
     }
     , canvasInit: function () {
         window.canvas = new fabric.Canvas('canvas');
-        canvas.setHeight(430);
-        canvas.setWidth(440);
+        canvas.setHeight($('#canvas-container').height());
+        canvas.setWidth($('#canvas-container').width());
 
     var img = new Image();
     img.src = '/TshirtDesignTool/img/White-1-F.jpg';
@@ -33,10 +18,16 @@ var TShirtDesignTool =
             originY: 'top',
             left: 0,
             top: 0,
-            width:440,
-            height:430
+            width:canvas.getWidth(),
+            height:canvas.getHeight()
         });
     };
+
+    //fabric.Image.fromURL('http://i2.ooshirts.com/images/lab_shirts/Cobalt-1-F.jpg', function(oImg) {
+    //    // scale image down, and flip it, before adding it onto canvas
+    //    oImg.scale(0.5).setFlipX(true);
+    //    canvas.add(oImg);
+    //});
 
 
 
@@ -101,14 +92,19 @@ var TShirtDesignTool =
             TShirtDesignTool.changeToEditorPanel();
             return;
     }
+    , showPanel: function(panelToshow){
+            var _this=TShirtDesignTool;
+            $(_this.panels).each(function(){
+                var value=this.concat();
+                value===panelToshow ? $(value).fadeIn(500):$(value).hide();
+            });
+}
     , changeToEditorPanel: function(){
             var selectedObject=window.canvas.getActiveObject();
             if(!selectedObject){
                 selectedObject=window.canvas.item(0);
             }
-
-            addPanel('#editor-panel');
-
+            TShirtDesignTool.showPanel('#editor-panel');
             $('#editor-panel textarea').val(selectedObject.text);
             $('#editor-panel input[type=color]').val(selectedObject.fill);
             $('#editor-panel input[type=range]').val(selectedObject.radius);
@@ -123,9 +119,7 @@ var TShirtDesignTool =
             });
     }
     , changeToAddTextPanel: function(){
-
-        addPanel('#text-panel');
-
+        TShirtDesignTool.showPanel('#text-panel');
         $('#text-panel textarea').val('');
     }
     , updateText: function(e){
@@ -199,10 +193,7 @@ var TShirtDesignTool =
         canvas.renderAll();
     }
     , changeToClipartPanel: function(){
-        //$('#text-panel').removeAttr('style');
-
-        addPanel('#clip-art-panel');
-
+        TShirtDesignTool.showPanel('#clip-art-panel');
 }
     , addClipartToCanvas: function(ImageId){
         var imgElement = document.getElementById(ImageId);
@@ -214,19 +205,31 @@ var TShirtDesignTool =
         window.canvas.add(imgInstance);
     }
     , changeTshirtSide: function(side){
+            var _canvas=window.canvas;
             var imageSrc='/TshirtDesignTool/img/White-1-'+side+'.jpg';
             var img = new Image();
             img.src = imageSrc;
             img.onload = function(){
-                window.canvas.setBackgroundImage(img.src, window.canvas.renderAll.bind(canvas), {
+                _canvas.setBackgroundImage(img.src, _canvas.renderAll.bind(canvas), {
                     originX: 'left',
                     originY: 'top',
                     left: 0,
                     top: 0,
-                    width:440,
-                    height:430
+                    width:canvas.getWidth(),
+                    height:canvas.getHeight()
                 });
             }
+}
+    ,saveDesign: function(){
+
+        var _canvas=window.canvas;
+    //var image = _canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+    //_canvas.deactivateAll().renderAll();
+    var img = new Image();
+    img.setAttribute('crossOrigin', 'anonymous');
+    //img.src = '/TshirtDesignTool/img/White-1-F.jpg';
+    img=_canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        window.open( img);
 }
 
 };
