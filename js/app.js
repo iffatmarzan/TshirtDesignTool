@@ -7,8 +7,24 @@ var TShirtDesignTool =
     , canvasInit: function () {
         window.canvas = new fabric.Canvas('canvas');
         canvas.setHeight(430);
-        canvas.setWidth(385);
-        canvas.renderAll();
+        canvas.setWidth(440);
+
+    var img = new Image();
+    img.src = '/TshirtDesignTool/img/White-1-F.jpg';
+    img.onload = function(){
+        canvas.setBackgroundImage(img.src, canvas.renderAll.bind(canvas), {
+            originX: 'left',
+            originY: 'top',
+            left: 0,
+            top: 0,
+            width:440,
+            height:430
+        });
+    };
+
+
+
+        //canvas.renderAll();
 
         canvas.on('object:moving', function (e) {
             var obj = e.target;
@@ -41,7 +57,7 @@ var TShirtDesignTool =
 
     }
     , drawText: function () {
-            var Text = $('#add-text-form textarea').val();
+            var Text = $('#textPanel textarea').val();
             if(Text==="")
                 return;
             //var SampleText = new fabric.Text(Text, {
@@ -60,17 +76,10 @@ var TShirtDesignTool =
                 id:'CT'
             });
 
-            //SampleText.on('selected', function() {
-            //   // console.log('Text is selected');
-            //    TShirtDesignTool.changeToEditorPanel();
-            //});
-
             curveText.on('selected', function() {
-                // console.log('Text is selected');
                 TShirtDesignTool.changeToEditorPanel();
             });
 
-            //window.canvas.add(SampleText);
             window.canvas.add(curveText);
             canvas.renderAll();
             TShirtDesignTool.changeToEditorPanel();
@@ -190,11 +199,33 @@ var TShirtDesignTool =
         });
         window.canvas.add(imgInstance);
     }
+    , changeTshirtSide: function(side){
+            var imageSrc='/TshirtDesignTool/img/White-1-'+side+'.jpg';
+            var img = new Image();
+            img.src = imageSrc;
+            img.onload = function(){
+                window.canvas.setBackgroundImage(img.src, window.canvas.renderAll.bind(canvas), {
+                    originX: 'left',
+                    originY: 'top',
+                    left: 0,
+                    top: 0,
+                    width:440,
+                    height:430
+                });
+            }
+}
 
 };
 
 $(document).ready(function () {
-    $(document).foundation();
+    $(document).foundation({
+        slider: {
+            on_change: function(e){
+                // do something when the value changes
+                //alert('changed');
+            }
+        }
+    });
     TShirtDesignTool.init();
 
 });

@@ -1,12 +1,3 @@
-/*.panel{
-    border-style: solid;
-    border-width: 1px;
-    border-color: #d8d8d8;
-    margin-bottom: 1.25rem;
-    padding: 1.25rem;
-    background: #f2f2f2;
-    color: #333333;
-}*/
 .EditPanel
 {
     height: 300px;
@@ -46,15 +37,9 @@ fieldset {
     margin: 0;
     padding: 0;
 }
-#FrontViewDiv{
-    background-image: URL('../img/front.png');
-    /* background-position: 20px 20px; */
+#canvas-container{
     height: 430px;
-    /* width: 200px; */
-    /* position: relative; */
-    /* background-repeat: no-repeat; */
     background-size: cover;
-    /*border: 1px solid black;*/
 }
 user agent stylesheetfieldset {
     display: block;
@@ -116,32 +101,30 @@ user agent stylesheetfieldset {
     padding:0px;
     /*border:1px solid red;*/
 }
+
 #textPanel{
     /*border:1px solid darkgray;*/
-    min-height:300px;
-    margin: 10px;
+    min-height:100px;
+    margin: 0px;
     padding: 0px;
 }
-#textPanel h6{
-    font-weight: bold;
-    background-color: whitesmoke;
-    padding: 10px 0px 10px 10px;
-    margin: 0px;
-    border-bottom: 1px solid darkgray;
-    color: darkslategray;
+#textPanel fieldset{
+    text-align: center;
+    height:45px;
 }
-#textPanel textarea{
-    width:90%;
-    margin:15px 0px 10px 5%;
-    padding-left: 10px;
-    border: 1px solid darkgray;
-    border-radius: 2px;
+#textPanel a{
+    height:40px;
 }
 
+#textPanel h5{
+    padding: 10px;
+    height:30px;
+    font-weight: bold;
+}
 #EditorPanel{
     min-height:300px;
-    margin: 10px;
-    padding: 0px;
+    margin: 0px;
+    padding:0px;
     border: 1px solid gray;
     display:none;
 }
@@ -158,34 +141,7 @@ user agent stylesheetfieldset {
     padding: 15px;
 }
 
-/*
-#EditorPanel textarea{
-    width:90%;
-    margin:15px 0px 10px 5%;
-    padding-left: 10px;
-    border: 1px solid darkgray;
-    border-radius: 2px;
-}
 
-#EditorPanel select{
-    width:90%;
-    height:40px;
-    margin:5px 0px 10px 5%;
-    padding-left: 10px;
-    border: 1px solid darkgray;
-    border-radius: 2px;
-    background-color: whitesmoke;
-}
-
-#EditorPanel b{
-    margin:10px 5px 10px 10%;
-}
-#EditorPanel input[type=number]{
-    display:inline-block;
-    width:40px;
-    cursor: pointer;
-}
-*/
 #EditorPanel input[type=color]{
     /*display:inline-block;
     width:30px;*/
@@ -195,13 +151,7 @@ user agent stylesheetfieldset {
 #EditorPanel select{
     cursor: pointer;
 }
-/*
-#EditorPanel input[type=range]{
-    margin-top: 15px;
-    width:200px;
 
-}
-*/
 #clipartPanel{
     border:1px solid darkgray;
     min-height:300px;
