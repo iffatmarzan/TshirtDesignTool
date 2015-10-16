@@ -195,13 +195,14 @@ var TShirtDesignTool =
     , changeToClipartPanel: function(){
         TShirtDesignTool.showPanel('#clip-art-panel');
 }
-    , addClipartToCanvas: function(ImageId){
-        var imgElement = document.getElementById(ImageId);
-        var imgInstance = new fabric.Image(imgElement, {
-            left: 100,
-            top: 100,
-            angle: 0
-        });
+    , addClipartToCanvas: function(imageSrc){
+        var img = new Image();
+        img.src = imageSrc;
+            var imgInstance = new fabric.Image(img, {
+                left: 100,
+                top: 100,
+                angle: 0
+            });
         window.canvas.add(imgInstance);
     }
     , changeTshirtSide: function(side){
@@ -221,15 +222,11 @@ var TShirtDesignTool =
             }
 }
     ,saveDesign: function(){
-
         var _canvas=window.canvas;
-    //var image = _canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-    //_canvas.deactivateAll().renderAll();
-    var img = new Image();
-    img.setAttribute('crossOrigin', 'anonymous');
-    //img.src = '/TshirtDesignTool/img/White-1-F.jpg';
-    img=_canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-        window.open( img);
+        var img = new Image();
+        img.setAttribute('crossOrigin', 'anonymous');
+        img=_canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        window.open(img);
 }
 
 };
