@@ -13,7 +13,10 @@
   <body>
 
       <div class="row">
+
+
           <div class="large-12 columns">
+
               <div class="nav-bar left">
                   <ul id="nav-bar-list" class="button-group">
                       <li><a href="#" class="button">Choose Shirt</a></li>
@@ -28,10 +31,10 @@
           </div>
       </div>
 
-      <div class="row">
+      <div class="row full-width">
 
           <!--TshirtImage div-->
-          <div class="large-2 columns" >
+          <div class="medium-2 large-2 columns" >
               <img class="ThumbImg" src="img/front-thumbnail.png" onclick="return TShirtDesignTool.changeTshirtSide('F')">
               <br>
               <img class="ThumbImg" src="img/back-thumbnail.png" onclick="return TShirtDesignTool.changeTshirtSide('B')">
@@ -42,14 +45,14 @@
           </div>
 
           <!--Canvas div-->
-          <div class="large-6 columns" >
+          <div class="medium-4 large-6 columns" >
               <div id="canvas-container">
                   <canvas id="canvas"></canvas>
               </div>
           </div>
 
           <!--Div for different panel -->
-          <div id="text-panel" class="large-4 columns">
+          <div id="text-panel" class="medium-4 large-4 columns">
               <div class="panel" >
                    <h5>Add Text:</h5>
                    <form class="content">
@@ -61,7 +64,7 @@
               </div>
           </div>
 
-          <div id="editor-panel" class="large-4 columns">       <!--Default display none-->
+          <div id="editor-panel" class="medium-4 large-4 columns">       <!--Default display none-->
                <h6>Text Properties:</h6>
                 <div class="editor-panel-tools">
                     <div class="row">
@@ -105,14 +108,14 @@
 
                     </div>
 
-
+                    <hr>
                     <!--slidebar div-->
                     <div class="row">
                         <div class="large-4 columns">
                             <label class="inline"><b>Arc Text: </b></label>
                         </div>
                         <div class="large-8 columns">
-                            <div class="range-slider" data-slider data-options="start: -170; end: 170;step: 1; initial: 0;">
+                            <div id="text-arc-slider" class="range-slider round" data-slider data-options="start: -190; end: 190;step: 1; initial: 0;">
                                 <span class="range-slider-handle" role="slider" tabindex="0"></span>
                                 <span class="range-slider-active-segment"></span>
                                 <input type="hidden">
@@ -120,11 +123,34 @@
                         </div>
                     </div>
 
+                    <hr>
+                    <div class="row">
+                        <div class="large-1 columns">
+                            <input id="text-outline" type="checkbox" onchange="return TShirtDesignTool.setOutline(this.value)">
+                        </div>
+                        <div class="large-11 columns">
+                            <label for="text-outline"><b>Add Outline</b></label>
+                        </div>
+                    </div>
 
-                </div>
+                    <div class="row" id="outline-properties" style="display: none;">
+
+                        <div class="large-4 columns">
+                            <input id="text-outline-color" type="color" class="radius"  onchange="return TShirtDesignTool.setOutlineColor(this.value)" value='+selectedObject.stroke+'>
+                        </div>
+
+                        <div class="large-8 columns">
+                            <div id="text-outline-slider" class="range-slider round" data-slider data-options="start: 0; end: 100;step: 1; initial: 50;">
+                                <span class="range-slider-handle" role="slider" tabindex="0"></span>
+                                <span class="range-slider-active-segment"></span>
+                                <input type="hidden">
+                            </div>
+                        </div>
+                    </div>
+
             </div>
 
-          <div id="clip-art-panel" class="large-4 columns" >
+          <div id="clip-art-panel" class="medium-4 large-4 columns" >
             <!--clip-art-panel Default display none-->
                 <h6>Clipart:</h6>
                 <div class="clip-arts-holder">

@@ -181,3 +181,16 @@ user agent stylesheetfieldset {
 .clip-arts-holder{
     padding: 20px;
 }
+
+.row.full-width {
+    width: 100%;
+    max-width: 100%;
+}
+
+#editor-panel input[type=color]{
+    display: block;
+    text-align: center;
+    vertical-align: middle;
+    max-width: 35px;
+
+}
