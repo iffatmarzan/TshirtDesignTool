@@ -12,11 +12,9 @@
 
   <body>
 
+       <!--start of First Row Nav bar-->
       <div class="row">
-
-
           <div class="large-12 columns">
-
               <div class="nav-bar left">
                   <ul id="nav-bar-list" class="button-group">
                       <li><a href="#" class="button">Choose Shirt</a></li>
@@ -30,8 +28,9 @@
               <hr/>
           </div>
       </div>
+       <!--End of First Row Nav bar-->
 
-      <div class="row full-width">
+      <div class="row">
 
           <!--TshirtImage div-->
           <div class="medium-2 large-2 columns" >
@@ -67,11 +66,13 @@
           <div id="editor-panel" class="medium-4 large-4 columns">       <!--Default display none-->
                <h6>Text Properties:</h6>
                 <div class="editor-panel-tools">
+
                     <div class="row">
                         <div class="large-12 columns">
                             <textarea name="" class="radius" onkeyup="return TShirtDesignTool.updateText(this.value)"></textarea>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="large-12 columns">
                            <select name="font" class="radius"  onchange="return TShirtDesignTool.setTextFont(this.value)">
@@ -83,6 +84,7 @@
                            </select>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="large-6 columns">
                             <div class="row">
@@ -94,7 +96,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="large-6 columns">
                             <div class="row">
                                 <div class="large-6 columns">
@@ -105,7 +106,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                     <hr>
@@ -124,31 +124,31 @@
                     </div>
 
                     <hr>
+
                     <div class="row">
-                        <div class="large-1 columns">
-                            <input id="text-outline" type="checkbox" onchange="return TShirtDesignTool.setOutline(this.value)">
+                        <div class="large-2 columns">
+                            <input id="text-outline" type="checkbox" onchange='$("#outline-properties").toggle()'>
                         </div>
-                        <div class="large-11 columns">
+                        <div class="large-9 columns">
                             <label for="text-outline"><b>Add Outline</b></label>
                         </div>
                     </div>
 
                     <div class="row" id="outline-properties" style="display: none;">
-
                         <div class="large-4 columns">
-                            <input id="text-outline-color" type="color" class="radius"  onchange="return TShirtDesignTool.setOutlineColor(this.value)" value='+selectedObject.stroke+'>
+                            <input id="text-outline-color" type="color" class="radius"  onchange="return TShirtDesignTool.setOutlineColor(this.value)">
                         </div>
-
                         <div class="large-8 columns">
-                            <div id="text-outline-slider" class="range-slider round" data-slider data-options="start: 0; end: 6;step: 1; initial: 1;">
+                            <div id="text-outline-slider" class="range-slider round" data-slider data-options="start: 1; end: 10;step: 1; initial: 1;">
                                 <span class="range-slider-handle" role="slider" tabindex="0"></span>
                                 <span class="range-slider-active-segment"></span>
                                 <input type="hidden">
                             </div>
                         </div>
-                    </div>
 
-            </div>
+                    </div>
+                </div>        <!--end of div editor-panel-tools-->
+            </div>    <!--end of div editor-panel -->
 
           <div id="clip-art-panel" class="medium-4 large-4 columns" >
             <!--clip-art-panel Default display none-->
@@ -161,7 +161,6 @@
                         <li><img class="th" src="clipart/img4.gif" onclick="return TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption">Fun</span></li>
                         <li><img class="th" src="clipart/img5.gif" onclick="return TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption">Animal</span></li>
                         <li><img class="th" src="clipart/img6.gif" onclick="return TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption">Symbol</span></li>
-
                     </ul>
                 </div>
             </div>
