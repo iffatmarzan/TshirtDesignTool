@@ -181,6 +181,9 @@ user agent stylesheetfieldset {
 .clip-arts-holder{
     padding: 20px;
 }
+.clip-arts-holder img{
+    height: 90px;
+}
 
 .row.full-width {
     width: 100%;
@@ -194,3 +197,11 @@ user agent stylesheetfieldset {
     max-width: 35px;
 
 }
+.slider{
+
+}
+#text-arc-slider .ui-slider-range { background: #729fcf; }
+#text-arc-slider .ui-slider-handle { border-color: #729fcf; }
+
+/*#text-outline-slider .ui-slider-range { background: #d8d8d8; }*/
+/*#text-outline-slider .ui-slider-handle { border-color: #4d4d4d; }*/

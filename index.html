@@ -4,10 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TShirtDesign | Welcome</title>
-    <script src="js/vendor/modernizr.js"></script>
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.js" ></script>-->
-      <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.min.js" ></script>-->
-    <link rel="stylesheet" href="css/foundation.css" />
+
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+      <link rel="stylesheet" href="css/foundation.css" />
     <link rel="stylesheet" href="css/app.css" />
   </head>
 
@@ -35,7 +34,7 @@
       <div class="row">
 
           <!--TshirtImage div-->
-          <div class="medium-2 large-2 columns" style="border:1px solid red" >
+          <div class="medium-2 large-2 columns"  >
               <img class="ThumbImg" src="img/front-thumbnail.png" onclick="return TShirtDesignTool.changeTshirtSide('F')">
               <br>
               <img class="ThumbImg" src="img/back-thumbnail.png" onclick="return TShirtDesignTool.changeTshirtSide('B')">
@@ -117,11 +116,7 @@
                             <label class="inline"><b>Arc Text: </b></label>
                         </div>
                         <div class="large-8 columns">
-                            <div id="text-arc-slider" class="range-slider round" data-slider data-options="start: -190; end: 190;step: 1; initial: 0;">
-                                <span class="range-slider-handle" role="slider" tabindex="0"></span>
-                                <span class="range-slider-active-segment"></span>
-                                <input type="hidden">
-                            </div>
+                            <div id="text-arc-slider" class="slider"></div>
                         </div>
                     </div>
 
@@ -129,7 +124,7 @@
 
                     <div class="row">
                         <div class="large-2 columns">
-                            <input id="text-outline" type="checkbox" onchange='$("#outline-properties").toggle()'>
+                            <input id="text-outline" type="checkbox" onchange='return TShirtDesignTool.setOutline(this.value)'>
                         </div>
                         <div class="large-9 columns">
                             <label for="text-outline"><b>Add Outline</b></label>
@@ -138,14 +133,10 @@
 
                     <div class="row" id="outline-properties" style="display: none;">
                         <div class="large-4 columns">
-                            <input id="text-outline-color" type="color" class="radius"  onchange="return TShirtDesignTool.setOutlineColor(this.value)">
+                            <input id="text-outline-color" type="color" class="radius" onchange="return TShirtDesignTool.setOutlineColor(this.value)">
                         </div>
                         <div class="large-8 columns">
-                            <div id="text-outline-slider" class="range-slider round" data-slider data-options="start: 1; end: 10;step: 1; initial: 1;">
-                                <span class="range-slider-handle" role="slider" tabindex="0"></span>
-                                <span class="range-slider-active-segment"></span>
-                                <input type="hidden">
-                            </div>
+                            <div id="text-outline-slider" class="slider" ></div>
                         </div>
 
                     </div>
@@ -169,11 +160,13 @@
 
       </div>
 
+        <script src="js/vendor/modernizr.js"></script>
         <script src="js/vendor/jquery.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <script src="js/vendor/fastclick.js"></script>
         <script src="js/foundation/foundation.js"></script>
         <script src="js/foundation.min.js"></script>
-        <script src="js/fabric.require.js"></script>
+        <!--<script src="js/fabric.require.js"></script>-->
         <script src="js/fabric.js"></script>
         <script src="js/curveText.class.js"></script>
         <script src="js/app.js"></script>
