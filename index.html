@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TShirtDesign | Welcome</title>
     <script src="js/vendor/modernizr.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.js" ></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.js" ></script>-->
+      <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.min.js" ></script>-->
     <link rel="stylesheet" href="css/foundation.css" />
     <link rel="stylesheet" href="css/app.css" />
   </head>
@@ -22,6 +23,7 @@
                       <li><a href="#" onclick='return TShirtDesignTool.changeToClipartPanel()' class="button">Add Clip Art</a></li>
                       <li><a href="#" class="button">Upload Image</a></li>
                       <li><a href="#" class="button">Personalize</a></li>
+                      <!--<li><a href="#" class="button">Free Drawing</a></li>-->
                       <li><a href="#" class="button customMenuItem" onclick='return TShirtDesignTool.saveDesign()'> Save Design </a></li>
                   </ul>
               </div>
@@ -33,14 +35,14 @@
       <div class="row">
 
           <!--TshirtImage div-->
-          <div class="medium-2 large-2 columns" >
+          <div class="medium-2 large-2 columns" style="border:1px solid red" >
               <img class="ThumbImg" src="img/front-thumbnail.png" onclick="return TShirtDesignTool.changeTshirtSide('F')">
               <br>
               <img class="ThumbImg" src="img/back-thumbnail.png" onclick="return TShirtDesignTool.changeTshirtSide('B')">
               <br>
-              <img class="ThumbImg" src="http://placehold.it/400x300&text=[img]" onclick="return TShirtDesignTool.changeTshirtSide('L')">
+              <img class="ThumbImg" src="img/Left-shelve.png" onclick="return TShirtDesignTool.changeTshirtSide('L')">
               <br>
-              <img class="ThumbImg" src="http://placehold.it/400x300&text=[img]" onclick="return TShirtDesignTool.changeTshirtSide('R')">
+              <img class="ThumbImg" src="img/right-shelve.png" onclick="return TShirtDesignTool.changeTshirtSide('R')">
           </div>
 
           <!--Canvas div-->
@@ -102,7 +104,7 @@
                                     <label for="text-color" class=" inline"><b>Color: </b></label>
                                 </div>
                                 <div class="large-6 columns">
-                                    <input id="text-color" type="color" class="radius"  onchange="return TShirtDesignTool.setTextColor(this.value)" value='+selectedObject.fill+'>
+                                    <input id="text-color" type="color" class="radius"  onchange="return TShirtDesignTool.setTextColor(this.value)">
                                 </div>
                             </div>
                         </div>
@@ -155,7 +157,7 @@
                 <h6>Clipart:</h6>
                 <div class="clip-arts-holder">
                     <ul class="small-block-grid-3">
-                        <li><img class="th" onclick="return TShirtDesignTool.addClipartToCanvas(this.src)" src="clipart/img1.gif"><span class="caption"> Flower </span></li>
+                        <li><img class="th" src="clipart/img1.gif" onclick="return TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Flower </span></li>
                         <li><img class="th" src="clipart/img2.gif" onclick="return TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption" > Avatar </span></li>
                         <li><img class="th" src="clipart/img3.gif" onclick="return TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Football </span></li>
                         <li><img class="th" src="clipart/img4.gif" onclick="return TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption">Fun</span></li>
@@ -171,9 +173,10 @@
         <script src="js/vendor/fastclick.js"></script>
         <script src="js/foundation/foundation.js"></script>
         <script src="js/foundation.min.js"></script>
-        <script src="js/app.js"></script>
+        <script src="js/fabric.require.js"></script>
+        <script src="js/fabric.js"></script>
         <script src="js/curveText.class.js"></script>
-
+        <script src="js/app.js"></script>
 
     </body>
 </html>
