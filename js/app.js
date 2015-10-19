@@ -64,39 +64,30 @@ var TShirtDesignTool =
 
     }
     , drawText: function () {
+            var _canvas=window.canvas;
             var Text = $('#text-panel textarea').val();
             if(Text==="")
                 return;
-            var SampleText = new fabric.Text("Fabric Text", {
-                left: canvas.getWidth() / 2,
-                top: canvas.getHeight() / 2,
-                //left: 380,
-                //top:370,
+            var SampleText = new fabric.Text(Text, {
                 fontFamily: 'sans-serif',
                 fontSize:30,
-                letterSpacing: 8
+                letterSpacing: 0
             });
-            var _canvas=window.canvas;
-            var curveText= new fabric.CurvedText(Text,{
-                textAlign: 'left',
-                fontFamily: 'sans-serif'
-            });
-            var left=_canvas.getWidth() / 2- curveText.getWidth()/2;
-            var top=_canvas.getHeight() / 2- curveText.getHeight();
-            curveText.set({'left':left,
-                            'top':top,
-                letterSpacing: 10
-                        });
-
-            curveText.on('selected', function() {
+            var left=_canvas.getWidth() / 2- SampleText.getWidth()/2;
+            var top=_canvas.getHeight() / 2- SampleText.getHeight();
+            SampleText.set({'left':left,'top':top});
+            SampleText.on('selected', function() {
                 TShirtDesignTool.changeToEditorPanel();
             });
 
-    SampleText.on('selected', function() {
-        TShirtDesignTool.changeToEditorPanel();
-    });
-
-            window.canvas.add(curveText);
+            //var curveText= new fabric.CurvedText(Text,{
+            //    textAlign: 'left',
+            //    fontFamily: 'sans-serif'
+            //});
+            //curveText.on('selected', function() {
+            //    TShirtDesignTool.changeToEditorPanel();
+            //});
+            //window.canvas.add(curveText);
             window.canvas.add(SampleText);
             canvas.renderAll();
             TShirtDesignTool.changeToEditorPanel();
@@ -114,11 +105,8 @@ var TShirtDesignTool =
             if(!selectedObject){
                 selectedObject=window.canvas.item(0);
             }
-    console.log(selectedObject.get('letterSpacing'));
+            console.log(selectedObject.get('letterSpacing'));
             TShirtDesignTool.showPanel('#editor-panel');
-
-
-
             $('#editor-panel textarea').val(selectedObject.text);
             $('#editor-panel input[type=color]').val(selectedObject.fill);
             $('#editor-panel input[type=range]').val(selectedObject.radius);
@@ -158,16 +146,20 @@ var TShirtDesignTool =
             var activeObject=window.canvas.getActiveObject();
             if(!activeObject)
                 activeObject=window.canvas.item(0);
-            //activeObject.set('spacing', parseInt(e));
+
+
+             if(activeObject.type=='text'){
+                 activeObject.set('letterSpacing', parseInt(e));
+             }
 
             if(activeObject.effect=='arc')
                 activeObject.set({
                 spacing:-10+parseInt(e)*2});
 
-            if(activeObject.effect=='STRAIGHT')
-               var ctext=activeObject.text.split("").join(String.fromCharCode(8239));
+            //if(activeObject.effect=='STRAIGHT')
+            //   var ctext=activeObject.text.split("").join(String.fromCharCode(8239));
+            //activeObject.setText(ctext);
 
-            activeObject.setText(ctext);
             canvas.renderAll();
     }
     , setTextColor: function(e){
@@ -182,32 +174,64 @@ var TShirtDesignTool =
         var activeObject=window.canvas.getActiveObject();
         if(!activeObject)
             activeObject=window.canvas.item(0);
-        var e=$( "#text-arc-slider" ).slider( "value" );
-        if(activeObject)
-        {
-            if(parseInt(e)<10 && parseInt(e)>-10 )
-            {
-                activeObject.set({
-                    effect:'STRAIGHT',
-                    spacing:0,
-                });
-                canvas.renderAll();
+        var e=$("#text-arc-slider").slider("value");
+
+            if(!activeObject)
                 return;
-            }
-            if(activeObject.effect=='STRAIGHT')
-                activeObject.set({
+
+        if(parseInt(e)>=10 && activeObject.type==='text')
+            {
+                var curveText= new fabric.CurvedText(activeObject.text,{
+                    top:activeObject.top,
+                    left:activeObject.left,
+                    fontFamily: activeObject.fontFamily,
+                    width:activeObject.width,
+                    height:activeObject.height,
+                    radius:1000,
                     effect:'arc',
-                    spacing:-10,
-                    textAlign: 'center'
+                    fontSize:activeObject.fontSize,
+                    spacing:activeObject.letterSpacing,
+                    fill:activeObject.fill,
+                    stroke:activeObject.stroke,
+                    strokeWidth:activeObject.strokeWidth,
+                    angle:activeObject.angle
                 });
-            activeObject.set({
-                textAlign: 'center',
-                reverse:parseInt(e)<0,
-                spacing:activeObject.spacing,
-                radius:1000-Math.abs(e)*5
-                });
-            canvas.renderAll();
+                window.canvas.remove(activeObject);
+                window.canvas.add(curveText);
+            }
+        if(parseInt(e)<10 && activeObject.type==='curvedText')
+        {
+            var SampleText= new fabric.Text(activeObject.text,{
+                top:activeObject.top,
+                left:activeObject.left,
+                textAlign: 'left',
+                fontFamily: 'sans-serif',
+                fontSize:activeObject.fontSize,
+                letterSpacing:activeObject.spacing,
+                fill:activeObject.fill,
+                stroke:activeObject.stroke,
+                strokeWidth:activeObject.strokeWidth
+            });
+            window.canvas.remove(activeObject);
+            window.canvas.add(SampleText);
         }
+            //if(activeObject.effect=='STRAIGHT')
+            //    activeObject.set({
+            //        effect:'arc',
+            //        spacing:-10,
+            //        textAlign: 'center'
+            //    });
+             if(activeObject.type==='curvedText'){
+                 activeObject.set({
+                     textAlign: 'center',
+                     reverse:parseInt(e)<0,
+                     spacing:activeObject.spacing,
+                     radius:1000-Math.abs(e)*5
+                 });
+             }
+
+            canvas.renderAll();
+
     }
     , changeToClipartPanel: function(){
         TShirtDesignTool.showPanel('#clip-art-panel');
@@ -306,88 +330,6 @@ $(document).ready(function () {
         $("#text-outline-slider").slider("value", 0);
 
     $(document).foundation();
-
-
 });
 
-fabric.util.object.extend(fabric.Text.prototype, {
-    _renderChars: function(method, ctx, chars, left, top) {
-        var characters = String.prototype.split.call(chars, ''),
-            index = 0,
-            current,
-            currentPosition = left,
-            y = top,
-            align = 1,
-            ls = 0;
 
-        if (this.letterSpacing !== undefined)
-            ls = this.letterSpacing;
-
-        if (this.textAlign === 'right') {
-            characters = characters.reverse();
-            align = -1;
-        } else if (this.textAlign === 'center') {
-            var totalWidth = 0;
-            for (var i = 0; i < characters.length; i++) {
-                totalWidth += (ctx.measureText(characters[i]).width + ls);
-            }
-            //currentPosition = x - (totalWidth / 2); //original
-            currentPosition = left - (totalWidth / 2); //just randomly replaced x with 'left' to avoid error, should be taken care of before finalizing
-        }
-
-        while (index < chars.length) {
-            current = characters[index++];
-            ctx.fillText(current, currentPosition, y);
-            currentPosition += (align * (ctx.measureText(current).width + ls));
-        }
-    },
-
-})
-
-fabric.util.object.extend(fabric.IText.prototype, {
-    letterSpacing : 0,
-    _getTextWidth: function(ctx, textLines) {
-        var maxWidth = ctx.measureText(textLines[0] || '|').width;
-        var maxLineLength = textLines[0].length;
-        for (var i = 1, len = textLines.length; i < len; i++) {
-            var currentLineWidth = ctx.measureText(textLines[i]).width;
-            if (currentLineWidth > maxWidth) {
-                maxWidth = currentLineWidth;
-                maxLineLength = textLines[i].length;
-            }
-        }
-
-        return maxWidth + (this.letterSpacing * maxLineLength);
-    },
-    _getWidthOfChar: function(ctx, _char, lineIndex, charIndex) {
-        if (this.textAlign === 'justify' && /\s/.test(_char)) {
-            return this._getWidthOfSpace(ctx, lineIndex);
-        }
-
-        var styleDeclaration = this._getStyleDeclaration(lineIndex, charIndex);
-        this._applyFontStyles(styleDeclaration);
-        var cacheProp = this._getCacheProp(_char, styleDeclaration);
-
-        if (this._charWidthsCache[cacheProp] && this.caching) {
-            return this._charWidthsCache[cacheProp] + this.letterSpacing;
-        }
-        else if (ctx) {
-            ctx.save();
-            var width = this._applyCharStylesGetWidth(ctx, _char, lineIndex, charIndex);
-            ctx.restore();
-            return width + this.letterSpacing;
-        }
-    },
-    _getWidthOfSpace: function (ctx, lineIndex) {
-        var lines = this.text.split(this._reNewline),
-            line = lines[lineIndex],
-            words = line.split(/\s+/),
-            wordsWidth = this._getWidthOfWords(ctx, line, lineIndex),
-            widthDiff = this.width - wordsWidth,
-            numSpaces = words.length - 1,
-            width = widthDiff / numSpaces;
-
-        return width + this.letterSpacing;
-    }
-
-});

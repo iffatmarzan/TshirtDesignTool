@@ -205,3 +205,10 @@ user agent stylesheetfieldset {
 
 /*#text-outline-slider .ui-slider-range { background: #d8d8d8; }*/
 /*#text-outline-slider .ui-slider-handle { border-color: #4d4d4d; }*/
+
+@font-face
+{
+    font-family: myFirstFont;
+    src: url('Sansation_Light.ttf'),
+    url('Sansation_Light.eot'); /* IE9 */
+}
