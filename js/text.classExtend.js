@@ -57,58 +57,58 @@ fabric.util.object.extend(fabric.Text.prototype, {
             ctx.fillText(current, currentPosition, y);
             currentPosition += (align * (ctx.measureText(current).width + ls));
         }
-    },
-
-});
-
-
-fabric.util.object.extend(fabric.IText.prototype, {
-    letterSpacing : 0,
-    _getTextWidth: function(ctx, textLines) {
-        var maxWidth = ctx.measureText(textLines[0] || '|').width;
-        var maxLineLength = textLines[0].length;
-        for (var i = 1, len = textLines.length; i < len; i++) {
-            var currentLineWidth = ctx.measureText(textLines[i]).width;
-            if (currentLineWidth > maxWidth) {
-                maxWidth = currentLineWidth;
-                maxLineLength = textLines[i].length;
-            }
-        }
-
-        return maxWidth + (this.letterSpacing * maxLineLength);
-    },
-    _getWidthOfChar: function(ctx, _char, lineIndex, charIndex) {
-        if (this.textAlign === 'justify' && /\s/.test(_char)) {
-            return this._getWidthOfSpace(ctx, lineIndex);
-        }
-
-        var styleDeclaration = this._getStyleDeclaration(lineIndex, charIndex);
-        this._applyFontStyles(styleDeclaration);
-        var cacheProp = this._getCacheProp(_char, styleDeclaration);
-
-        if (this._charWidthsCache[cacheProp] && this.caching) {
-            return this._charWidthsCache[cacheProp] + this.letterSpacing;
-        }
-        else if (ctx) {
-            ctx.save();
-            var width = this._applyCharStylesGetWidth(ctx, _char, lineIndex, charIndex);
-            ctx.restore();
-            return width + this.letterSpacing;
-        }
-    },
-    _getWidthOfSpace: function (ctx, lineIndex) {
-        var lines = this.text.split(this._reNewline),
-            line = lines[lineIndex],
-            words = line.split(/\s+/),
-            wordsWidth = this._getWidthOfWords(ctx, line, lineIndex),
-            widthDiff = this.width - wordsWidth,
-            numSpaces = words.length - 1,
-            width = widthDiff / numSpaces;
-
-        return width + this.letterSpacing;
     }
 
 });
+
+
+//fabric.util.object.extend(fabric.IText.prototype, {
+//    letterSpacing : 0,
+//    _getTextWidth: function(ctx, textLines) {
+//        var maxWidth = ctx.measureText(textLines[0] || '|').width;
+//        var maxLineLength = textLines[0].length;
+//        for (var i = 1, len = textLines.length; i < len; i++) {
+//            var currentLineWidth = ctx.measureText(textLines[i]).width;
+//            if (currentLineWidth > maxWidth) {
+//                maxWidth = currentLineWidth;
+//                maxLineLength = textLines[i].length;
+//            }
+//        }
+//
+//        return maxWidth + (this.letterSpacing * maxLineLength);
+//    },
+//    _getWidthOfChar: function(ctx, _char, lineIndex, charIndex) {
+//        if (this.textAlign === 'justify' && /\s/.test(_char)) {
+//            return this._getWidthOfSpace(ctx, lineIndex);
+//        }
+//
+//        var styleDeclaration = this._getStyleDeclaration(lineIndex, charIndex);
+//        this._applyFontStyles(styleDeclaration);
+//        var cacheProp = this._getCacheProp(_char, styleDeclaration);
+//
+//        if (this._charWidthsCache[cacheProp] && this.caching) {
+//            return this._charWidthsCache[cacheProp] + this.letterSpacing;
+//        }
+//        else if (ctx) {
+//            ctx.save();
+//            var width = this._applyCharStylesGetWidth(ctx, _char, lineIndex, charIndex);
+//            ctx.restore();
+//            return width + this.letterSpacing;
+//        }
+//    },
+//    _getWidthOfSpace: function (ctx, lineIndex) {
+//        var lines = this.text.split(this._reNewline),
+//            line = lines[lineIndex],
+//            words = line.split(/\s+/),
+//            wordsWidth = this._getWidthOfWords(ctx, line, lineIndex),
+//            widthDiff = this.width - wordsWidth,
+//            numSpaces = words.length - 1,
+//            width = widthDiff / numSpaces;
+//
+//        return width + this.letterSpacing;
+//    }
+//
+//});
 
 fabric.util.object.extend(fabric.Object.prototype, {
 

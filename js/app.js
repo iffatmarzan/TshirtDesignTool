@@ -185,13 +185,14 @@ var TShirtDesignTool =
                     top:activeObject.top,
                     left:activeObject.left,
                     fontFamily: activeObject.fontFamily,
-                    width:activeObject.width,
-                    height:activeObject.height,
-                    radius:1000,
+                    //width:activeObject.width,
+                    //height:activeObject.height,
+                    radius:900,
                     effect:'arc',
                     fontSize:activeObject.fontSize,
                     spacing:activeObject.letterSpacing,
                     fill:activeObject.fill,
+                    textAlign: 'center',
                     stroke:activeObject.stroke,
                     strokeWidth:activeObject.strokeWidth,
                     angle:activeObject.angle
@@ -209,11 +210,12 @@ var TShirtDesignTool =
                 fontSize:activeObject.fontSize,
                 letterSpacing:activeObject.spacing,
                 fill:activeObject.fill,
-                stroke:activeObject.stroke,
+                //stroke:activeObject.stroke,
                 strokeWidth:activeObject.strokeWidth
             });
             window.canvas.remove(activeObject);
             window.canvas.add(SampleText);
+            window.canvas.setActiveObject(SampleText);
         }
             //if(activeObject.effect=='STRAIGHT')
             //    activeObject.set({
@@ -225,14 +227,19 @@ var TShirtDesignTool =
                  activeObject.set({
                      textAlign: 'center',
                      reverse:parseInt(e)<0,
-                     spacing:activeObject.spacing,
-                     radius:1000-Math.abs(e)*5
+                     radius:950-Math.abs(e)*5
                  });
              }
 
             canvas.renderAll();
 
     }
+    , setFontSize: function(e){
+
+}
+    ,setFontStyle: function(e){
+
+}
     , changeToClipartPanel: function(){
         TShirtDesignTool.showPanel('#clip-art-panel');
 }
@@ -276,23 +283,24 @@ var TShirtDesignTool =
     $("#outline-properties").toggle();
    // console.log(e);
 
-        var activeObject=window.canvas.getActiveObject();
-        if(!activeObject)
-            activeObject=window.canvas.item(0);
-        if(activeObject)
-            activeObject.setStrokeWidth(0);
-
-    $('#text-outline-slider .ui-slider-range').css('background','#d8d8d8');
-    $('#text-outline-slider .ui-slider-handle').css('background','#fff');
-    $('#outline-properties input[type=color]').val('#d8d8d8');
-        window.canvas.renderAll();
+    //    var activeObject=window.canvas.getActiveObject();
+    //    if(!activeObject)
+    //        activeObject=window.canvas.item(0);
+    //    if(activeObject)
+    //        activeObject.setStrokeWidth(0);
+    //
+    //$('#text-outline-slider .ui-slider-range').css('background','#d8d8d8');
+    //$('#text-outline-slider .ui-slider-handle').css('background','#fff');
+    //$('#outline-properties input[type=color]').val('#d8d8d8');
+    //    window.canvas.renderAll();
 
 }
     , setOutlineColor: function(e){
             var activeObject=window.canvas.getActiveObject();
             if(!activeObject)
                 activeObject=window.canvas.item(0);
-            activeObject.setStroke(e);
+            if(activeObject)
+                activeObject.setStroke(e);
             $('#text-outline-slider .ui-slider-range').css('background',e);
             //$('#text-outline-slider .ui-slider-handle').css('background',e);
             window.canvas.renderAll();

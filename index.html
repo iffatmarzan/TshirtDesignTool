@@ -108,8 +108,29 @@
                             </div>
                         </div>
                     </div>
-
                     <hr>
+                    <!--font sizing and font styling-->
+
+                    <div class="row">
+                        <div class="large-2 columns">
+                            <label for="font-sizing" class=" inline"><b>Font Size: </b></label>
+                        </div>
+                        <div class="large-3 columns">
+                            <input id="font-sizing" type="number" class="radius"   min="15" max="45" value="30" onchange="return TShirtDesignTool.setFontSize(this.value)" >
+                        </div>
+                        <div class="large-2 columns">
+                            <label for="font-style" class=" inline"><b>Font style: </b></label>
+                        </div>
+                        <div class="large-5 columns">
+                            <select id="font-style" class="radius"  onchange="return TShirtDesignTool.setFontStyle(this.value)">
+                                <option value="">normal</option>
+                                <option value="">bold</option>
+                                <option value="">italic</option>
+                            </select>
+                        </div>
+                    </div>
+                    <hr>
+
                     <!--slidebar div-->
                     <div class="row">
                         <div class="large-4 columns">
