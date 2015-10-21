@@ -61,7 +61,6 @@ fabric.util.object.extend(fabric.Text.prototype, {
 
 });
 
-
 //fabric.util.object.extend(fabric.IText.prototype, {
 //    letterSpacing : 0,
 //    _getTextWidth: function(ctx, textLines) {
@@ -112,6 +111,11 @@ fabric.util.object.extend(fabric.Text.prototype, {
 
 fabric.util.object.extend(fabric.Object.prototype, {
 
+    borderColor: 'rgba(100,100,100,.40)',
+    //hasRotatingPoint: false,
+    cornerColor: 'rgba(100,100,100,.40)',
+    cornerSize: 10,
+
     _drawControl: function(control, ctx, methodName, left, top) {
          if (!this.isControlVisible(control)) {
             return;
@@ -119,48 +123,38 @@ fabric.util.object.extend(fabric.Object.prototype, {
          var size = this.cornerSize;
          isVML() || this.transparentCorners || ctx.clearRect(left, top, size, size);
 
-        if(control !== 'bl')      //MODIFICATION BY AFIFA only if condition, not the body
-            ctx[methodName](left, top, size, size);
+        if(control !== 'mt' && control !== 'mr' && control !== 'ml' && control !== 'mb')
+            ctx['fillRect'](left, top, size, size);
 
-         //MODIFICATION BY AFIFA starts
 
         var SelectedIconImage = new Image();
-        if(control === 'bl') {
-             SelectedIconImage.src = 'img/cross.png';
+        if(control === 'tl') {
+             SelectedIconImage.src = 'img/cross-black.png';
              ctx.drawImage(SelectedIconImage, left, top, size, size);
      }
-         //MODIFICATION BY AFIFA ends
+
     }
 
 });
 
 fabric.util.object.extend(fabric.Canvas.prototype, {
-    //MODIFICATION BY AFIFA Starts
-    /**
-     * Cursor value used for cross point
-     * @type String
-     * @default
-     */
+
     pointerCursor:         'pointer',
-    // MODIFICATION BY AFIFA ends
 
     _getActionFromCorner: function(target, corner) {
         var action = 'drag';
         if (corner) {
-            action = (corner === 'ml' || corner === 'mr')
-                ? 'scaleX'
-                : (corner === 'mt' || corner === 'mb')
-                ? 'scaleY'
-                : corner === 'mtr'
+            action = corner === 'mtr'
                 ? 'rotate'
-                : corner === 'bl' //MODIFICATION BY AFIFA
-                ? 'remove' //MODIFICATION BY AFIFA
+                : corner === 'tl'
+                ? 'remove'
                 : 'scale';
         }
         return action;
     },
 
      _setupCurrentTransform: function (e, target) {
+
          if (!target) {
              return;
          }
@@ -170,7 +164,6 @@ fabric.util.object.extend(fabric.Canvas.prototype, {
              action = this._getActionFromCorner(target, corner),
              origin = this._getOriginFromCorner(target, corner);
 
-         //MODIFICATION BY AFIFA starts
 
          if (action == 'remove')
          {
@@ -184,12 +177,14 @@ fabric.util.object.extend(fabric.Canvas.prototype, {
              }
              else
              {
-                 target.remove();
+                 var activeObject=window.canvas.getActiveObject();
+                 window.canvas.remove(activeObject);
              }
+             window.canvas.renderAll();
+             TShirtDesignTool.changeToAddTextPanel();
              return;
          }
 
-         //MODIFICATION BY AFIFA ends
 
          this._currentTransform = {
              target: target,
@@ -223,10 +218,10 @@ fabric.util.object.extend(fabric.Canvas.prototype, {
      },
 
     _setCornerCursor: function(corner, target) {
-         if (corner === 'bl') {               //MODIFICATION BY AFIFA
-             this.setCursor(this.pointerCursor);  //MODIFICATION BY AFIFA
-         }                                             //MODIFICATION BY AFIFA
-         else if (corner in cursorOffset) {              //MODIFICATION BY AFIFA ONLY ELSE
+         if (corner === 'tl') {
+             this.setCursor(this.pointerCursor);
+         }
+         else if (corner in cursorOffset) {
              this.setCursor(this._getRotatedCornerCursor(corner, target));
          }
          else if (corner === 'mtr' && target.hasRotatingPoint) {
@@ -241,13 +236,13 @@ fabric.util.object.extend(fabric.Canvas.prototype, {
  });
 
 var cursorOffset = {
-    mt: 0, // n
+    //mt: 0, // n
     tr: 1, // ne
-    mr: 2, // e
+    //mr: 2, // e
     br: 3, // se
-    mb: 4, // s
+    //mb: 4, // s
     bl: 5, // sw
-    ml: 6, // w
+    //ml: 6, // w
     tl: 7 // nw
 };
 

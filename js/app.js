@@ -105,7 +105,6 @@ var TShirtDesignTool =
             if(!selectedObject){
                 selectedObject=window.canvas.item(0);
             }
-            console.log(selectedObject.get('letterSpacing'));
             TShirtDesignTool.showPanel('#editor-panel');
             $('#editor-panel textarea').val(selectedObject.text);
             $('#editor-panel input[type=color]').val(selectedObject.fill);
@@ -339,5 +338,3 @@ $(document).ready(function () {
 
     $(document).foundation();
 });
-
-
