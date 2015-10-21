@@ -69,7 +69,7 @@ var TShirtDesignTool =
             if(Text==="")
                 return;
             var SampleText = new fabric.Text(Text, {
-                fontFamily: 'sans-serif',
+                //fontFamily: 'squealer',
                 fontSize:30,
                 letterSpacing: 0
             });
@@ -233,10 +233,50 @@ var TShirtDesignTool =
             canvas.renderAll();
 
     }
+    , setTextCircular: function(){
+    var activeObject=window.canvas.getActiveObject();
+    if(!activeObject)
+        activeObject=window.canvas.item(0);
+    if(!activeObject)
+        return;
+    var isChecked=$('#text-circular').is(':checked');
+    console.log(isChecked);
+    if(isChecked){
+        $( '#text-arc-slider' ).slider({
+            disabled: true
+        });
+        var curveText= new fabric.CurvedText(activeObject.text,{
+            top:activeObject.top,
+            left:activeObject.left,
+            fontFamily: activeObject.fontFamily,
+            //width:activeObject.width,
+            //height:activeObject.height,
+            radius:((activeObject.width/2/3.14)+activeObject.height/2),
+            effect:'curved',
+            fontSize:activeObject.fontSize,
+            spacing:activeObject.letterSpacing,
+            fill:activeObject.fill,
+            textAlign: 'center',
+            stroke:activeObject.stroke,
+            strokeWidth:activeObject.strokeWidth,
+            angle:activeObject.angle
+        });
+        window.canvas.remove(activeObject);
+        window.canvas.add(curveText);
+    }
+
+    if(!isChecked){
+        $( '#text-arc-slider' ).slider({
+            disabled: false
+        });
+    }
+    window.canvas.renderAll();
+
+}
     , setFontSize: function(e){
 
 }
-    ,setFontStyle: function(e){
+    , setFontStyle: function(e){
 
 }
     , changeToClipartPanel: function(){
@@ -318,14 +358,14 @@ var TShirtDesignTool =
 $(document).ready(function () {
     TShirtDesignTool.init();
 
-        $("#text-arc-slider").slider({
+        $('#text-arc-slider').slider({
             orientation: "horizontal",
             range: "min",
             max: 180,
             //slide: refreshSwatch,
             change: TShirtDesignTool.setTextArc
         });
-        $("#text-arc-slider").slider("value", 0);
+        $('#text-arc-slider').slider("value", 0);
 
         $("#text-outline-slider").slider({
             orientation: "horizontal",

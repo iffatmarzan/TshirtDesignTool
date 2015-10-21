@@ -208,7 +208,7 @@ user agent stylesheetfieldset {
 
 @font-face
 {
-    font-family: myFirstFont;
-    src: url('Sansation_Light.ttf'),
-    url('Sansation_Light.eot'); /* IE9 */
+    font-family: squealer;
+    src: url('SQUEALER.ttf'),
+    url('SQUEALER.eot'); /* IE9 */
 }

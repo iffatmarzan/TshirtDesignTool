@@ -113,7 +113,7 @@ fabric.util.object.extend(fabric.Object.prototype, {
 
     borderColor: 'rgba(100,100,100,.40)',
     //hasRotatingPoint: false,
-    cornerColor: 'rgba(100,100,100,.40)',
+    cornerColor: 'rgba(100,100,100,.8)',
     cornerSize: 10,
 
     _drawControl: function(control, ctx, methodName, left, top) {
