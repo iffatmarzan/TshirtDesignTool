@@ -95,7 +95,7 @@
                                     <label for="text-spacing" class=" inline"><b>Spacing: </b></label>
                                 </div>
                                 <div class="large-6 columns">
-                                    <input id="text-spacing" type="number" class="radius"   min="-5" max="10" value="0" onchange="return TShirtDesignTool.setTextSpacing(this.value)" >
+                                    <input id="text-spacing" type="number" class="radius"   min="-15" max="10"  onchange="return TShirtDesignTool.setTextSpacing(this.value)" >
                                 </div>
                             </div>
                         </div>
@@ -118,7 +118,7 @@
                             <label for="font-sizing" class=" inline"><b>Font Size: </b></label>
                         </div>
                         <div class="large-3 columns">
-                            <input id="font-sizing" type="number" class="radius"   min="15" max="45" value="30" onchange="return TShirtDesignTool.setFontSize(this.value)" >
+                            <input id="font-sizing" type="number" class="radius"   min="15" max="45" onchange="return TShirtDesignTool.setFontSize(this.value)" >
                         </div>
                         <div class="large-2 columns">
                             <label for="font-style" class=" inline"><b>Font style: </b></label>
@@ -193,16 +193,19 @@
 
       </div>
 
-        <script src="js/vendor/modernizr.js"></script>
-        <script src="js/vendor/jquery.js"></script>
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-        <script src="js/vendor/fastclick.js"></script>
-        <script src="js/foundation/foundation.js"></script>
-        <script src="js/foundation.min.js"></script>
-        <script src="js/fabric.js"></script>
-        <script src="js/curveText.class.js"></script>
+       <script src="js/vendor/modernizr.js"></script>
+       <script src="js/vendor/jquery.js"></script>
+       <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+       <script src="js/vendor/fastclick.js"></script>
+       <script src="js/foundation/foundation.js"></script>
+       <script src="js/foundation.min.js"></script>
+       <script src="js/fabric.js"></script>
+       <script src="js/fabric.object.classExtend.js"></script>
+       <script src="js/fabric.canvas.classExtend.js"></script>
        <script src="js/text.classExtend.js"></script>
-        <script src="js/app.js"></script>
+       <script src="js/curveText.class.js"></script>
+       <script src="js/curveText.classExtend.js"></script>
+       <script src="js/app.js"></script>
 
     </body>
 </html>

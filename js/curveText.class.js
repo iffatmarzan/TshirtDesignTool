@@ -182,7 +182,8 @@
                         textWidth += this.letters.item(i).width + space;
                     }
                     textWidth -= space;
-                } else if (this.effect=='arc') {
+                }
+                else if (this.effect=='arc') {
                     fixedLetterAngle = ((this.letters.item(0).fontSize + space) / this.radius) / (Math.PI/180);
                     textWidth = ((this.text.length+1) * (this.letters.item(0).fontSize + space));
                 }
@@ -231,7 +232,8 @@
                         this.letters.item(i).set('padding', 0);
                         this.letters.item(i).set('selectable', false);
 
-                    }else if(this.effect==='arc'){//arc
+                    }
+                    else if(this.effect==='arc'){//arc
                         curAngle = multiplier * ((multiplier * curAngle) + fixedLetterAngle);
                         angleRadians=curAngle*(Math.PI/180);
 
@@ -239,9 +241,8 @@
                         this.letters.item(i).set('left', multiplier*(Math.sin(angleRadians)*this.radius));
                         this.letters.item(i).set('padding', 0);
                         this.letters.item(i).set('selectable', false);
-                    }else if(this.effect==='STRAIGHT'){//STRAIGHT
-                        //var newfont=(i*5)+15;
-                        //this.letters.item(i).set('fontSize',(newfont));
+                    }
+                    else if(this.effect==='STRAIGHT'){
 
                         this.letters.item(i).set('left', (width));
                         this.letters.item(i).set('top', (0));
@@ -255,106 +256,110 @@
                             transparentCorners: false
                         });
                         this.letters.item(i).set('selectable', false);
-                    }else if(this.effect==='smallToLarge'){//smallToLarge
-                        var small=parseInt(this.smallFont);
-                        var large=parseInt(this.largeFont);
-                        //var small = 20;
-                        //var large = 75;
-                        var difference=large-small;
-                        var center=Math.ceil(this.text.length/2);
-                        var step=difference/(this.text.length);
-                        var newfont=small+(i*step);
-
-                        //var newfont=(i*this.smallFont)+15;
-
-                        this.letters.item(i).set('fontSize', (newfont));
-
-                        this.letters.item(i).set('left', (width));
-                        width+=this.letters.item(i).get('width');
-                        //this.letters.item(i).set('padding', 0);
-                        /*this.letters.item(i).set({
-                         borderColor: 'red',
-                         cornerColor: 'green',
-                         cornerSize: 6,
-                         transparentCorners: false
-                         });*/
-                        this.letters.item(i).set('padding', 0);
-                        this.letters.item(i).set('selectable', false);
-                        this.letters.item(i).set('top', -1*this.letters.item(i).get('fontSize')+i);
-                        //this.letters.width=width;
-                        //this.letters.height=this.letters.item(i).get('height');
-
-                    }else if(this.effect==='largeToSmallTop'){//largeToSmallTop
-                        var small=parseInt(this.largeFont);
-                        var large=parseInt(this.smallFont);
-                        //var small = 20;
-                        //var large = 75;
-                        var difference=large-small;
-                        var center=Math.ceil(this.text.length/2);
-                        var step=difference/(this.text.length);
-                        var newfont=small+(i*step);
-                        //var newfont=((this.text.length-i)*this.smallFont)+12;
-                        this.letters.item(i).set('fontSize', (newfont));
-                        this.letters.item(i).set('left', (width));
-                        width+=this.letters.item(i).get('width');
-                        this.letters.item(i).set('padding', 0);
-                        this.letters.item(i).set({
-                            borderColor: 'red',
-                            cornerColor: 'green',
-                            cornerSize: 6,
-                            transparentCorners: false
-                        });
-                        this.letters.item(i).set('padding', 0);
-                        this.letters.item(i).set('selectable', false);
-                        this.letters.item(i).top=-1*this.letters.item(i).get('fontSize')+(i/this.text.length);
-
-                    }else if(this.effect==='largeToSmallBottom'){
-                        var small=parseInt(this.largeFont);
-                        var large=parseInt(this.smallFont);
-                        //var small = 20;
-                        //var large = 75;
-                        var difference=large-small;
-                        var center=Math.ceil(this.text.length/2);
-                        var step=difference/(this.text.length);
-                        var newfont=small+(i*step);
-                        //var newfont=((this.text.length-i)*this.smallFont)+12;
-                        this.letters.item(i).set('fontSize', (newfont));
-                        this.letters.item(i).set('left', (width));
-                        width+=this.letters.item(i).get('width');
-                        this.letters.item(i).set('padding', 0);
-                        this.letters.item(i).set({
-                            borderColor: 'red',
-                            cornerColor: 'green',
-                            cornerSize: 6,
-                            transparentCorners: false
-                        });
-                        this.letters.item(i).set('padding', 0);
-                        this.letters.item(i).set('selectable', false);
-                        //this.letters.item(i).top =-1* this.letters.item(i).get('fontSize')+newfont-((this.text.length-i))-((this.text.length-i));
-                        this.letters.item(i).top=-1*this.letters.item(i).get('fontSize')-i;
-
-                    }else if(this.effect==='bulge'){//bulge
-                        var small=parseInt(this.smallFont);
-                        var large=parseInt(this.largeFont);
-                        //var small = 20;
-                        //var large = 75;
-                        var difference=large-small;
-                        var center=Math.ceil(this.text.length/2);
-                        var step=difference/(this.text.length-center);
-                        if(i<center)
-                            var newfont=small+(i*step);
-                        else
-                            var newfont=large-((i-center+1)*step);
-                        this.letters.item(i).set('fontSize', (newfont));
-
-                        this.letters.item(i).set('left', (width));
-                        width+=this.letters.item(i).get('width');
-
-                        this.letters.item(i).set('padding', 0);
-                        this.letters.item(i).set('selectable', false);
-
-                        this.letters.item(i).set('top', -1*this.letters.item(i).get('height')/2);
                     }
+                    //else if(this.effect==='smallToLarge'){//smallToLarge
+                    //    var small=parseInt(this.smallFont);
+                    //    var large=parseInt(this.largeFont);
+                    //    //var small = 20;
+                    //    //var large = 75;
+                    //    var difference=large-small;
+                    //    var center=Math.ceil(this.text.length/2);
+                    //    var step=difference/(this.text.length);
+                    //    var newfont=small+(i*step);
+                    //
+                    //    //var newfont=(i*this.smallFont)+15;
+                    //
+                    //    this.letters.item(i).set('fontSize', (newfont));
+                    //
+                    //    this.letters.item(i).set('left', (width));
+                    //    width+=this.letters.item(i).get('width');
+                    //    //this.letters.item(i).set('padding', 0);
+                    //    /*this.letters.item(i).set({
+                    //     borderColor: 'red',
+                    //     cornerColor: 'green',
+                    //     cornerSize: 6,
+                    //     transparentCorners: false
+                    //     });*/
+                    //    this.letters.item(i).set('padding', 0);
+                    //    this.letters.item(i).set('selectable', false);
+                    //    this.letters.item(i).set('top', -1*this.letters.item(i).get('fontSize')+i);
+                    //    //this.letters.width=width;
+                    //    //this.letters.height=this.letters.item(i).get('height');
+                    //
+                    //}
+                    //else if(this.effect==='largeToSmallTop'){//largeToSmallTop
+                    //    var small=parseInt(this.largeFont);
+                    //    var large=parseInt(this.smallFont);
+                    //    //var small = 20;
+                    //    //var large = 75;
+                    //    var difference=large-small;
+                    //    var center=Math.ceil(this.text.length/2);
+                    //    var step=difference/(this.text.length);
+                    //    var newfont=small+(i*step);
+                    //    //var newfont=((this.text.length-i)*this.smallFont)+12;
+                    //    this.letters.item(i).set('fontSize', (newfont));
+                    //    this.letters.item(i).set('left', (width));
+                    //    width+=this.letters.item(i).get('width');
+                    //    this.letters.item(i).set('padding', 0);
+                    //    this.letters.item(i).set({
+                    //        borderColor: 'red',
+                    //        cornerColor: 'green',
+                    //        cornerSize: 6,
+                    //        transparentCorners: false
+                    //    });
+                    //    this.letters.item(i).set('padding', 0);
+                    //    this.letters.item(i).set('selectable', false);
+                    //    this.letters.item(i).top=-1*this.letters.item(i).get('fontSize')+(i/this.text.length);
+                    //
+                    //}
+                    //else if(this.effect==='largeToSmallBottom'){
+                    //    var small=parseInt(this.largeFont);
+                    //    var large=parseInt(this.smallFont);
+                    //    //var small = 20;
+                    //    //var large = 75;
+                    //    var difference=large-small;
+                    //    var center=Math.ceil(this.text.length/2);
+                    //    var step=difference/(this.text.length);
+                    //    var newfont=small+(i*step);
+                    //    //var newfont=((this.text.length-i)*this.smallFont)+12;
+                    //    this.letters.item(i).set('fontSize', (newfont));
+                    //    this.letters.item(i).set('left', (width));
+                    //    width+=this.letters.item(i).get('width');
+                    //    this.letters.item(i).set('padding', 0);
+                    //    this.letters.item(i).set({
+                    //        borderColor: 'red',
+                    //        cornerColor: 'green',
+                    //        cornerSize: 6,
+                    //        transparentCorners: false
+                    //    });
+                    //    this.letters.item(i).set('padding', 0);
+                    //    this.letters.item(i).set('selectable', false);
+                    //    //this.letters.item(i).top =-1* this.letters.item(i).get('fontSize')+newfont-((this.text.length-i))-((this.text.length-i));
+                    //    this.letters.item(i).top=-1*this.letters.item(i).get('fontSize')-i;
+                    //
+                    //}
+                    //else if(this.effect==='bulge'){//bulge
+                    //    var small=parseInt(this.smallFont);
+                    //    var large=parseInt(this.largeFont);
+                    //    //var small = 20;
+                    //    //var large = 75;
+                    //    var difference=large-small;
+                    //    var center=Math.ceil(this.text.length/2);
+                    //    var step=difference/(this.text.length-center);
+                    //    if(i<center)
+                    //        var newfont=small+(i*step);
+                    //    else
+                    //        var newfont=large-((i-center+1)*step);
+                    //    this.letters.item(i).set('fontSize', (newfont));
+                    //
+                    //    this.letters.item(i).set('left', (width));
+                    //    width+=this.letters.item(i).get('width');
+                    //
+                    //    this.letters.item(i).set('padding', 0);
+                    //    this.letters.item(i).set('selectable', false);
+                    //
+                    //    this.letters.item(i).set('top', -1*this.letters.item(i).get('height')/2);
+                    //}
                 }
 
                 // Update group coords
@@ -370,43 +375,43 @@
 //				console.log('End rendering')
             }
         },
-        _renderOld: function(ctx){
-            if(this.letters){
-                var curAngle=0,
-                    angleRadians=0,
-                    align=0;
-                // Text align
-                if(this.get('textAlign')==='center'||this.get('textAlign')==='justify'){
-                    align=(this.spacing/2)*(this.text.length-1);
-                }else if(this.get('textAlign')==='right'){
-                    align=(this.spacing)*(this.text.length-1);
-                }
-                var multiplier=this.reverse?1:-1;
-                for(var i=0, len=this.text.length; i<len; i++){
-                    // Find coords of each letters (radians : angle*(Math.PI / 180)
-                    curAngle=multiplier*(-i*parseInt(this.spacing, 10)+align);
-                    angleRadians=curAngle*(Math.PI/180);
-
-                    for(var key in this.delegatedProperties){
-                        this.letters.item(i).set(key, this.get(key));
-                    }
-                    this.letters.item(i).set('top', (-Math.cos(angleRadians)*this.radius));
-                    this.letters.item(i).set('left', (+Math.sin(angleRadians)*this.radius));
-                    this.letters.item(i).setAngle(curAngle);
-                    this.letters.item(i).set('padding', 0);
-                    this.letters.item(i).set('selectable', false);
-                }
-                // Update group coords
-                this.letters._calcBounds();
-                this.letters._updateObjectsCoords();
-                this.letters.saveCoords();
-//				this.letters.render(ctx);
-                this.width=this.letters.width;
-                this.height=this.letters.height;
-                this.letters.left=-(this.letters.width/2);
-                this.letters.top=-(this.letters.height/2);
-            }
-        },
+//        _renderOld: function(ctx){
+//            if(this.letters){
+//                var curAngle=0,
+//                    angleRadians=0,
+//                    align=0;
+//                // Text align
+//                if(this.get('textAlign')==='center'||this.get('textAlign')==='justify'){
+//                    align=(this.spacing/2)*(this.text.length-1);
+//                }else if(this.get('textAlign')==='right'){
+//                    align=(this.spacing)*(this.text.length-1);
+//                }
+//                var multiplier=this.reverse?1:-1;
+//                for(var i=0, len=this.text.length; i<len; i++){
+//                    // Find coords of each letters (radians : angle*(Math.PI / 180)
+//                    curAngle=multiplier*(-i*parseInt(this.spacing, 10)+align);
+//                    angleRadians=curAngle*(Math.PI/180);
+//
+//                    for(var key in this.delegatedProperties){
+//                        this.letters.item(i).set(key, this.get(key));
+//                    }
+//                    this.letters.item(i).set('top', (-Math.cos(angleRadians)*this.radius));
+//                    this.letters.item(i).set('left', (+Math.sin(angleRadians)*this.radius));
+//                    this.letters.item(i).setAngle(curAngle);
+//                    this.letters.item(i).set('padding', 0);
+//                    this.letters.item(i).set('selectable', false);
+//                }
+//                // Update group coords
+//                this.letters._calcBounds();
+//                this.letters._updateObjectsCoords();
+//                this.letters.saveCoords();
+////				this.letters.render(ctx);
+//                this.width=this.letters.width;
+//                this.height=this.letters.height;
+//                this.letters.left=-(this.letters.width/2);
+//                this.letters.top=-(this.letters.height/2);
+//            }
+//        },
         render: function(ctx, noTransform){
             // do not render if object is not visible
             if(!this.visible)

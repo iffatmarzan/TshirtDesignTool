@@ -113,13 +113,15 @@ var TShirtDesignTool =
             //$('#text-arc-slider').slider('value', selectedObject.radius);
             $('#text-outline-slider').slider('value', selectedObject.strokeWidth);
             $('#editor-panel select option').each(function(){
-                $this=$(this);
-                var value=$this.val();
-                if(value==selectedObject.fontFamily){
-                    $this.attr('selected','selected');
-                }
+                //$this=$(this);
+                //var value=$this.val();
+                if($(this).val()==selectedObject.fontFamily)
+                    $(this).attr('selected','selected');
+
             });
             $('#outline-properties input[type=color]').val(selectedObject.stroke);
+            $('#text-spacing').val(selectedObject.letterSpacing);
+            $('#font-sizing').val(selectedObject.fontSize);
 
             //$(document).foundation('slider', 'reflow');
     }
@@ -234,47 +236,63 @@ var TShirtDesignTool =
 
     }
     , setTextCircular: function(){
-    var activeObject=window.canvas.getActiveObject();
-    if(!activeObject)
-        activeObject=window.canvas.item(0);
-    if(!activeObject)
-        return;
-    var isChecked=$('#text-circular').is(':checked');
-    console.log(isChecked);
-    if(isChecked){
-        $( '#text-arc-slider' ).slider({
-            disabled: true
-        });
-        var curveText= new fabric.CurvedText(activeObject.text,{
-            top:activeObject.top,
-            left:activeObject.left,
-            fontFamily: activeObject.fontFamily,
-            //width:activeObject.width,
-            //height:activeObject.height,
-            radius:((activeObject.width/2/3.14)+activeObject.height/2),
-            effect:'curved',
-            fontSize:activeObject.fontSize,
-            spacing:activeObject.letterSpacing,
-            fill:activeObject.fill,
-            textAlign: 'center',
-            stroke:activeObject.stroke,
-            strokeWidth:activeObject.strokeWidth,
-            angle:activeObject.angle
-        });
-        window.canvas.remove(activeObject);
-        window.canvas.add(curveText);
-    }
+            var activeObject=window.canvas.getActiveObject();
+            if(!activeObject)
+                activeObject=window.canvas.item(0);
+            if(!activeObject)
+                return;
+            var isChecked=$('#text-circular').is(':checked');
+            //console.log(isChecked);
+            if(isChecked && activeObject.type!=='curvedText'){
+                $( '#text-arc-slider' ).slider({disabled: true});
+                var curveText= new fabric.CurvedText(activeObject.text,{
+                    top:activeObject.top,
+                    left:activeObject.left,
+                    fontFamily: activeObject.fontFamily,
+                    width:activeObject.width,
+                    height:activeObject.height,
+                    radius:((activeObject.width/2/3.14)+activeObject.height/2),
+                    effect:'arc',
+                    fontSize:activeObject.fontSize,
+                    //spacing:activeObject.letterSpacing,
+                    fill:activeObject.fill,
+                    textAlign: 'center',
+                    stroke:activeObject.stroke,
+                    strokeWidth:activeObject.strokeWidth,
+                    angle:activeObject.angle
+                });
+                window.canvas.remove(activeObject);
+                window.canvas.add(curveText);
+                window.canvas.setActiveObject(curveText);
+            }
 
-    if(!isChecked){
-        $( '#text-arc-slider' ).slider({
-            disabled: false
-        });
-    }
-    window.canvas.renderAll();
-
+            if(!isChecked && activeObject.type!=='text'){
+                $( '#text-arc-slider' ).slider({disabled: false});
+                var SampleText= new fabric.Text(activeObject.text,{
+                    top:activeObject.top,
+                    left:activeObject.left,
+                    textAlign: 'left',
+                    fontFamily: 'sans-serif',
+                    fontSize:activeObject.fontSize,
+                    letterSpacing:0,
+                    fill:activeObject.fill,
+                    stroke:activeObject.stroke,
+                    strokeWidth:activeObject.strokeWidth
+                });
+                window.canvas.remove(activeObject);
+                window.canvas.add(SampleText);
+                window.canvas.setActiveObject(SampleText);
+            }
+                window.canvas.renderAll();
 }
     , setFontSize: function(e){
-
+            var activeObject=window.canvas.getActiveObject();
+            if(!activeObject)
+                activeObject=window.canvas.item(0);
+            if(!activeObject)
+                return;
+            activeObject.set('fontSize',parseInt(e));
+            window.canvas.renderAll();
 }
     , setFontStyle: function(e){
 
@@ -319,20 +337,16 @@ var TShirtDesignTool =
         window.open(img);
 }
     , setOutline: function(e){
-    $("#outline-properties").toggle();
-   // console.log(e);
-
-    //    var activeObject=window.canvas.getActiveObject();
-    //    if(!activeObject)
-    //        activeObject=window.canvas.item(0);
-    //    if(activeObject)
-    //        activeObject.setStrokeWidth(0);
-    //
-    //$('#text-outline-slider .ui-slider-range').css('background','#d8d8d8');
-    //$('#text-outline-slider .ui-slider-handle').css('background','#fff');
-    //$('#outline-properties input[type=color]').val('#d8d8d8');
-    //    window.canvas.renderAll();
-
+            $("#outline-properties").toggle();
+            var activeObject=window.canvas.getActiveObject();
+            if(!activeObject)
+                activeObject=window.canvas.item(0);
+            if(activeObject)
+                activeObject.setStrokeWidth(0);
+            $('#text-outline-slider .ui-slider-range').css('background','#d8d8d8');
+            $('#text-outline-slider .ui-slider-handle').css('background','#fff');
+            $('#outline-properties input[type=color]').val('#d8d8d8');
+            window.canvas.renderAll();
 }
     , setOutlineColor: function(e){
             var activeObject=window.canvas.getActiveObject();
