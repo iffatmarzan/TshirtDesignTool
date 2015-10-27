@@ -252,7 +252,7 @@ var TShirtDesignTool =
                     width:activeObject.width,
                     height:activeObject.height,
                     radius:((activeObject.width/2/3.14)+activeObject.height/2),
-                    effect:'arc',
+                    effect:'circular',
                     fontSize:activeObject.fontSize,
                     //spacing:activeObject.letterSpacing,
                     fill:activeObject.fill,

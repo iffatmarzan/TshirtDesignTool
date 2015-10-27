@@ -183,6 +183,12 @@
                     }
                     textWidth -= space;
                 }
+                else if (this.effect=='circular') {
+                    //fixedLetterAngle = ((this.letters.item(0).fontSize + space) / this.radius) / (Math.PI/180);
+                    var circularTextangle=2*(Math.PI);
+                    fixedLetterAngle = 2*(Math.PI) / this.text.length;
+                    textWidth = ((this.text.length+1) * (this.letters.item(0).fontSize + space));
+                }
                 else if (this.effect=='arc') {
                     fixedLetterAngle = ((this.letters.item(0).fontSize + space) / this.radius) / (Math.PI/180);
                     textWidth = ((this.text.length+1) * (this.letters.item(0).fontSize + space));
@@ -200,6 +206,7 @@
                     curAngle = -(((textWidth/2)/ this.radius) / (Math.PI/180));
                 }
                 if (this.reverse) curAngle = -curAngle;
+
 
                 var width=0,
                     multiplier=this.reverse?-1:1,
@@ -241,6 +248,13 @@
                         this.letters.item(i).set('left', multiplier*(Math.sin(angleRadians)*this.radius));
                         this.letters.item(i).set('padding', 0);
                         this.letters.item(i).set('selectable', false);
+                    }
+                    else if(this.effect==='circular'){
+                        this.letters.item(i).set('top', -1*(Math.cos(circularTextangle)*this.radius));
+                        this.letters.item(i).set('left', -1*(Math.sin(circularTextangle)*this.radius));
+                        this.letters.item(i).set('padding', 0);
+                        this.letters.item(i).set('selectable', false);
+                        circularTextangle =  circularTextangle - fixedLetterAngle;
                     }
                     else if(this.effect==='STRAIGHT'){
 
@@ -447,10 +461,10 @@
             this.clipTo&&ctx.restore();
 
             //Those lines causes double borders.. not sure why
-//			if(!noTransform&&this.active){
-//				this.drawBorders(ctx);
-//				this.drawControls(ctx);
-//			}
+			if(!noTransform&&this.active){
+				this.drawBorders(ctx);
+				this.drawControls(ctx);
+			}
 //			ctx.restore();
             this.setCoords();
         },

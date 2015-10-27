@@ -2,6 +2,7 @@
 fabric.util.object.extend(fabric.Text.prototype, {
     _renderChars: function(method, ctx, chars, left, top) {
         //console.log(this.width);
+        var shortM = method.slice(0, -4);
         var characters = String.prototype.split.call(chars, ''),
             index = 0,
             current,
@@ -27,13 +28,18 @@ fabric.util.object.extend(fabric.Text.prototype, {
         var updatedWidth = currentPosition;
         while (index < chars.length) {
             current = characters[index++];
-            ctx.fillText(current, currentPosition, y);
+            //ctx.fillText(current, currentPosition, y);
+            ctx[method](current, currentPosition, y);
             currentPosition += (align * (ctx.measureText(current).width + ls));
         }
         updatedWidth = currentPosition - updatedWidth;
         if(this.width<updatedWidth)
             this.width = updatedWidth;
+
+        //this._renderTextStroke(ctx);
+        this[shortM].toLive && ctx.restore();
     }
+
 
 });
 
