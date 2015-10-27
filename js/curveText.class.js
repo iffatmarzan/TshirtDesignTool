@@ -461,10 +461,10 @@
             this.clipTo&&ctx.restore();
 
             //Those lines causes double borders.. not sure why
-			if(!noTransform&&this.active){
-				this.drawBorders(ctx);
-				this.drawControls(ctx);
-			}
+            //if(!noTransform&&this.active){
+				//this.drawBorders(ctx);
+				//this.drawControls(ctx);
+            //}
 //			ctx.restore();
             this.setCoords();
         },

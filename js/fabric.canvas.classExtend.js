@@ -3,13 +3,13 @@
  */
 
 var cursorOffset = {
-    //mt: 0, // n
+    mt: 0, // n
     tr: 1, // ne
-    //mr: 2, // e
+    mr: 2, // e
     br: 3, // se
-    //mb: 4, // s
+    mb: 4, // s
     bl: 5, // sw
-    //ml: 6, // w
+    ml: 6, // w
     tl: 7 // nw
 };
 degreesToRadians = fabric.util.degreesToRadians;
@@ -19,7 +19,11 @@ fabric.util.object.extend(fabric.Canvas.prototype, {
     _getActionFromCorner: function(target, corner) {
         var action = 'drag';
         if (corner) {
-            action = corner === 'mtr'
+            action = (corner === 'ml' || corner === 'mr')
+                ? 'scaleX'
+                : (corner === 'mt' || corner === 'mb')
+                ? 'scaleY'
+                :( corner === 'mtr' )
                 ? 'rotate'
                 : corner === 'tl'
                 ? 'remove'

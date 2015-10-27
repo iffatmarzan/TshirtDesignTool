@@ -191,7 +191,7 @@ var TShirtDesignTool =
                     radius:900,
                     effect:'arc',
                     fontSize:activeObject.fontSize,
-                    spacing:activeObject.letterSpacing,
+                    spacing:activeObject.letterSpacing-10,
                     fill:activeObject.fill,
                     textAlign: 'center',
                     stroke:activeObject.stroke,

@@ -1,6 +1,21 @@
 
 fabric.util.object.extend(fabric.Text.prototype, {
     _renderChars: function(method, ctx, chars, left, top) {
+
+        if(chars.length===1){
+            var shortM = method.slice(0, -4);
+            if (this[shortM].toLive) {
+                var offsetX = -this.width / 2 + this[shortM].offsetX || 0,
+                    offsetY = -this.height / 2 + this[shortM].offsetY || 0;
+                ctx.save();
+                ctx.translate(offsetX, offsetY);
+                left -= offsetX;
+                top -= offsetY;
+            }
+            ctx[method](chars, left, top);
+            this[shortM].toLive && ctx.restore();
+            return;
+        }
         //console.log(this.width);
         var shortM = method.slice(0, -4);
         var characters = String.prototype.split.call(chars, ''),
