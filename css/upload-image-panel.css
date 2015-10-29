@@ -1,0 +1,42 @@
+#upload-image-panel{
+    border:1px solid darkgray;
+    min-height:200px;
+    margin: 0px;
+    padding: 0px;
+    display: none;
+}
+
+#upload-image-panel h6{
+    font-weight: bold;
+    background-color: whitesmoke;
+    padding: 10px 0px 10px 10px;
+    margin: 0px;
+    border-bottom: 1px solid darkgray;
+    color: darkslategray;
+}
+
+#upload-image-panel div{
+    font-weight: bold;
+    margin: 30px 0px 10px 20%;
+    padding: 0px;
+    color: darkslategray;
+    height:50px;
+    background-color: #CED5D9;
+    width: 60%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+    text-align: center;
+    vertical-align: middle;
+}
+#upload-image-panel div input[type=file]{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}

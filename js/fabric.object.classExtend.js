@@ -23,7 +23,7 @@ fabric.util.object.extend(fabric.Object.prototype, {
         var SelectedIconImage = new Image();
         if(control === 'tl') {
             SelectedIconImage.src = 'img/cross-black.png';
-            ctx.drawImage(SelectedIconImage, left, top, size, size);
+            ctx['drawImage'](SelectedIconImage, left, top, size, size);
         }
 
     }

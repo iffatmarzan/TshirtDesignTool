@@ -1,0 +1,36 @@
+#editor-panel{
+    min-height:300px;
+    margin: 0px;
+    padding:0px;
+    border: 1px solid gray;
+    display:none;
+}
+#editor-panel h6{
+    font-weight: bold;
+    background-color: whitesmoke;
+    padding: 10px 0px 10px 10px;
+    margin: 0px;
+    border-bottom: 1px solid darkgray;
+    color: darkslategray;
+}
+
+.editor-panel-tools{
+    padding: 15px;
+}
+
+
+#editor-panel input[type=color]{
+    /*display:inline-block;
+    width:30px;*/
+    cursor: pointer;
+}
+
+#editor-panel select{
+    cursor: pointer;
+}
+#editor-panel input[type=color]{
+    display: block;
+    text-align: center;
+    vertical-align: middle;
+    max-width: 35px;
+}

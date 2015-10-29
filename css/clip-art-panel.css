@@ -1,0 +1,32 @@
+#clip-art-panel{
+    border:1px solid darkgray;
+    min-height:300px;
+    margin: 0px;
+    padding: 0px;
+    display: none;
+}
+
+#clip-art-panel h6{
+    font-weight: bold;
+    background-color: whitesmoke;
+    padding: 10px 0px 10px 10px;
+    margin: 0px;
+    border-bottom: 1px solid darkgray;
+    color: darkslategray;
+}
+
+.clipartImage{
+    padding:10px;
+}
+
+.caption{
+    display: block;
+    text-align: center;
+}
+
+.clip-arts-holder{
+    padding: 20px;
+}
+.clip-arts-holder img{
+    height: 90px;
+}

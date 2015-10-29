@@ -1,46 +1,48 @@
-.EditPanel
-{
+.EditPanel{
     height: 300px;
 }
 
-.ThumbImg
-{
+.ThumbImg {
     border: 1px solid grey;
     width: 100px;
     height: 120px;
     margin: 6px;
 }
-.customMenuItem
-{
+
+.customMenuItem{
     width: 220px;
 }
+
 #text-properties .input-text-1, #add-text .input-text-1 {
     overflow: hidden;
     resize: none;
 }
+
 .full, .half {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     width: 100%;
 }
+
 input[type=text], input.text, textarea {
     padding: 12px;
     border: 1px solid #CED5D9;
 }
+
 fieldset {
     padding-top: 18px;
     width: 100%;
-}
-fieldset {
     border: 0;
     margin: 0;
     padding: 0;
 }
+
 #canvas-container{
     height: 500px;
     background-size: cover;
 }
+
 user agent stylesheetfieldset {
     display: block;
     -webkit-margin-start: 2px;
@@ -57,6 +59,7 @@ user agent stylesheetfieldset {
     border-image-repeat: initial;
     min-width: -webkit-min-content;
 }
+
 .primary-button {
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
@@ -95,94 +98,11 @@ user agent stylesheetfieldset {
     font-size: 12px;
     text-align: center;
 }
-#canvas
-{
+
+#canvas{
     margin: 0px;
     padding:0px;
     /*border:1px solid red;*/
-}
-
-#text-panel{
-    /*border:1px solid darkgray;*/
-    min-height:100px;
-    margin: 0px;
-    padding: 0px;
-}
-#text-panel fieldset{
-    text-align: center;
-    height:45px;
-}
-#text-panel a{
-    height:40px;
-}
-
-#text-panel h5{
-    padding: 10px;
-    height:30px;
-    font-weight: bold;
-}
-#editor-panel{
-    min-height:300px;
-    margin: 0px;
-    padding:0px;
-    border: 1px solid gray;
-    display:none;
-}
-#editor-panel h6{
-    font-weight: bold;
-    background-color: whitesmoke;
-    padding: 10px 0px 10px 10px;
-    margin: 0px;
-    border-bottom: 1px solid darkgray;
-    color: darkslategray;
-}
-
-.editor-panel-tools{
-    padding: 15px;
-}
-
-
-#editor-panel input[type=color]{
-    /*display:inline-block;
-    width:30px;*/
-    cursor: pointer;
-}
-
-#editor-panel select{
-    cursor: pointer;
-}
-
-#clip-art-panel{
-    border:1px solid darkgray;
-    min-height:300px;
-    margin: 0px;
-    padding: 0px;
-    display: none;
-}
-
-#clip-art-panel h6{
-    font-weight: bold;
-    background-color: whitesmoke;
-    padding: 10px 0px 10px 10px;
-    margin: 0px;
-    border-bottom: 1px solid darkgray;
-    color: darkslategray;
-}
-
-.clipartImage{
-    padding:10px;
-}
-
-.caption{
-    display: block;
-    text-align: center;
-}
-
-.clip-arts-holder{
-    padding: 20px;
-}
-.clip-arts-holder img{
-    height: 90px;
 }
 
 .row.full-width {
@@ -190,25 +110,9 @@ user agent stylesheetfieldset {
     max-width: 100%;
 }
 
-#editor-panel input[type=color]{
-    display: block;
-    text-align: center;
-    vertical-align: middle;
-    max-width: 35px;
-
-}
-.slider{
-
-}
 #text-arc-slider .ui-slider-range { background: #729fcf; }
 #text-arc-slider .ui-slider-handle { border-color: #729fcf; }
 
 /*#text-outline-slider .ui-slider-range { background: #d8d8d8; }*/
 /*#text-outline-slider .ui-slider-handle { border-color: #4d4d4d; }*/
 
-@font-face
-{
-    font-family: squealer;
-    src: url('SQUEALER.ttf'),
-    url('SQUEALER.eot'); /* IE9 */
-}
