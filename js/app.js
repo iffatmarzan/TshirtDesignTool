@@ -59,6 +59,7 @@ var TShirtDesignTool =
                 return;
             var SampleText = new fabric.Text(Text, {
                 //fontFamily: 'squealer',
+                //textAlign:'center',
                 fontSize:30,
                 letterSpacing: 0
             });
@@ -173,16 +174,18 @@ var TShirtDesignTool =
             activeObject=window.canvas.item(0);
         if(!activeObject)
                 return;
-        var e=$("#text-arc-slider").slider("value");
-        if(parseInt(e)>=10 && activeObject.type==='text')
+        var arcSliderValue=parseInt($("#text-arc-slider").slider("value"));
+
+        if( (arcSliderValue <-10 || arcSliderValue >10) && activeObject.type==='text')
             {
                 var curveText= new fabric.CurvedText(activeObject.text,{
                     top:activeObject.top,
                     left:activeObject.left,
-                    fontFamily: activeObject.fontFamily,
+                    fontFamily:'Times New Roman',
                     //width:activeObject.width,
                     //height:activeObject.height,
-                    radius:900,
+                    reverse:arcSliderValue <0,
+                    radius:550,
                     effect:'arc',
                     fontSize:activeObject.fontSize,
                     spacing:activeObject.letterSpacing-10,
@@ -195,13 +198,13 @@ var TShirtDesignTool =
                 window.canvas.remove(activeObject);
                 window.canvas.add(curveText);
             }
-        if(parseInt(e)<10 && activeObject.type==='curvedText')
+        if( (arcSliderValue>-11 &&arcSliderValue <11) && activeObject.type==='curvedText')
         {
             var SampleText= new fabric.Text(activeObject.text,{
                 top:activeObject.top,
                 left:activeObject.left,
                 textAlign: 'left',
-                fontFamily: 'sans-serif',
+                fontFamily: activeObject.fontFamily,
                 fontSize:activeObject.fontSize,
                 letterSpacing:activeObject.spacing+10,
                 fill:activeObject.fill,
@@ -220,9 +223,9 @@ var TShirtDesignTool =
             //    });
              if(activeObject.type==='curvedText'){
                  activeObject.set({
-                     textAlign: 'center',
-                     reverse:parseInt(e)<0,
-                     radius:950-Math.abs(e)*5
+                     //textAlign: 'center',
+                     reverse:arcSliderValue<0,
+                     radius:550-Math.abs(arcSliderValue)*5
                  });
              }
 
@@ -303,7 +306,8 @@ var TShirtDesignTool =
             });
         window.canvas.add(imgInstance);
     }
-    , uploadImage: function(){
+    , uploadImage: function(e){
+    alert(e);
 
 }
     , saveDesign: function(){
@@ -360,7 +364,8 @@ $(document).ready(function () {
         $('#text-arc-slider').slider({
             orientation: "horizontal",
             range: "min",
-            max: 180,
+            min:-100,
+            max: 100,
             //slide: refreshSwatch,
             change: TShirtDesignTool.setTextArc
         });
