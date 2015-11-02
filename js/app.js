@@ -366,7 +366,6 @@ $(document).ready(function () {
             range: "min",
             min:-100,
             max: 100,
-            //slide: refreshSwatch,
             change: TShirtDesignTool.setTextArc
         });
         $('#text-arc-slider').slider("value", 0);
@@ -375,10 +374,14 @@ $(document).ready(function () {
             orientation: "horizontal",
             range: "min",
             max: 3,
-            //slide: refreshSwatch,
             change: TShirtDesignTool.setOutlineWidth
         });
         $("#text-outline-slider").slider("value", 0);
+
+    $("#text-color,#text-outline-color").kendoColorPicker({
+        palette: "basic",
+        tileSize: 4
+    });
 
     $(document).foundation();
 });
