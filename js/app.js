@@ -6,29 +6,60 @@ var TShirtDesignTool =
         text: "normal",
         value: 1,
         selected: false,
-        description: "                     ",
-        imageSrc: "http://dl.dropbox.com/u/40036711/Images/facebook-icon-32.png"
+        description: "                     "
+        //imageSrc: "http://dl.dropbox.com/u/40036711/Images/facebook-icon-32.png"
     },
     {
         text: "bold",
         value: 2,
         selected: false,
-        description: "                      ",
-        imageSrc: "http://dl.dropbox.com/u/40036711/Images/twitter-icon-32.png"
+        description: "                      "
+        //imageSrc: "http://dl.dropbox.com/u/40036711/Images/twitter-icon-32.png"
     },
     {
         text: "italic",
         value: 3,
         selected: false,
-        description: "                      ",
-        imageSrc: "http://dl.dropbox.com/u/40036711/Images/linkedin-icon-32.png"
+        description: "                      "
+        //imageSrc: "http://dl.dropbox.com/u/40036711/Images/linkedin-icon-32.png"
     },
     {
         text: "oblique",
         value: 4,
         selected: false,
+        description: "                      "
+        //imageSrc: "http://dl.dropbox.com/u/40036711/Images/foursquare-icon-32.png"
+    }
+]
+    , fontFamilyDropdownData:[
+    {
+        text: "Standard",
+        value: 1,
+        selected: false,
+        description: "                     ",
+        id: "Standard"
+
+    },
+    {
+        text: "Modern",
+        value: 2,
+        selected: false,
         description: "                      ",
-        imageSrc: "http://dl.dropbox.com/u/40036711/Images/foursquare-icon-32.png"
+        id: "Modern"
+    },
+    {
+        text: "Old style",
+        value: 3,
+        selected: false,
+        description: "                      ",
+        id: "Old style"
+    },
+    {
+        text: "Handwriting",
+        value: 4,
+        selected: false,
+        description: "                      ",
+        id: "Handwriting"
     }
 ]
     , init: function () {
@@ -373,21 +404,21 @@ var TShirtDesignTool =
 
 }
     , importDesign: function(e){
-    //console.log(e);
-    alert('on import design')
-    var json;
-    var reader = new FileReader();
-    reader.onload = function (event)
-    {
-        var img = new Image();
-        img.src = event.target.result;
-        console.log(event.target.result);
-        json=event.target.result;
+            //console.log(e);
+            alert('on import design')
+            var json;
+            var reader = new FileReader();
+            reader.onload = function (event)
+            {
+                var img = new Image();
+                img.src = event.target.result;
+                console.log(event.target.result);
+                json=event.target.result;
 
-    }
-    //reader.readAsDataURL(e.target.files[0]);
-    window.canvas.loadFromJSON(json);
-    window.canvas.renderAll();
+            }
+            //reader.readAsDataURL(e.target.files[0]);
+            window.canvas.loadFromJSON(json);
+            window.canvas.renderAll();
 
 }
     , saveDesign: function(){
@@ -491,17 +522,19 @@ $(document).ready(function () {
             TShirtDesignTool.setFontStyle(data.selectedData.text);
         }
     });
-/*
-    $('#fonts-standard').ddslick({
-        data: TShirtDesignTool.fontStyleDropdownData,
-        width:190,
-        imagePosition: "left",
-        selectText: "Select font style",
+
+    $('#font-family').ddslick({
+        data: TShirtDesignTool.fontFamilyDropdownData,
+        width:300,
+        selectText: "Select font family",
         onSelected: function (data) {
-            //console.log(data);
-            TShirtDesignTool.setFontStyle(data.selectedData.text);
+            console.log(data);
+            //TShirtDesignTool.setFontStyle(data.selectedData.text);
+        },
+        onHover:function(){
+            alert('hurrah')
         }
-    });*/
+    });
 
     $(document).foundation();
 });
