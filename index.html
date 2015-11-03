@@ -82,15 +82,56 @@
 
                     <div class="row">
                         <div class="large-12 columns">
-                           <select name="font" class="radius"  onchange="return TShirtDesignTool.setTextFont(this.value)">
-                              <option value="sans-serif">sans-serif</option>
-                              <option value="OldSansBlack">OldSansBlack</option>
-                              <option value="Megazine">Megazine</option>
-                              <option value="monospace" >monospace</option>
-                              <option value="Impact">Impact</option>
-                              <option value="Sansation_Light">Sansation_Light</option>
-                               <option value="Squealer">Squealer</option>
-                           </select>
+                            <div class="font-name-holder">
+                                <a data-dropdown="font-name" aria-expanded="false" class="button radius">Select Font</a>
+                                <ul id="font-name" name="font" class="f-dropdown" onchange="return TShirtDesignTool.setTextFont(this.value)">
+
+                                    <li>
+                                        <a href="#" data-dropdown="fonts-standard" data-options="align: right" aria-expanded="false">Standard</a>
+                                        <ul id="fonts-standard" name="font" class="f-dropdown">
+                                            <li title="Sans-serif" onclick="return TShirtDesignTool.setTextFont(this.title)"><a href="#" >Sans-serif</a></li>
+                                            <li title="OldSansBlack" onclick="return TShirtDesignTool.setTextFont(this.title)"><a href="#">OldSansBlack</a></li>
+                                            <li title="Monospace" onclick="return TShirtDesignTool.setTextFont(this.title)"><a href="#">Monospace</a></li>
+                                            <li title="Sansation_Light" onclick="return TShirtDesignTool.setTextFont(this.title)"><a href="#">Sansation Light</a></li>
+                                            <li title="Squealer" onclick="return TShirtDesignTool.setTextFont(this.title)"><a href="#">Squealer</a></li>
+                                            <li title="Megazine" onclick="return TShirtDesignTool.setTextFont(this.title)"><a href="#">Megazine</a></li>
+                                        </ul>
+                                    </li>
+
+                                   <li>
+                                       <a href="#" data-dropdown="fonts-old" data-options="align: right" aria-expanded="false">Old Style</a>
+                                       <ul id="fonts-old" name="font" class="f-dropdown">
+                                           <li title="Sans-serif" onclick="return TShirtDesignTool.setTextFont(this.title)"><a href="#" >Sans-serif</a></li>
+                                           <li title="OldSansBlack" onclick="return TShirtDesignTool.setTextFont(this.title)"><a href="#">OldSansBlack</a></li>
+                                           <li title="Monospace" onclick="return TShirtDesignTool.setTextFont(this.title)"><a href="#">Monospace</a></li>
+                                           <li title="Sansation_Light" onclick="return TShirtDesignTool.setTextFont(this.title)"><a href="#">Sansation Light</a></li>
+                                           <li title="Squealer" onclick="return TShirtDesignTool.setTextFont(this.title)"><a href="#">Squealer</a></li>
+                                           <li title="Megazine" onclick="return TShirtDesignTool.setTextFont(this.title)"><a href="#">Megazine</a></li>
+                                       </ul>
+                                    </li>
+
+                                    <li>
+                                    <a href="#" data-dropdown="fonts-college" data-options="align: right" aria-expanded="false">College</a>
+                                    <ul id="fonts-college" name="font" class="f-dropdown">
+                                        <li title="Sans-serif" onclick="return TShirtDesignTool.setTextFont(this.title)"><a href="#" >Sans-serif</a></li>
+                                        <li title="OldSansBlack" onclick="return TShirtDesignTool.setTextFont(this.title)"><a href="#">OldSansBlack</a></li>
+                                        <li title="Monospace" onclick="return TShirtDesignTool.setTextFont(this.title)"><a href="#">Monospace</a></li>
+                                        <li title="Sansation_Light" onclick="return TShirtDesignTool.setTextFont(this.title)"><a href="#">Sansation Light</a></li>
+                                        <li title="Squealer" onclick="return TShirtDesignTool.setTextFont(this.title)"><a href="#">Squealer</a></li>
+                                        <li title="Megazine" onclick="return TShirtDesignTool.setTextFont(this.title)"><a href="#">Megazine</a></li>
+                                    </ul>
+                                </li>
+                                </ul>
+                            </div>
+                           <!--<select name="font" class="radius"  onchange="return TShirtDesignTool.setTextFont(this.value)">-->
+                              <!--<option value="sans-serif">sans-serif</option>-->
+                              <!--<option value="OldSansBlack">OldSansBlack</option>-->
+                              <!--<option value="Megazine">Megazine</option>-->
+                              <!--<option value="monospace" >monospace</option>-->
+                              <!--<option value="Impact">Impact</option>-->
+                              <!--<option value="Sansation_Light">Sansation_Light</option>-->
+                               <!--<option value="Squealer">Squealer</option>-->
+                           <!--</select>-->
                         </div>
                     </div>
 

@@ -491,7 +491,17 @@ $(document).ready(function () {
             TShirtDesignTool.setFontStyle(data.selectedData.text);
         }
     });
-
+/*
+    $('#fonts-standard').ddslick({
+        data: TShirtDesignTool.fontStyleDropdownData,
+        width:190,
+        imagePosition: "left",
+        selectText: "Select font style",
+        onSelected: function (data) {
+            //console.log(data);
+            TShirtDesignTool.setFontStyle(data.selectedData.text);
+        }
+    });*/
 
     $(document).foundation();
 });
