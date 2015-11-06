@@ -368,13 +368,13 @@
             ddSelectedValue = ddSelected.siblings('.dd-selected-value'),
             ddOptions = obj.find('.dd-submenu-options'),
             ddPointer = ddSelected.siblings('.dd-pointer'),
-            selectedOption = obj.find('.dd-submenu-options').eq(index),
+            selectedOption = obj.find('#'+parentId).find('.dd-submenu-option').eq(index),
             selectedLiItem = selectedOption.closest('li'),
             settings = pluginData.settings,
             selectedData = pluginData.settings.data[parentIndex].submenu[index];
 
         //Highlight selected option
-        obj.find('.dd-option').removeClass('dd-option-selected');
+        obj.find('.dd-submenu-option').removeClass('dd-option-selected');
         selectedOption.addClass('dd-option-selected');
 
         //Update or Set plugin data with new selection
