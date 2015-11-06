@@ -5,6 +5,7 @@
     url('SQUEALER.eot'); /* IE9 */
 }
 
+
 @font-face
 {
     font-family: Sansation_Light;
@@ -12,9 +13,15 @@
     url('Sansation_Light.eot'); /* IE9 */
 }
 
-@font-face
-{
+@font-face {
     font-family: OldSansBlack;
     src: url('OldSansBlack.ttf'),
     url('OldSansBlack.eot'); /* IE9 */
+}
+
+@font-face
+{
+    font-family: Learning Curve;
+    src: url('LearningCurve_OT.otf'),
+    url('LearningCurve_OT.eot'); /* IE9 */
 }

@@ -52,7 +52,7 @@
             '.dd-option{ padding:10px; display:block; border-bottom:solid 1px #ddd; overflow:hidden; text-decoration:none; color:#333; cursor:pointer;-webkit-transition: all 0.25s ease-in-out; -moz-transition: all 0.25s ease-in-out;-o-transition: all 0.25s ease-in-out;-ms-transition: all 0.25s ease-in-out; }' +
             '.dd-options > li:last-child > .dd-option{ border-bottom:none;}' +
             '.dd-option:hover{ background:#f3f3f3; color:#000;}' +
-            '.dd-submenus{ position: absolute; width: inherit;}' +
+            '.dd-submenus{ position: absolute; width: 200px;}' +
             '.dd-submenu-options{ border:solid 1px #ccc; border-top:none; list-style:none; box-shadow:0px 1px 5px #ddd; display:none; position:absolute; z-index:2000; margin:0; padding:0;background:#fff; overflow:auto;}' +
             '.dd-submenu-option{ padding:10px; display:block; border-bottom:solid 1px #ddd; overflow:hidden; text-decoration:none; color:#333; cursor:pointer;-webkit-transition: all 0.25s ease-in-out; -moz-transition: all 0.25s ease-in-out;-o-transition: all 0.25s ease-in-out;-ms-transition: all 0.25s ease-in-out; }' +
             '.dd-submenu-options > li:last-child > .dd-option{ border-bottom:none;}' +

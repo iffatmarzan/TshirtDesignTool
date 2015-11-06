@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TShirtDesign | Welcome</title>
-
       <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
       <link href="http://kendo.cdn.telerik.com/2014.2.716/styles/kendo.common.min.css" rel="stylesheet" />
       <link href="http://kendo.cdn.telerik.com/2014.2.716/styles/kendo.default.min.css" rel="stylesheet" />
@@ -39,19 +38,9 @@
        <!--End of First Row Nav bar-->
 
       <div class="row">
-          <!--TshirtImage div start-->
-          <div class="medium-2 large-2 columns"  >
-              <img class="ThumbImg" src="img/front-thumbnail.png" onclick="return TShirtDesignTool.changeTshirtSide('F')"> <br>
-              <img class="ThumbImg" src="img/back-thumbnail.png" onclick="return TShirtDesignTool.changeTshirtSide('B')"> <br>
-              <img class="ThumbImg" src="img/Left-shelve.png" onclick="return TShirtDesignTool.changeTshirtSide('L')"> <br>
-              <img class="ThumbImg" src="img/right-shelve.png" onclick="return TShirtDesignTool.changeTshirtSide('R')">
-          </div>
-          <!--TshirtImage div end-->
 
-          <!--Canvas div-->
-          <div id="canvas-container" class="medium-4 large-6 columns" >
-                  <canvas id="canvas"></canvas>
-          </div>
+
+
 
           <!--Div for different panel -->
           <!--Add-text-panel start-->
@@ -82,7 +71,10 @@
 
                     <div class="row">
                         <div class="large-12 columns">
+
                            <select id="font-family"></select>
+
+
                             <br>
                         </div>
                     </div>
@@ -204,6 +196,20 @@
           </div>
           <!--upload-image panel end-->
 
+          <!--Canvas div-->
+          <div id="canvas-container" class="medium-4 large-6 columns" >
+              <canvas id="canvas"></canvas>
+          </div>
+
+          <!--TshirtImage div start-->
+          <div class="medium-2 large-2 columns"  >
+              <img class="ThumbImg" src="img/Thumb-front.png" onclick="return TShirtDesignTool.changeTshirtSide('F')"> <br>
+              <img class="ThumbImg" src="img/Thumb-back.png" onclick="return TShirtDesignTool.changeTshirtSide('B')"> <br>
+              <img class="ThumbImg" src="img/Thumb-left.png" onclick="return TShirtDesignTool.changeTshirtSide('L')"> <br>
+              <img class="ThumbImg" src="img/Thumb-right.png" onclick="return TShirtDesignTool.changeTshirtSide('R')">
+          </div>
+          <!--TshirtImage div end-->
+
       </div>
 
        <script src="js/vendor/modernizr.js"></script>
@@ -212,10 +218,8 @@
        <script src="js/jquery.ddslick.js"></script>
        <script src="js/kendo.ui.core.min.js"></script>
        <script src="js/vendor/fastclick.js"></script>
-       <script src="js/foundation/foundation.js"></script>
        <script src="js/foundation.min.js"></script>
        <script src="js/fabric.js"></script>
-       <script src="js/base64-binary.js"></script>
        <script src="js/fabric.object.classExtend.js"></script>
        <script src="js/fabric.canvas.classExtend.js"></script>
        <script src="js/text.classExtend.js"></script>
