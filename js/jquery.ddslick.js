@@ -52,6 +52,11 @@
             '.dd-option{ padding:10px; display:block; border-bottom:solid 1px #ddd; overflow:hidden; text-decoration:none; color:#333; cursor:pointer;-webkit-transition: all 0.25s ease-in-out; -moz-transition: all 0.25s ease-in-out;-o-transition: all 0.25s ease-in-out;-ms-transition: all 0.25s ease-in-out; }' +
             '.dd-options > li:last-child > .dd-option{ border-bottom:none;}' +
             '.dd-option:hover{ background:#f3f3f3; color:#000;}' +
+            '.dd-submenus{ position: absolute; width: inherit;}' +
+            '.dd-submenu-options{ border:solid 1px #ccc; border-top:none; list-style:none; box-shadow:0px 1px 5px #ddd; display:none; position:absolute; z-index:2000; margin:0; padding:0;background:#fff; overflow:auto;}' +
+            '.dd-submenu-option{ padding:10px; display:block; border-bottom:solid 1px #ddd; overflow:hidden; text-decoration:none; color:#333; cursor:pointer;-webkit-transition: all 0.25s ease-in-out; -moz-transition: all 0.25s ease-in-out;-o-transition: all 0.25s ease-in-out;-ms-transition: all 0.25s ease-in-out; }' +
+            '.dd-submenu-options > li:last-child > .dd-option{ border-bottom:none;}' +
+            '.dd-submenu-option:hover{ background:#f3f3f3; color:#000;}' +
             '.dd-selected-description-truncated { text-overflow: ellipsis; white-space:nowrap; }' +
             '.dd-option-selected { background:#f6f6f6; }' +
             '.dd-option-image, .dd-selected-image { vertical-align:middle; float:left; margin-right:5px; max-width:64px;}' +
@@ -71,7 +76,8 @@
         //Apply on all selected elements
         return this.each(function () {
             var obj = $(this),
-                data = obj.data('ddslick');
+                data = obj.data('ddslick'),
+            	submenuTimer;
             //If the plugin has not been initialized yet
             if (!data) {
 
@@ -160,6 +166,30 @@
                     selectIndex(obj, $(this).closest('li').index());
                 });
 
+
+                obj.find('.dd-option').hover(function () {
+                    var dataIndex = $(this).children('.dd-option-value').val()- 1;
+
+                    if(typeof options.data[dataIndex].submenu !== 'undefined')
+                    {
+                        options.data[dataIndex].submenuHovered = false;
+                        openSubMenu(obj, dataIndex);
+                        if(submenuTimer != null) clearTimeout(submenuTimer);
+                    }
+
+                }, function () {
+                    $this = $(this);
+                    submenuTimer = setTimeout(function(){
+                        var dataIndex = $this.children('.dd-option-value').val()- 1;
+                        if(typeof options.data[dataIndex].submenu !== 'undefined' && options.data[dataIndex].submenuHovered == false)
+                        {
+                            closeSubMenu(obj, dataIndex);
+                        }
+                    }, 200);
+                });
+
+
+
                 //Click anywhere to close
                 if (options.clickOffToClose) {
                     ddOptions.addClass('dd-click-off-close');
@@ -168,6 +198,54 @@
                         $('.dd-click-off-close').slideUp(50).siblings('.dd-select').find('.dd-pointer').removeClass('dd-pointer-up');
                     });
                 }
+
+                for(var i=0;i< options.data.length;i++)
+                {
+                    if(options.data[i].submenu)
+                    {
+                        obj.append("<ul class='dd-submenus dd-submenu-options' id='dd-submenu-"+ i +"' ></ul>");
+
+                        var top = (i+1)*obj.find('.dd-option').height()*2;
+                        if(top<0)   top = -top;
+
+                        var left = obj.find('.dd-select').width();
+                        if(left<0)   left = -left;
+
+                        obj.find('#dd-submenu-'+i).css({ "top": top+"px", "left": left+2+"px" });
+                        for(var option=0; option < options.data[i].submenu.length; option++)
+                        {
+                            var item = options.data[i].submenu[option];
+
+                            obj.find("#dd-submenu-"+i).append('<li>' +
+                            '<a class="dd-submenu-option">' +
+                            (item.value ? ' <input class="dd-option-value" type="hidden" value="' + item.value + '" />' : '') +
+                            (item.imageSrc ? ' <img class="dd-option-image' + (options.imagePosition == "right" ? ' dd-image-right' : '') + '" src="' + item.imageSrc + '" />' : '') +
+                            (item.text ? ' <label class="dd-option-text">' + item.text + '</label>' : '') +
+                            (item.description ? ' <small class="dd-option-description dd-desc">' + item.description + '</small>' : '') +
+                            '</a>' +
+                            '</li>');
+                        }
+                    }
+
+                }
+
+
+                obj.find('.dd-submenus').hover(function(){
+                    var id = $(this).attr('id');
+                    var index = id.slice('dd-submenu-'.length, id.length);
+                    options.data[index].submenuHovered = true;
+                }
+                , function(){
+                    var id = $(this).attr('id');
+                    var index = id.slice('dd-submenu-'.length, id.length);
+                    options.data[index].submenuHovered = false;
+                    closeSubMenu(obj, index);
+                 });
+
+                obj.find('.dd-submenu-option').on('click.ddslick', function () {
+                    selectSubmenuIndex(obj, $(this).closest('ul').attr('id'), $(this).closest('li').index());
+                });
+
             }
         });
     };
@@ -234,6 +312,67 @@
             settings = pluginData.settings,
             selectedData = pluginData.settings.data[index];
 
+        if(typeof selectedData.submenu == 'undefined')
+        {
+            //Highlight selected option
+            obj.find('.dd-option').removeClass('dd-option-selected');
+            selectedOption.addClass('dd-option-selected');
+
+            //Update or Set plugin data with new selection
+            pluginData.selectedIndex = index;
+            pluginData.selectedItem = selectedLiItem;
+            pluginData.selectedData = selectedData;
+
+            //If set to display to full html, add html
+            if (settings.showSelectedHTML) {
+                ddSelected.html(
+                    (selectedData.imageSrc ? '<img class="dd-selected-image' + (settings.imagePosition == "right" ? ' dd-image-right' : '') + '" src="' + selectedData.imageSrc + '" />' : '') +
+                    (selectedData.text ? '<label class="dd-selected-text">' + selectedData.text + '</label>' : '') +
+                    (selectedData.description ? '<small class="dd-selected-description dd-desc' + (settings.truncateDescription ? ' dd-selected-description-truncated' : '') + '" >' + selectedData.description + '</small>' : '')
+                );
+
+            }
+            //Else only display text as selection
+            else ddSelected.html(selectedData.text);
+
+            //Updating selected option value
+            ddSelectedValue.val(selectedData.value);
+
+            //BONUS! Update the original element attribute with the new selection
+            pluginData.original.val(selectedData.value);
+            obj.data('ddslick', pluginData);
+
+            //Close options on selection
+            close(obj);
+
+            //Adjust appearence for selected option
+            adjustSelectedHeight(obj);
+
+            //Callback function on selection
+            if (typeof settings.onSelected == 'function') {
+                settings.onSelected.call(this, pluginData);
+            }
+        }
+
+    }
+
+    function selectSubmenuIndex(obj, parentId, index) {
+
+        var parentIndex = parentId.slice('dd-submenu-'.length, parentId.length);
+
+        //Get plugin data
+        var pluginData = obj.data('ddslick');
+
+        //Get required elements
+        var ddSelected = obj.find('.dd-selected'),
+            ddSelectedValue = ddSelected.siblings('.dd-selected-value'),
+            ddOptions = obj.find('.dd-submenu-options'),
+            ddPointer = ddSelected.siblings('.dd-pointer'),
+            selectedOption = obj.find('.dd-submenu-options').eq(index),
+            selectedLiItem = selectedOption.closest('li'),
+            settings = pluginData.settings,
+            selectedData = pluginData.settings.data[parentIndex].submenu[index];
+
         //Highlight selected option
         obj.find('.dd-option').removeClass('dd-option-selected');
         selectedOption.addClass('dd-option-selected');
@@ -263,15 +402,17 @@
         obj.data('ddslick', pluginData);
 
         //Close options on selection
+        closeAllSubmenus(obj);
         close(obj);
 
         //Adjust appearence for selected option
-        adjustSelectedHeight(obj);
+        //adjustSelectedHeight(obj);
 
         //Callback function on selection
         if (typeof settings.onSelected == 'function') {
             settings.onSelected.call(this, pluginData);
         }
+
     }
 
     //Private: Close the drop down options
@@ -297,6 +438,41 @@
 
         //Fix text height (i.e. display title in center), if there is no description
         adjustOptionsHeight(obj);
+    }
+
+    function openSubMenu(obj, dataIndex) {
+
+        var submenuId = '#dd-submenu-'+dataIndex;
+        var $this = obj.find(submenuId),
+            wasOpen = $this.is(':visible'),
+            ddOptions = $this.siblings('.dd-options');
+
+
+        //Close all open options (multiple plugins) on the page
+        $('.dd-click-off-close').not(ddOptions).slideUp(50);
+
+        closeAllSubmenus(obj);
+
+        if (!wasOpen) {
+            $this.slideDown('fast');
+        }
+
+    }
+
+    function closeSubMenu(obj, dataIndex) {
+
+        var submenuId = '#dd-submenu-'+dataIndex;
+        var $this = obj.find(submenuId),
+            wasOpen = $this.is(':visible');
+
+        if (wasOpen) {
+            $this.slideUp('fast');
+        }
+
+    }
+
+    function closeAllSubmenus(obj){
+        obj.find('.dd-submenus').hide();
     }
 
     //Private: Close the drop down options

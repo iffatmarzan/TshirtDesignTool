@@ -37,29 +37,56 @@ var TShirtDesignTool =
         value: 1,
         selected: false,
         description: "                     ",
-        id: "Standard"
-
+        id: "Standard",
+        submenu: [
+            { text: "Sans-serif", value: "sans-serif", imageSrc: "img/fonts/sans-serif.png" },
+            { text: "OldSansBlack", value: "OldSansBlack", imageSrc: "img/fonts/OldSansBlack.png" },
+            { text: "Monospace", value: "Monospace", imageSrc: "img/fonts/monospace.png" },
+            { text: "Sansation Light", value: "Sansation_Light", imageSrc: "img/fonts/sansation-light.png" },
+            { text: "Squealer", value: "Squealer", imageSrc: "img/fonts/squealer.png" },
+            { text: "Megazine", value: "Megazine", imageSrc: "img/fonts/sans-serif.png" } ]
     },
     {
         text: "Modern",
         value: 2,
         selected: false,
         description: "                      ",
-        id: "Modern"
+        id: "Modern",
+        submenu: [
+            { text: "Sans-serif", value: "sans-serif", imageSrc: "img/fonts/sans-serif.png" },
+            { text: "OldSansBlack", value: "OldSansBlack", imageSrc: "img/fonts/OldSansBlack.png" },
+            { text: "Monospace", value: "Monospace", imageSrc: "img/fonts/monospace.png" },
+            { text: "Sansation Light", value: "Sansation_Light", imageSrc: "img/fonts/sansation-light.png" },
+            { text: "Squealer", value: "Squealer", imageSrc: "img/fonts/squealer.png" },
+            { text: "Megazine", value: "Megazine", imageSrc: "img/fonts/sans-serif.png" } ]
     },
     {
         text: "Old style",
         value: 3,
         selected: false,
         description: "                      ",
-        id: "Old style"
+        id: "Old style",
+        submenu: [
+            { text: "Sans-serif", value: "sans-serif", imageSrc: "img/fonts/sans-serif.png" },
+            { text: "OldSansBlack", value: "OldSansBlack", imageSrc: "img/fonts/OldSansBlack.png" },
+            { text: "Monospace", value: "Monospace", imageSrc: "img/fonts/monospace.png" },
+            { text: "Sansation Light", value: "Sansation_Light", imageSrc: "img/fonts/sansation-light.png" },
+            { text: "Squealer", value: "Squealer", imageSrc: "img/fonts/squealer.png" },
+            { text: "Megazine", value: "Megazine", imageSrc: "img/fonts/sans-serif.png" } ]
     },
     {
         text: "Handwriting",
         value: 4,
         selected: false,
         description: "                      ",
-        id: "Handwriting"
+        id: "Handwriting",
+        submenu: [
+            { text: "Sans-serif", value: "sans-serif", imageSrc: "img/fonts/sans-serif.png" },
+            { text: "OldSansBlack", value: "OldSansBlack", imageSrc: "img/fonts/OldSansBlack.png" },
+            { text: "Monospace", value: "Monospace", imageSrc: "img/fonts/monospace.png" },
+            { text: "Sansation Light", value: "Sansation_Light", imageSrc: "img/fonts/sansation-light.png" },
+            { text: "Squealer", value: "Squealer", imageSrc: "img/fonts/squealer.png" },
+            { text: "Megazine", value: "Megazine", imageSrc: "img/fonts/sans-serif.png" } ]
     }
 ]
     , init: function () {
@@ -528,11 +555,7 @@ $(document).ready(function () {
         width:300,
         selectText: "Select font family",
         onSelected: function (data) {
-            console.log(data);
-            //TShirtDesignTool.setFontStyle(data.selectedData.text);
-        },
-        onHover:function(){
-            alert('hurrah')
+            TShirtDesignTool.setTextFont(data.selectedData.value);
         }
     });
 

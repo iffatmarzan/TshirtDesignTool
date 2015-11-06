@@ -4,3 +4,17 @@
     src: url('SQUEALER.ttf'),
     url('SQUEALER.eot'); /* IE9 */
 }
+
+@font-face
+{
+    font-family: Sansation_Light;
+    src: url('Sansation_Light.ttf'),
+    url('Sansation_Light.eot'); /* IE9 */
+}
+
+@font-face
+{
+    font-family: OldSansBlack;
+    src: url('OldSansBlack.ttf'),
+    url('OldSansBlack.eot'); /* IE9 */
+}
