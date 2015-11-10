@@ -64,7 +64,7 @@
          * @type Number
          * @default 50
          */
-        radius: 50,
+        radius: 0,
         /**
          * Special Effects, Thanks to fahadnabbasi
          * https://github.com/EffEPi/fabric.curvedText/issues/9
@@ -190,8 +190,10 @@
                     textWidth = ((this.text.length+1) * (this.letters.item(0).fontSize + space));
                 }
                 else if (this.effect=='arc') {
+                    //fixedLetterAngle = ((25 + space) / this.radius) / (Math.PI/180);
                     fixedLetterAngle = ((this.letters.item(0).fontSize + space) / this.radius) / (Math.PI/180);
                     textWidth = ((this.text.length+1) * (this.letters.item(0).fontSize + space));
+                    //textWidth = ((this.text.length+1) * (25 + space));
                 }
                 else if (this.effect=='STRAIGHT') {
                     //fixedLetterAngle = ((this.letters.item(0).fontSize + space) / this.radius) / (Math.PI/180);
