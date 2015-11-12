@@ -174,7 +174,8 @@
                     align=0,
                     textWidth=0,
                     space = parseInt(this.spacing),
-                    fixedLetterAngle=0;
+                    fixedLetterAngle= 0,
+                    arcLetterAngle=[];
 
                 //get text width
                 if (this.effect=='curved') {
@@ -190,10 +191,24 @@
                     textWidth = ((this.text.length+1) * (this.letters.item(0).fontSize + space));
                 }
                 else if (this.effect=='arc') {
-                    //fixedLetterAngle = ((25 + space) / this.radius) / (Math.PI/180);
+                    var maxWidthChar=0;
+                    for(var i=0;i<this.text.length;i++){
+                        //arcLetterAngle[i]=(( this.letters.item(i).width +15 + space+(this.letters.item(i).fontSize-30)) / this.radius) / (Math.PI/180);
+                        if(this.letters.item(i).width > maxWidthChar){
+                            maxWidthChar=this.letters.item(i).width;
+                        }
+                    }
+                    if(maxWidthChar>26)
+                        space+=2;
+                    else if(maxWidthChar>23)
+                       space+=1;
+
+                    //console.log(maxWidthChar, space)
+
+                    //fixedLetterAngle = (( this.letters.item(0).width +15 + space+(this.letters.item(0).fontSize-30)) / this.radius) / (Math.PI/180);
                     fixedLetterAngle = ((this.letters.item(0).fontSize + space) / this.radius) / (Math.PI/180);
                     textWidth = ((this.text.length+1) * (this.letters.item(0).fontSize + space));
-                    //textWidth = ((this.text.length+1) * (25 + space));
+                    //textWidth = ((this.text.length+1) * (this.letters.item(0).width+15 + space + (this.letters.item(0).fontSize-30)));
                 }
                 else if (this.effect=='STRAIGHT') {
                     //fixedLetterAngle = ((this.letters.item(0).fontSize + space) / this.radius) / (Math.PI/180);
@@ -245,7 +260,6 @@
                     else if(this.effect==='arc'){//arc
                         curAngle = multiplier * ((multiplier * curAngle) + fixedLetterAngle);
                         angleRadians=curAngle*(Math.PI/180);
-
                         this.letters.item(i).set('top', multiplier*-1*(Math.cos(angleRadians)*this.radius));
                         this.letters.item(i).set('left', multiplier*(Math.sin(angleRadians)*this.radius));
                         this.letters.item(i).set('padding', 0);
