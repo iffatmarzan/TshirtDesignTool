@@ -1,27 +1,63 @@
-@font-face
-{
+@font-face {
     font-family: squealer;
-    src: url('SQUEALER.ttf'),
-    url('SQUEALER.eot'); /* IE9 */
+    src: url('SQUEALER.ttf');
+     /* IE9 */
 }
 
-
-@font-face
-{
+@font-face {
     font-family: Sansation_Light;
-    src: url('Sansation_Light.ttf'),
-    url('Sansation_Light.eot'); /* IE9 */
+    src: url('Sansation_Light.ttf');
+     /* IE9 */
 }
 
 @font-face {
     font-family: OldSansBlack;
-    src: url('OldSansBlack.ttf'),
-    url('OldSansBlack.eot'); /* IE9 */
+    src: url('OldSansBlack.ttf');
+     /* IE9 */
 }
 
-@font-face
-{
-    font-family: Learning Curve;
-    src: url('LearningCurve_OT.otf'),
-    url('LearningCurve_OT.eot'); /* IE9 */
+@font-face {
+    font-family: KunstlerScript;
+    src: url('Handwriting/KUNSTLER.TTF');
+     /* IE9 */
+}
+@font-face {
+    font-family: CoalHandLuke;
+    src: url('Handwriting/CoalhandLuke.ttf');
+    /* IE9 */
+}
+@font-face {
+    font-family: EasyRider;
+    src: url('Handwriting/EasyRider.ttf');
+    /* IE9 */
+}
+@font-face {
+    font-family: LeGrandSaut;
+    src: url('Handwriting/le_Grand_Saut.ttf');
+    /* IE9 */
+}
+@font-face {
+    font-family: AlwaysInMyHeart;
+    src: url('Handwriting/AlwaysInMyHeart.ttf');
+    /* IE9 */
+}
+@font-face {
+    font-family: SilentReaction;
+    src: url('Handwriting/LearningCurve_OT.otf');
+    /* IE9 */
+}
+@font-face {
+    font-family: AgencyFB;
+    src: url('Modern/Agency_FB.ttf');
+    /* IE9 */
+}
+@font-face {
+    font-family: HarlowSolidItalic;
+    src: url('Modern/HarlowSolidItalic.ttf');
+    /* IE9 */
+}
+@font-face {
+    font-family: Bauhaus93;
+    src: url('Modern/bauhaus93.ttf');
+    /* IE9 */
 }

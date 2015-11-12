@@ -22,11 +22,11 @@ fabric.util.object.extend(fabric.Object.prototype, {
         var deleteIcon = new Image();
         deleteIcon.src = 'img/delete.png';
 
-        var scaleIcon= new Image();
-        scaleIcon.src='img/scale.gif';
+        var scaleIcon = new Image();
+        scaleIcon.src = 'img/scale.gif';
 
-        var rotateIcon= new Image();
-        rotateIcon.src='img/rotate.png';
+        var rotateIcon = new Image();
+        rotateIcon.src = 'img/rotate.png';
 
         if (control === 'tl') {
             //SelectedIconImage.onload = function () {
@@ -45,12 +45,10 @@ fabric.util.object.extend(fabric.Object.prototype, {
             //ctx['strokeRect'](left, top, size, size);
             ctx['fillRect'](left, top, size, size);
         }
-        if (control === 'tr' || control === 'br' || control === 'bl' )
-        {
+        if (control === 'tr' || control === 'br' || control === 'bl') {
             ctx['drawImage'](scaleIcon, left, top, size, size);
             //ctx['strokeRect'](left, top, size, size);
         }
-
 
     }
 

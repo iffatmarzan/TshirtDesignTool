@@ -1,7 +1,7 @@
 var TShirtDesignTool =
 {
     panels: ['text-panel', 'editor-panel', 'clip-art-panel', 'upload-image-panel']
-    , fontStyleDropdownData: [
+    , fontStyleData: [
     {
         text: "bold",
         value: 1,
@@ -31,12 +31,12 @@ var TShirtDesignTool =
         imageSrc: ""
     }
 ]
-    , fontFamilyDropdownData: [
+    , fontFamilyData: [
     {
         text: "Standard",
         value: 1,
         selected: false,
-        description: "                     ",
+        description: " ",
         id: "Standard",
         submenu: [
             {text: "Sans-serif", value: "sans-serif", imageSrc: "img/fonts/sans-serif.png"},
@@ -50,25 +50,22 @@ var TShirtDesignTool =
         text: "Modern",
         value: 2,
         selected: false,
-        description: "                      ",
+        description: "   ",
         id: "Modern",
         submenu: [
-            {text: "Sans-serif", value: "sans-serif", imageSrc: "img/fonts/sans-serif.png"},
-            {text: "OldSansBlack", value: "OldSansBlack", imageSrc: "img/fonts/OldSansBlack.png"},
-            {text: "Monospace", value: "Monospace", imageSrc: "img/fonts/monospace.png"},
-            {text: "Sansation Light", value: "Sansation_Light", imageSrc: "img/fonts/sansation-light.png"},
-            {text: "Squealer", value: "Squealer", imageSrc: "img/fonts/squealer.png"},
-            {text: "Megazine", value: "Megazine", imageSrc: "img/fonts/sans-serif.png"}]
+            {text: "AgencyFB", value: "AgencyFB", imageSrc: "img/fonts/sans-serif.png"},
+            {text: "Verdana", value: "verdana", imageSrc: "img/fonts/OldSansBlack.png"},
+            {text: "Harlow Solid Italic", value: "HarlowSolidItalic", imageSrc: "img/fonts/monospace.png"},
+            {text: "Bauhaus 93", value: "Bauhaus93", imageSrc: "img/fonts/sansation-light.png"}]
     },
     {
         text: "Old style",
         value: 3,
         selected: false,
-        description: "                      ",
+        description: "  ",
         id: "Old style",
         submenu: [
-            {text: "Sans-serif", value: "sans-serif", imageSrc: "img/fonts/sans-serif.png"},
-            {text: "OldSansBlack", value: "OldSansBlack", imageSrc: "img/fonts/OldSansBlack.png"},
+            {text: "Impact", value: "impact", imageSrc: "img/fonts/sans-serif.png"},
             {text: "Monospace", value: "Monospace", imageSrc: "img/fonts/monospace.png"},
             {text: "Sansation Light", value: "Sansation_Light", imageSrc: "img/fonts/sansation-light.png"},
             {text: "Squealer", value: "Squealer", imageSrc: "img/fonts/squealer.png"},
@@ -78,15 +75,15 @@ var TShirtDesignTool =
         text: "Handwriting",
         value: 4,
         selected: false,
-        description: "                      ",
+        description: " ",
         id: "Handwriting",
         submenu: [
-            {text: "Learning Curve", value: "Learning Curve", imageSrc: "img/fonts/sans-serif.png"},
-            {text: "OldSansBlack", value: "OldSansBlack", imageSrc: "img/fonts/OldSansBlack.png"},
-            {text: "Monospace", value: "Monospace", imageSrc: "img/fonts/monospace.png"},
-            {text: "Sansation Light", value: "Sansation_Light", imageSrc: "img/fonts/sansation-light.png"},
-            {text: "Squealer", value: "Squealer", imageSrc: "img/fonts/squealer.png"},
-            {text: "Megazine", value: "Megazine", imageSrc: "img/fonts/sans-serif.png"}]
+            {text: "Kunstler Script", value: "KunstlerScript", imageSrc: "img/fonts/kunstlerScript.png"},
+            {text: "Coal Hand Luke", value: "CoalHandLuke", imageSrc: "img/fonts/OldSansBlack.png"},
+            {text: "Silent Reaction", value: "SilentReaction", imageSrc: "img/fonts/monospace.png"},
+            {text: "Le Grand Saut", value: "LeGrandSaut", imageSrc: "img/fonts/sansation-light.png"},
+            {text: "Easy Rider", value: "EasyRider", imageSrc: "img/fonts/squealer.png"},
+            {text: "Always In Heart", value: "AlwaysInMyHeart", imageSrc: "img/fonts/sans-serif.png"}]
     }
 ]
     , tempDesignData: [
@@ -245,9 +242,9 @@ var TShirtDesignTool =
     }
     if (selectedObject.effect == 'arc') {
         if (selectedObject.spacing !== undefined)
-            textSpacing.value = (selectedObject.spacing +9);
-        if(textCircular.checked)
-            textCircular.checked=false;
+            textSpacing.value = (selectedObject.spacing + 9);
+        if (textCircular.checked)
+            textCircular.checked = false;
         $('#textArcSlider').slider({disabled: false});
         //console.log(selectedObject.reverse)
         var multiplier = selectedObject.reverse ? 1 : -1;
@@ -256,14 +253,14 @@ var TShirtDesignTool =
         $('#textArcSlider').slider('value', multiplier * sliderValue);
     }
     if (selectedObject.type === 'text') {
-        if(textCircular.checked)
-            textCircular.checked=false;
+        if (textCircular.checked)
+            textCircular.checked = false;
         $('#textArcSlider').slider({disabled: false});
         $('#textArcSlider').slider('value', 0);
     }
 
     if (selectedObject.stroke) {
-        textOutline.checked=true;
+        textOutline.checked = true;
         //console.log(selectedObject.stroke)
         //console.log(selectedObject.strokeWidth)
         if ($("#outline-properties").get(0).style['display'] === 'none')
@@ -346,7 +343,7 @@ var TShirtDesignTool =
 
     if (activeObject.effect == 'arc')
         activeObject.set({
-            spacing: -10 + parseInt(e) * 2
+            spacing: -9 + parseInt(e) * 2
         });
 
     //if(activeObject.effect=='STRAIGHT')
@@ -441,7 +438,7 @@ var TShirtDesignTool =
             radius: ((activeObject.width / 2 / 3.14) + activeObject.height / 2),
             effect: 'circular',
             fontSize: activeObject.fontSize,
-            spacing:0,
+            spacing: 0,
             fill: activeObject.fill,
             textAlign: 'center',
             stroke: activeObject.stroke,
@@ -645,32 +642,22 @@ var TShirtDesignTool =
 $(document).ready(function () {
     TShirtDesignTool.init();
 
-    //$('div').children().each(function(e){
-    //    console.log(e)
-    //    var id=$(data).attr('id');
-    //    if(id!==undefined){
-    //        id=$('#'+id);
-    //        console.log(id)
-    //    }
-    //
-    //});
-
     $('#textArcSlider').slider({
         orientation: "horizontal",
         range: "min",
         min: -107,
         max: 108,
+        value: 0,
         slide: TShirtDesignTool.setTextArc
     });
-    $('#textArcSlider').slider("value", 0);
 
     $("#text-outline-slider").slider({
         orientation: "horizontal",
         range: "min",
         max: 100,
+        value: 0,
         slide: TShirtDesignTool.setOutlineWidth
     });
-    $("#text-outline-slider").slider("value", 0);
 
     $("#text-color,#text-outline-color").kendoColorPicker({
         palette: "basic",
@@ -686,7 +673,7 @@ $(document).ready(function () {
     });
 
     $('#font-style').ddslick({
-        data: TShirtDesignTool.fontStyleDropdownData,
+        data: TShirtDesignTool.fontStyleData,
         width: 190,
         imagePosition: "left",
         selectText: "Select font style",
@@ -697,7 +684,7 @@ $(document).ready(function () {
     });
 
     $('#font-family').ddslick({
-        data: TShirtDesignTool.fontFamilyDropdownData,
+        data: TShirtDesignTool.fontFamilyData,
         width: 300,
         selectText: "Select font family",
         onSelected: function (data) {
@@ -705,7 +692,6 @@ $(document).ready(function () {
             TShirtDesignTool.setTextFontFamily(data.selectedData.value);
         }
     });
-
 
     $(document).foundation();
 });
