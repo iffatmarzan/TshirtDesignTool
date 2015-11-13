@@ -104,6 +104,9 @@ var TShirtDesignTool =
         object: null
     }
 ]
+    , undoObjects: []
+    , redoObjects: []
+    , isUndoMode: true
     , arcTextWidth: 0
     , init: function () {
     var _this = TShirtDesignTool;
@@ -145,6 +148,50 @@ var TShirtDesignTool =
             obj.left = Math.min(obj.left, obj.canvas.width - obj.getBoundingRect().width + obj.left - obj.getBoundingRect().left);
         }
     });
+
+    canvas.on('object:added', function (e) {
+        var obj = e.target;
+        if(TShirtDesignTool.isUndoMode){
+            TShirtDesignTool.undoObjects.push({
+                operation: 'added',
+                object: obj
+            });
+        }
+        if(!TShirtDesignTool.isUndoMode){
+            TShirtDesignTool.redoObjects.push({
+                operation: 'added',
+                object: obj
+            });
+        }
+
+        if (obj.type === 'text' || obj.type === 'curvedText') {
+            obj.on('selected', function () {
+                TShirtDesignTool.changeToEditorPanel();
+            });
+        }
+        if (obj.type === 'image') {
+            obj.on('selected', function () {
+                TShirtDesignTool.changeToClipartPanel();
+            });
+        }
+    });
+
+    canvas.on('object:removed', function (e) {
+        var obj = e.target;
+        if(TShirtDesignTool.isUndoMode){
+            TShirtDesignTool.undoObjects.push({
+                operation: 'deleted',
+                object: obj
+            });
+        }
+        if(!TShirtDesignTool.isUndoMode){
+            TShirtDesignTool.redoObjects.push({
+                operation: 'deleted',
+                object: obj
+            });
+        }
+    });
+
     //document.onkeydown = function(e) {
     //    if (46 === e.keyCode || e.keyCode===110) {
     //        var activeObject=window.canvas.getActiveObject();
@@ -170,11 +217,40 @@ var TShirtDesignTool =
     var left = _canvas.getWidth() / 2 - SampleText.getWidth() / 2;
     var top = _canvas.getHeight() / 2 - SampleText.getHeight();
     SampleText.set({'left': left, 'top': top});
-    SampleText.on('selected', function () {
-        TShirtDesignTool.changeToEditorPanel();
-    });
     window.canvas.add(SampleText).renderAll();
     TShirtDesignTool.changeToDefaultEditorPanel(Text);
+}
+    , undo: function () {
+    TShirtDesignTool.isUndoMode = false;
+    if (TShirtDesignTool.undoObjects.length > 0) {
+        var object = TShirtDesignTool.undoObjects.pop();
+        if(object){
+            if (object.operation === 'added') {
+                window.canvas.remove(object.object);
+            }
+            if (object.operation === 'deleted') {
+                window.canvas.add(object.object);
+            }
+        }
+
+    }
+    TShirtDesignTool.isUndoMode = true;
+}
+    , redo: function () {
+    TShirtDesignTool.isUndoMode = true;
+    if (TShirtDesignTool.redoObjects.length > 0) {
+        var object = TShirtDesignTool.redoObjects.pop();
+        if(object){
+            if (object.operation === 'added') {
+                window.canvas.remove(object.object);
+            }
+            if (object.operation === 'deleted') {
+                window.canvas.add(object.object);
+            }
+        }
+
+    }
+    //TShirtDesignTool.isUndoMode=true;
 }
     , showPanel: function (panelToshow) {
     TShirtDesignTool.panels.forEach(function (panel) {
@@ -307,8 +383,9 @@ var TShirtDesignTool =
     //console.log(TShirtDesignTool.tempDesignData);
     _canvas.clear();
     TShirtDesignTool.tempDesignData.forEach(function (obj) {
-        if (obj.side == sideName && obj.object !== null)
+        if (obj.side == sideName && obj.object !== null) {
             _canvas.loadFromJSON(JSON.stringify(obj.object));
+        }
         return;
     });
     var imageSrc = '/TshirtDesignTool/img/White-1-' + sideName + '.jpg';
@@ -379,9 +456,6 @@ var TShirtDesignTool =
             stroke: activeObject.stroke,
             strokeWidth: activeObject.strokeWidth
         });
-        SampleText.on('selected', function () {
-            TShirtDesignTool.changeToEditorPanel();
-        });
         window.canvas.remove(activeObject).add(SampleText).setActiveObject(SampleText).renderAll();
         return;
     }
@@ -404,9 +478,6 @@ var TShirtDesignTool =
             stroke: activeObject.stroke,
             strokeWidth: activeObject.strokeWidth,
             angle: activeObject.angle
-        });
-        curveText.on('selected', function () {
-            TShirtDesignTool.changeToEditorPanel();
         });
         window.canvas.remove(activeObject).add(curveText).setActiveObject(curveText);
     }
@@ -445,9 +516,6 @@ var TShirtDesignTool =
             strokeWidth: activeObject.strokeWidth,
             angle: activeObject.angle
         });
-        curveText.on('selected', function () {
-            TShirtDesignTool.changeToEditorPanel();
-        });
         window.canvas.remove(activeObject).add(curveText).setActiveObject(curveText).renderAll();
     }
 
@@ -465,9 +533,6 @@ var TShirtDesignTool =
             fill: activeObject.fill,
             stroke: activeObject.stroke,
             strokeWidth: activeObject.strokeWidth
-        });
-        SampleText.on('selected', function () {
-            TShirtDesignTool.changeToEditorPanel();
         });
         window.canvas.remove(activeObject).add(SampleText).setActiveObject(SampleText).renderAll();
     }

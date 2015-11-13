@@ -42,6 +42,7 @@ fabric.util.object.extend(fabric.Canvas.prototype, {
 
         if (action == 'remove')
         {
+            //alert('fired in extend');
             if (this.getActiveGroup() && this.getActiveGroup()!= 'undefined')
             {
                 this.getActiveGroup().forEachObject(function(o)
