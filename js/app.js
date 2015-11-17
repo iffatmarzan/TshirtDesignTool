@@ -1,6 +1,6 @@
 var TShirtDesignTool =
 {
-    panels: ['text-panel', 'editor-panel', 'clip-art-panel', 'upload-image-panel']
+    panels: ['text-panel', 'editor-panel', 'clip-art-panel', 'upload-image-panel','edit-clipart-panel']
     , fontStyleData: [
     {
         text: "bold",
@@ -166,12 +166,12 @@ var TShirtDesignTool =
 
         if (obj.type === 'text' || obj.type === 'curvedText') {
             obj.on('selected', function () {
-                TShirtDesignTool.changeToEditorPanel();
+                TShirtDesignTool.textEditorPanel();
             });
         }
-        if (obj.type === 'image') {
+        if (obj.type === 'path-group') {
             obj.on('selected', function () {
-                TShirtDesignTool.changeToClipartPanel();
+                TShirtDesignTool.clipartEditorPanel();
             });
         }
     });
@@ -199,7 +199,7 @@ var TShirtDesignTool =
     //            window.canvas.remove(activeObject);
     //        }
     //        window.canvas.renderAll();
-    //        TShirtDesignTool.changeToAddTextPanel();
+    //        TShirtDesignTool.addTextPanel();
     //    }
     //}
 
@@ -218,7 +218,7 @@ var TShirtDesignTool =
     var top = _canvas.getHeight() / 2 - SampleText.getHeight();
     SampleText.set({'left': left, 'top': top});
     window.canvas.add(SampleText).renderAll();
-    TShirtDesignTool.changeToDefaultEditorPanel(Text);
+    TShirtDesignTool.defaultEditorPanel(Text);
 }
     , undo: function () {
     TShirtDesignTool.isUndoMode = false;
@@ -261,7 +261,7 @@ var TShirtDesignTool =
     return window.canvas.getActiveObject() || window.canvas.item(0);
     //throw new Error('This is not an error. This is just to abort javascript');
 }
-    , changeToDefaultEditorPanel: function (Text) {
+    , defaultEditorPanel: function (Text) {
     TShirtDesignTool.showPanel('editor-panel');
     textArea.value = Text;
     $('#font-family .dd-selected').get(0).innerHTML = 'Select font family';
@@ -277,7 +277,7 @@ var TShirtDesignTool =
     $('.k-selected-color').get(0).style['background-color'] = 'rgb(0,0,0)';
     $("#outline-properties").hide();
 }
-    , changeToEditorPanel: function () {
+    , textEditorPanel: function () {
     var selectedObject = window.canvas.getActiveObject();
     if (!selectedObject)
         return;
@@ -355,12 +355,30 @@ var TShirtDesignTool =
     //     $('#text-outline-slider').slider('value', selectedObject.strokeWidth*100);
 
 }
-    , changeToAddTextPanel: function () {
+    , addTextPanel: function () {
     TShirtDesignTool.showPanel('text-panel');
     $('#text-panel textarea').val('');
 }
     , changeToClipartPanel: function () {
     TShirtDesignTool.showPanel('clip-art-panel');
+}
+    , clipartEditorPanel: function () {
+    TShirtDesignTool.showPanel('edit-clipart-panel');
+    var activeObject = window.canvas.getActiveObject();
+    if (!activeObject) {
+        $('.k-selected-color').get(2).style['background-color'] = 'rgb(0,0,0)';
+        $('.k-selected-color').get(3).style['background-color'] = 'rgb(0,0,0)';
+        return;
+    }
+    if (activeObject.fill)
+        $('.k-selected-color').get(2).style['background-color'] = activeObject.fill;
+    if (activeObject.stroke) {
+        $('.k-selected-color').get(3).style['background-color'] = activeObject.stroke;
+        $('#svgStrokeWidth .ui-slider-range').css('background', activeObject.stroke);
+        $('#svgStrokeWidth').slider('value', activeObject.strokeWidth * 20);
+    }
+    if(activeObject.opacity)
+        $('#svgOpacity').slider('value', activeObject.strokeWidth * 100);
 }
     , changeToUploadImagePanel: function () {
     TShirtDesignTool.showPanel('upload-image-panel');
@@ -409,11 +427,11 @@ var TShirtDesignTool =
     canvas.renderAll();
 }
     , setTextFontFamily: function (fontFamily) {
-    TShirtDesignTool.getCanvasActiveObject().setFontFamily(fontFamily);
+    window.canvas.getActiveObject().setFontFamily(fontFamily);
     window.canvas.renderAll();
 }
     , setTextSpacing: function (e) {
-    var activeObject = TShirtDesignTool.getCanvasActiveObject();
+    var activeObject = window.canvas.getActiveObject();
     if (activeObject.type == 'text') {
         activeObject.set('letterSpacing', parseInt(e));
     }
@@ -430,7 +448,7 @@ var TShirtDesignTool =
     canvas.renderAll();
 }
     , setTextColor: function (textColor) {
-    TShirtDesignTool.getCanvasActiveObject().setFill(textColor);
+    window.canvas.getActiveObject().setFill(textColor);
     canvas.renderAll();
 }
     , setTextArc: function () {
@@ -539,7 +557,7 @@ var TShirtDesignTool =
     //window.canvas.renderAll();
 }
     , setFontSize: function (fontSize) {
-    TShirtDesignTool.getCanvasActiveObject().set('fontSize', parseInt(fontSize));
+    window.canvas.getActiveObject().set('fontSize', parseInt(fontSize));
     window.canvas.renderAll();
 }
     , setFontStyle: function (fontStyle) {
@@ -595,16 +613,62 @@ var TShirtDesignTool =
 
 }
     , addClipartToCanvas: function (imageSrc) {
-    var img = new Image();
-    img.src = imageSrc;
-    var imgInstance = new fabric.Image(img, {
-        left: 100,
-        top: 100,
-        angle: 0,
-        width: 85,
-        height: 90
+    fabric.loadSVGFromURL(imageSrc, function (objects, options) {
+        //objects.stroke='green';
+        console.log(objects);
+        var _canvas = window.canvas;
+        var obj = fabric.util.groupSVGElements(objects, options);
+        obj.left = _canvas.getWidth() / 2 - 50;
+        obj.top = _canvas.getHeight() / 2 - 50;
+        obj.scaleX = 100 / options.width;
+        obj.scaleY = 100 / options.height;
+        obj.angle = 0;
+        _canvas.add(obj).renderAll();
     });
-    window.canvas.add(imgInstance).renderAll();
+
+    //var img = new Image();
+    //img.src = imageSrc;
+    //var imgInstance = new fabric.Image(img, {
+    //    left: 100,
+    //    top: 100,
+    //    angle: 0,
+    //    width: 85,
+    //    height: 90
+    //});
+    //_canvas.add(imgInstance).renderAll();
+}
+    , setSvgFillColor: function (fillColor) {
+    var activeObject = window.canvas.getActiveObject();
+    if (!activeObject)
+        return;
+    activeObject.paths.forEach(function(path){
+        path.fill=fillColor;
+    });
+    window.canvas.renderAll();
+}
+    , setSvgStroke: function (stroke) {
+    var activeObject = window.canvas.getActiveObject();
+    if (!activeObject)
+        return;
+    activeObject.setStroke(stroke);
+    $('#svgStrokeWidth .ui-slider-range').css('background', stroke);
+    window.canvas.renderAll();
+
+}
+    , setSvgStrokeWidth: function(){
+    var activeObject = window.canvas.getActiveObject();
+    if (!activeObject)
+        return;
+    activeObject.setStrokeWidth(($('#svgStrokeWidth').slider('value')) / 20);
+    window.canvas.renderAll();
+}
+    , setSvgOpacity: function(){
+    var activeObject = window.canvas.getActiveObject();
+    if (!activeObject)
+        return;
+    activeObject.setOpacity(($('#svgOpacity').slider('value')) *.01);
+    window.canvas.renderAll();
+
 }
     , uploadImage: function (e) {
     //console.log(e);
@@ -665,7 +729,7 @@ var TShirtDesignTool =
 }
     , saveDesign: function () {
     if (!fileName.value) {
-        fileName.placeholder = '*FileName is Required.';
+        fileName.placeholder = '* Required.';
         return false;
     }
     var img = new Image();
@@ -737,6 +801,24 @@ $(document).ready(function () {
         slide: TShirtDesignTool.setTextArc
     });
 
+    $('#svgStrokeWidth').slider({
+        orientation: "horizontal",
+        range: "min",
+        min: 0,
+        max: 100,
+        value: 0,
+        slide: TShirtDesignTool.setSvgStrokeWidth
+    });
+
+    $('#svgOpacity').slider({
+        orientation: "horizontal",
+        range: "min",
+        min: 0,
+        max: 100,
+        value: 100,
+        slide: TShirtDesignTool.setSvgOpacity
+    });
+
     $("#text-outline-slider").slider({
         orientation: "horizontal",
         range: "min",
@@ -745,7 +827,7 @@ $(document).ready(function () {
         slide: TShirtDesignTool.setOutlineWidth
     });
 
-    $("#text-color,#text-outline-color").kendoColorPicker({
+    $("#text-color,#text-outline-color,#svgFill,#svgStroke").kendoColorPicker({
         palette: "basic",
         tileSize: 4
     });

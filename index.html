@@ -14,6 +14,7 @@
       <link rel="stylesheet" href="css/clip-art-panel.css">
       <link rel="stylesheet" href="css/upload-image-panel.css">
       <link rel="stylesheet" href="css/save-image-panel.css">
+      <link rel="stylesheet" href="css/edit-clipart-panel.css">
       <link rel="stylesheet" href="fonts/font.css" />
   </head>
 
@@ -25,7 +26,7 @@
               <div class="nav-bar left">
                   <ul id="nav-bar-list" class="button-group">
                       <li><a href="#" class="button">Choose Shirt</a></li>
-                      <li><a href="#" onclick='return TShirtDesignTool.changeToAddTextPanel()' class="button">Add Text</a></li>
+                      <li><a href="#" onclick='return TShirtDesignTool.addTextPanel()' class="button">Add Text</a></li>
                       <li><a href="#" onclick='return TShirtDesignTool.changeToClipartPanel()' class="button">Add Clip Art</a></li>
                       <li><a href="#" onclick='return TShirtDesignTool.changeToUploadImagePanel()' class="button">Upload Image</a></li>
                       <li><a href="#" class="button">Personalize</a></li>
@@ -39,7 +40,6 @@
        <!--End of First Row Nav bar-->
 
       <div class="row">
-
           <!--Div for different panel -->
           <!--Add-text-panel start-->
           <div id="text-panel" class="medium-4 large-4 columns">
@@ -91,7 +91,7 @@
                                     <label for="text-color" class=" inline"><b>Color: </b></label>
                                 </div>
                                 <div class="large-6 columns">
-                                    <input id="text-color" type="color" class="radius"  onchange="return TShirtDesignTool.setTextColor(this.value)">
+                                    <input id="text-color" type="color" class="radius"  onchange="TShirtDesignTool.setTextColor(this.value)">
                                 </div>
                             </div>
                         </div>
@@ -153,7 +153,6 @@
                         <div class="large-8 columns">
                             <div id="text-outline-slider" class="slider" ></div>
                         </div>
-
                     </div>
                 </div>        <!--end of div editor-panel-tools-->
             </div>
@@ -165,16 +164,59 @@
                 <h6>Clipart:</h6>
                 <div class="clip-arts-holder">
                     <ul class="small-block-grid-3">
-                        <li><img class="th" src="clipart/img1.gif" onclick="return TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Flower </span></li>
-                        <li><img class="th" src="clipart/img2.gif" onclick="return TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption" > Avatar </span></li>
-                        <li><img class="th" src="clipart/img3.gif" onclick="return TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Football </span></li>
-                        <li><img class="th" src="clipart/img4.gif" onclick="return TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption">Fun</span></li>
-                        <li><img class="th" src="clipart/img5.gif" onclick="return TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption">Animal</span></li>
-                        <li><img class="th" src="clipart/img6.gif" onclick="return TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption">Symbol</span></li>
-                    </ul>
+                        <li><img class="th" src="clipart/leaf.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Leaf </span></li>
+                        <li><img class="th" src="clipart/flower.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption" > Flower </span></li>
+                        <li><img class="th" src="clipart/emo.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Guiter </span></li>
+                        <li><img class="th" src="clipart/dragon.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Dragon </span></li>
+                        <li><img class="th" src="clipart/fluid.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Fluid </span></li>
+                        <li><img class="th" src="clipart/liquid.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Paint </span></li>
+                        <li><img class="th" src="clipart/paintSix.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Paint </span></li>
+                        <li><img class="th" src="clipart//arrow.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Arrow </span></li>
+                        <li><img class="th" src="clipart/deer.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Deer </span></li>
+                       </ul>
                 </div>
             </div>
           <!--clipart-panel end-->
+
+          <!--clipart editor panel start-->
+          <div id="edit-clipart-panel" class="medium-4 large-4 columns">
+              <h6> Customize: </h6>
+
+              <div class="editor-panel-tools">
+                  <div class="row">
+                      <div class="large-3 columns">
+                          <label for="svgFill" class="inline"><b>Fill color: </b></label>
+                      </div>
+                      <div class="large-3 columns">
+                          <input id="svgFill" type="color" class="radius"  onchange="TShirtDesignTool.setSvgFillColor(this.value)">
+                      </div>
+                      <div class="large-3 columns">
+                          <label for="svgStroke" class="inline"><b>Stroke: </b></label>
+                      </div>
+                      <div class="large-3 columns">
+                          <input id="svgStroke" type="color" class="radius"  onchange="TShirtDesignTool.setSvgStroke(this.value)">
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="large-4 columns">
+                          <label for="svgStrokeWidth" class="inline"><b>StrokeWidth: </b></label>
+                      </div>
+                      <div class="large-8 columns">
+                          <div id="svgStrokeWidth" class="slider" ></div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="large-3 columns">
+                          <label for="svgOpacity" class="inline"><b>Opacity: </b></label>
+                      </div>
+                      <div class="large-9 columns">
+                          <div id="svgOpacity" class="slider" ></div>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+          <!--clipart editor panel end-->
 
              <!--upload-image panel start-->
           <div id="upload-image-panel" class="medium-4 large-4 columns" >
@@ -194,8 +236,6 @@
           <!--Canvas div-->
           <div id="canvas-container" class="medium-4 large-6 columns" >
               <canvas id="canvas"></canvas>
-              <!--<input type="button" value=" undo " onclick="TShirtDesignTool.undo()">-->
-              <!--<input type="button" value=" Redo " onclick="TShirtDesignTool.redo()">-->
           </div>
 
           <!--TshirtImage div start-->

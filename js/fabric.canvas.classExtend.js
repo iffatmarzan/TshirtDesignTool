@@ -56,7 +56,7 @@ fabric.util.object.extend(fabric.Canvas.prototype, {
                 var activeObject=window.canvas.getActiveObject();
                 window.canvas.remove(activeObject);
             }
-            TShirtDesignTool.changeToAddTextPanel();
+            TShirtDesignTool.addTextPanel();
             window.canvas.renderAll();
             return;
         }
