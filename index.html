@@ -13,6 +13,7 @@
       <link rel="stylesheet" href="css/text-editor-panel.css">
       <link rel="stylesheet" href="css/clip-art-panel.css">
       <link rel="stylesheet" href="css/upload-image-panel.css">
+      <link rel="stylesheet" href="css/save-image-panel.css">
       <link rel="stylesheet" href="fonts/font.css" />
   </head>
 
@@ -29,7 +30,7 @@
                       <li><a href="#" onclick='return TShirtDesignTool.changeToUploadImagePanel()' class="button">Upload Image</a></li>
                       <li><a href="#" class="button">Personalize</a></li>
                       <!--<li><a href="#" class="button">Free Drawing</a></li>-->
-                      <li><a href="#" class="button customMenuItem" onclick='return TShirtDesignTool.saveDesign()'> Save Design </a></li>
+                      <li><a href="#" class="button customMenuItem" onclick='return TShirtDesignTool.showSaveDesignPanel()'> Save Design </a></li>
                   </ul>
               </div>
               <hr/>
@@ -101,7 +102,7 @@
 
                     <div class="row">
                         <div class="large-2 columns">
-                            <label for="fontSizing" class=" inline"><b>Font Size: </b></label>
+                            <label for="fontSizing" class="inline"><b>Font Size: </b></label>
                         </div>
                         <div class="large-3 columns">
                             <input id="fontSizing" type="number" class="radius"   min="15" max="45" onchange="return TShirtDesignTool.setFontSize(this.value)" >
@@ -193,8 +194,8 @@
           <!--Canvas div-->
           <div id="canvas-container" class="medium-4 large-6 columns" >
               <canvas id="canvas"></canvas>
-              <input type="button" value=" undo " onclick="TShirtDesignTool.undo()">
-              <input type="button" value=" Redo " onclick="TShirtDesignTool.redo()">
+              <!--<input type="button" value=" undo " onclick="TShirtDesignTool.undo()">-->
+              <!--<input type="button" value=" Redo " onclick="TShirtDesignTool.redo()">-->
           </div>
 
           <!--TshirtImage div start-->
@@ -208,9 +209,49 @@
 
       </div>
 
+       <!--third row start-->
+       <div class="row">
+           <div id="saveImagePanel" class="small-12 large-centered columns">
+               <img src="img/Red-1-B.jpg">
+               <div class="row">
+                   <div class="large-4 columns">
+                       <label for="fileName" class=" inline"><b>File Name: </b></label>
+                   </div>
+                   <div class="large-8 columns">
+                       <input id="fileName" type="text" class="radius" >
+                   </div>
+               </div>
+
+               <div class="row">
+                   <div class="large-4 columns">
+                       <label for="fileType" class=" inline"><b>Save as Type : </b></label>
+                   </div>
+                   <div class="large-8 columns">
+                       <select id="fileType" class="radius">
+                           <option value="png" selected>PNG Image</option>
+                           <option value="jpeg">JPG Image</option>
+                           <option value="gif">GIF Image</option>
+                           <option value="bmp">BMP Image</option>
+                       </select>
+                   </div>
+               </div>
+
+               <div class="row">
+                   <div class="small-6 large-centered columns">
+                       <!--<input type="button" value=" save " onclick="TShirtDesignTool.saveDesign()">-->
+                       <a class="save" onclick="TShirtDesignTool.saveDesign()">save</a>
+                       <input type="button" value=" cancel " onclick={$.unblockUI();}>
+                   </div>
+               </div>
+               <br>
+           </div>
+       </div>
+       <!--third row end-->
+
        <script src="js/vendor/modernizr.js"></script>
        <script src="js/vendor/jquery.js"></script>
        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+       <script src="js/jquery.blockUI.js"></script>
        <script src="js/jquery.ddslick.js"></script>
        <script src="js/kendo.ui.core.min.js"></script>
        <script src="js/vendor/fastclick.js"></script>

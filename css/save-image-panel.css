@@ -1,0 +1,21 @@
+#saveImagePanel
+{
+    border:0px;
+    padding: 0px;
+    display: none;
+    margin: 0px;
+}
+#saveImagePanel img{
+    height: 400px;
+    margin-bottom: 5px;
+    width: 400px;
+}
+
+.save{
+    background-color: #CED5D9;
+    border: 1px solid lightgray;
+    padding: 2px 10px 2px 10px;
+    color: black;
+    border-radius: 2px;
+
+}

@@ -151,13 +151,13 @@ var TShirtDesignTool =
 
     canvas.on('object:added', function (e) {
         var obj = e.target;
-        if(TShirtDesignTool.isUndoMode){
+        if (TShirtDesignTool.isUndoMode) {
             TShirtDesignTool.undoObjects.push({
                 operation: 'added',
                 object: obj
             });
         }
-        if(!TShirtDesignTool.isUndoMode){
+        if (!TShirtDesignTool.isUndoMode) {
             TShirtDesignTool.redoObjects.push({
                 operation: 'added',
                 object: obj
@@ -178,13 +178,13 @@ var TShirtDesignTool =
 
     canvas.on('object:removed', function (e) {
         var obj = e.target;
-        if(TShirtDesignTool.isUndoMode){
+        if (TShirtDesignTool.isUndoMode) {
             TShirtDesignTool.undoObjects.push({
                 operation: 'deleted',
                 object: obj
             });
         }
-        if(!TShirtDesignTool.isUndoMode){
+        if (!TShirtDesignTool.isUndoMode) {
             TShirtDesignTool.redoObjects.push({
                 operation: 'deleted',
                 object: obj
@@ -224,7 +224,7 @@ var TShirtDesignTool =
     TShirtDesignTool.isUndoMode = false;
     if (TShirtDesignTool.undoObjects.length > 0) {
         var object = TShirtDesignTool.undoObjects.pop();
-        if(object){
+        if (object) {
             if (object.operation === 'added') {
                 window.canvas.remove(object.object);
             }
@@ -240,7 +240,7 @@ var TShirtDesignTool =
     TShirtDesignTool.isUndoMode = true;
     if (TShirtDesignTool.redoObjects.length > 0) {
         var object = TShirtDesignTool.redoObjects.pop();
-        if(object){
+        if (object) {
             if (object.operation === 'added') {
                 window.canvas.remove(object.object);
             }
@@ -646,20 +646,38 @@ var TShirtDesignTool =
     window.canvas.renderAll();
 
 }
-    , saveDesign: function () {
+    , showSaveDesignPanel: function () {
     var _canvas = window.canvas;
     var img = new Image();
     img.setAttribute('crossOrigin', 'anonymous');
     img = _canvas.toDataURL("image/png");
-    //img==_canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-    //console.log(img);
-    //img=img.replace("image/octet-stream", "image/jpeg");
-    //console.log(img);
-    //img=img.replace("image/jpeg", "image/gif");
-    //console.log(img);
-    //img=img.replace("image/gif", "image/bmp");
-    //console.log(img);
-    window.open(img);
+    $('#saveImagePanel img').attr('src', img);
+    $('.save').removeAttr('download');
+    $('.save').removeAttr('href');
+    $.blockUI({
+        message: $('#saveImagePanel'),
+        css: {
+            top: '50px',
+            left: '30%',
+            width: '34%'
+        }
+    });
+}
+    , saveDesign: function () {
+    if (!fileName.value) {
+        fileName.placeholder = '*FileName is Required.';
+        return false;
+    }
+    var img = new Image();
+    img.setAttribute('crossOrigin', 'anonymous');
+    img = window.canvas.toDataURL("image/png").replace('image/png', 'image/' + fileType.value);
+    $('.save').attr({
+        'download': fileName.value,
+        'href': img
+    });
+    setTimeout($.unblockUI, 500);
+    fileName.value='';
+
 }
     , setOutline: function () {
     var activeObject = window.canvas.getActiveObject();
@@ -706,6 +724,9 @@ var TShirtDesignTool =
 
 $(document).ready(function () {
     TShirtDesignTool.init();
+    var undoRedoBtn = '<input type="button" value=" undo " onclick="TShirtDesignTool.undo()">' +
+        '<input type="button" value=" Redo " onclick="TShirtDesignTool.redo()">';
+    $('#canvas-container').append(undoRedoBtn);
 
     $('#textArcSlider').slider({
         orientation: "horizontal",
