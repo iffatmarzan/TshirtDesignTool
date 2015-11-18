@@ -1,6 +1,6 @@
 var TShirtDesignTool =
 {
-    panels: ['text-panel', 'editor-panel', 'clip-art-panel', 'upload-image-panel','edit-clipart-panel']
+    panels: ['text-panel', 'editor-panel', 'clip-art-panel', 'upload-image-panel', 'edit-clipart-panel']
     , fontStyleData: [
     {
         text: "bold",
@@ -172,6 +172,11 @@ var TShirtDesignTool =
         if (obj.type === 'path-group') {
             obj.on('selected', function () {
                 TShirtDesignTool.clipartEditorPanel();
+                $('#pathList').html('');
+                for (var i = 0; i < obj.paths.length; i++) {
+                    var option = '<option value=' + i + ' >Path ' + i + '</option>';
+                    $('#pathList').append(option);
+                }
             });
         }
     });
@@ -367,18 +372,14 @@ var TShirtDesignTool =
     var activeObject = window.canvas.getActiveObject();
     if (!activeObject) {
         $('.k-selected-color').get(2).style['background-color'] = 'rgb(0,0,0)';
-        $('.k-selected-color').get(3).style['background-color'] = 'rgb(0,0,0)';
         return;
     }
-    if (activeObject.fill)
-        $('.k-selected-color').get(2).style['background-color'] = activeObject.fill;
-    if (activeObject.stroke) {
-        $('.k-selected-color').get(3).style['background-color'] = activeObject.stroke;
-        $('#svgStrokeWidth .ui-slider-range').css('background', activeObject.stroke);
-        $('#svgStrokeWidth').slider('value', activeObject.strokeWidth * 20);
+    $('.k-selected-color').get(2).style['background-color'] = activeObject.paths[pathList.options.selectedIndex];
+    if (activeObject.angle) {
+        $('#svgAngle').slider('value', activeObject.angle);
     }
-    if(activeObject.opacity)
-        $('#svgOpacity').slider('value', activeObject.strokeWidth * 100);
+    if (activeObject.opacity)
+        $('#svgOpacity').slider('value', activeObject.opacity * 100);
 }
     , changeToUploadImagePanel: function () {
     TShirtDesignTool.showPanel('upload-image-panel');
@@ -615,14 +616,15 @@ var TShirtDesignTool =
     , addClipartToCanvas: function (imageSrc) {
     fabric.loadSVGFromURL(imageSrc, function (objects, options) {
         //objects.stroke='green';
-        console.log(objects);
+
         var _canvas = window.canvas;
         var obj = fabric.util.groupSVGElements(objects, options);
         obj.left = _canvas.getWidth() / 2 - 50;
         obj.top = _canvas.getHeight() / 2 - 50;
         obj.scaleX = 100 / options.width;
         obj.scaleY = 100 / options.height;
-        obj.angle = 0;
+        obj.hasRotatingPoint = false;
+        //console.log(obj);
         _canvas.add(obj).renderAll();
     });
 
@@ -637,14 +639,21 @@ var TShirtDesignTool =
     //});
     //_canvas.add(imgInstance).renderAll();
 }
-    , setSvgFillColor: function (fillColor) {
+    , setSvgPathColor: function (fillColor) {
     var activeObject = window.canvas.getActiveObject();
     if (!activeObject)
         return;
-    activeObject.paths.forEach(function(path){
-        path.fill=fillColor;
-    });
+    activeObject.paths[pathList.options.selectedIndex].fill = fillColor;
+    //window.canvas.render(activeObject);
     window.canvas.renderAll();
+}
+    , svgPathChange: function () {
+    var activeObject = window.canvas.getActiveObject();
+    if (!activeObject)
+        return;
+    $('.k-selected-color').get(2).style['background-color'] = activeObject.paths[pathList.options.selectedIndex].fill;
+    //window.canvas.render(activeObject);
+    //window.canvas.renderAll();
 }
     , setSvgStroke: function (stroke) {
     var activeObject = window.canvas.getActiveObject();
@@ -655,18 +664,18 @@ var TShirtDesignTool =
     window.canvas.renderAll();
 
 }
-    , setSvgStrokeWidth: function(){
+    , setSvgAngle: function () {
     var activeObject = window.canvas.getActiveObject();
     if (!activeObject)
         return;
-    activeObject.setStrokeWidth(($('#svgStrokeWidth').slider('value')) / 20);
+    activeObject.setAngle($('#svgAngle').slider('value'));
     window.canvas.renderAll();
 }
-    , setSvgOpacity: function(){
+    , setSvgOpacity: function () {
     var activeObject = window.canvas.getActiveObject();
     if (!activeObject)
         return;
-    activeObject.setOpacity(($('#svgOpacity').slider('value')) *.01);
+    activeObject.setOpacity(($('#svgOpacity').slider('value')) * .01);
     window.canvas.renderAll();
 
 }
@@ -740,7 +749,7 @@ var TShirtDesignTool =
         'href': img
     });
     setTimeout($.unblockUI, 500);
-    fileName.value='';
+    fileName.value = '';
 
 }
     , setOutline: function () {
@@ -801,13 +810,13 @@ $(document).ready(function () {
         slide: TShirtDesignTool.setTextArc
     });
 
-    $('#svgStrokeWidth').slider({
+    $('#svgAngle').slider({
         orientation: "horizontal",
         range: "min",
-        min: 0,
-        max: 100,
+        min: -1,
+        max: 362,
         value: 0,
-        slide: TShirtDesignTool.setSvgStrokeWidth
+        slide: TShirtDesignTool.setSvgAngle
     });
 
     $('#svgOpacity').slider({
@@ -827,7 +836,7 @@ $(document).ready(function () {
         slide: TShirtDesignTool.setOutlineWidth
     });
 
-    $("#text-color,#text-outline-color,#svgFill,#svgStroke").kendoColorPicker({
+    $("#text-color,#text-outline-color,#svgFill").kendoColorPicker({
         palette: "basic",
         tileSize: 4
     });

@@ -7,6 +7,9 @@
       <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
       <link href="http://kendo.cdn.telerik.com/2014.2.716/styles/kendo.common.min.css" rel="stylesheet" />
       <link href="http://kendo.cdn.telerik.com/2014.2.716/styles/kendo.default.min.css" rel="stylesheet" />
+      <!--<link rel="stylesheet" href="css/jquery-ui.css">-->
+      <!--<link rel="stylesheet" href="css/kendo.common.min.css"  />-->
+      <!--<link rel="stylesheet" href="css/kendo.default.min.css"  />-->
       <link rel="stylesheet" href="css/foundation.css" />
       <link rel="stylesheet" href="css/app.css" />
       <link rel="stylesheet" href="css/add-text-panel.css">
@@ -165,13 +168,13 @@
                 <div class="clip-arts-holder">
                     <ul class="small-block-grid-3">
                         <li><img class="th" src="clipart/leaf.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Leaf </span></li>
-                        <li><img class="th" src="clipart/flower.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption" > Flower </span></li>
+                        <li><img class="th" src="clipart/santa.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption" > Santa </span></li>
                         <li><img class="th" src="clipart/emo.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Guiter </span></li>
                         <li><img class="th" src="clipart/dragon.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Dragon </span></li>
                         <li><img class="th" src="clipart/fluid.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Fluid </span></li>
-                        <li><img class="th" src="clipart/liquid.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Paint </span></li>
+                        <li><img class="th" src="clipart/buffelo.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Buffelo </span></li>
                         <li><img class="th" src="clipart/paintSix.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Paint </span></li>
-                        <li><img class="th" src="clipart//arrow.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Arrow </span></li>
+                        <li><img class="th" src="clipart/arrow.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Arrow </span></li>
                         <li><img class="th" src="clipart/deer.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Deer </span></li>
                        </ul>
                 </div>
@@ -184,25 +187,23 @@
 
               <div class="editor-panel-tools">
                   <div class="row">
-                      <div class="large-3 columns">
-                          <label for="svgFill" class="inline"><b>Fill color: </b></label>
+                      <div class="large-7 columns">
+                          <select id="pathList" class="radius" onchange="TShirtDesignTool.svgPathChange()">
+                          </select>
+                      </div>
+                      <div class="large-2 columns">
+                          <label for="svgFill" class="inline"><b>color: </b></label>
                       </div>
                       <div class="large-3 columns">
-                          <input id="svgFill" type="color" class="radius"  onchange="TShirtDesignTool.setSvgFillColor(this.value)">
-                      </div>
-                      <div class="large-3 columns">
-                          <label for="svgStroke" class="inline"><b>Stroke: </b></label>
-                      </div>
-                      <div class="large-3 columns">
-                          <input id="svgStroke" type="color" class="radius"  onchange="TShirtDesignTool.setSvgStroke(this.value)">
+                          <input id="svgFill" type="color" class="radius"  onchange="TShirtDesignTool.setSvgPathColor(this.value)">
                       </div>
                   </div>
                   <div class="row">
-                      <div class="large-4 columns">
-                          <label for="svgStrokeWidth" class="inline"><b>StrokeWidth: </b></label>
+                      <div class="large-3 columns">
+                          <label for="svgAngle" class="inline"><b>Angle: </b></label>
                       </div>
-                      <div class="large-8 columns">
-                          <div id="svgStrokeWidth" class="slider" ></div>
+                      <div class="large-9 columns">
+                          <div id="svgAngle" class="slider" ></div>
                       </div>
                   </div>
                   <div class="row">
@@ -290,7 +291,7 @@
 
        <script src="js/vendor/modernizr.js"></script>
        <script src="js/vendor/jquery.js"></script>
-       <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+       <script src="js/jquery-ui.js"></script>
        <script src="js/jquery.blockUI.js"></script>
        <script src="js/jquery.ddslick.js"></script>
        <script src="js/kendo.ui.core.min.js"></script>
