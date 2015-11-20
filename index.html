@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TShirtDesign | Welcome</title>
       <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-      <link href="http://kendo.cdn.telerik.com/2014.2.716/styles/kendo.common.min.css" rel="stylesheet" />
-      <link href="http://kendo.cdn.telerik.com/2014.2.716/styles/kendo.default.min.css" rel="stylesheet" />
-      <!--<link rel="stylesheet" href="css/jquery-ui.css">-->
+      <!--<link href="http://kendo.cdn.telerik.com/2014.2.716/styles/kendo.common.min.css" rel="stylesheet" />-->
+      <!--<link href="http://kendo.cdn.telerik.com/2014.2.716/styles/kendo.default.min.css" rel="stylesheet" />-->
+      <link rel="stylesheet" href="css/spectrum.css">
       <!--<link rel="stylesheet" href="css/kendo.common.min.css"  />-->
       <!--<link rel="stylesheet" href="css/kendo.default.min.css"  />-->
       <link rel="stylesheet" href="css/foundation.css" />
@@ -29,12 +29,12 @@
               <div class="nav-bar left">
                   <ul id="nav-bar-list" class="button-group">
                       <li><a href="#" class="button">Choose Shirt</a></li>
-                      <li><a href="#" onclick='return TShirtDesignTool.addTextPanel()' class="button">Add Text</a></li>
-                      <li><a href="#" onclick='return TShirtDesignTool.changeToClipartPanel()' class="button">Add Clip Art</a></li>
-                      <li><a href="#" onclick='return TShirtDesignTool.changeToUploadImagePanel()' class="button">Upload Image</a></li>
+                      <li><a href="#" class="button">Add Text</a></li>
+                      <li><a href="#" class="button">Add Clip Art</a></li>
+                      <li><a href="#" class="button">Upload Image</a></li>
                       <li><a href="#" class="button">Personalize</a></li>
                       <!--<li><a href="#" class="button">Free Drawing</a></li>-->
-                      <li><a href="#" class="button customMenuItem" onclick='return TShirtDesignTool.showSaveDesignPanel()'> Save Design </a></li>
+                      <li><a href="#" class="button customMenuItem"> Save Design </a></li>
                   </ul>
               </div>
               <hr/>
@@ -51,7 +51,7 @@
                    <form class="content">
                        <textarea class="text full input-text-1" rows="2" name=""></textarea>
                        <fieldset>
-                           <a href="#" title="Add" class="button radius" onclick="return TShirtDesignTool.drawText()">Add Text</a>
+                           <a href="#" title="Add" class="button radius">Add Text</a>
                        </fieldset>
                    </form>
               </div>
@@ -66,7 +66,7 @@
 
                     <div class="row">
                         <div class="large-12 columns">
-                            <textarea id="textArea" class="radius" onkeyup="return TShirtDesignTool.updateText(this.value)"></textarea>
+                            <textarea id="textArea" class="radius"></textarea>
                         </div>
                     </div>
 
@@ -84,7 +84,7 @@
                                     <label for="textSpacing" class=" inline"><b>Spacing: </b></label>
                                 </div>
                                 <div class="large-6 columns">
-                                    <input id="textSpacing" type="number" class="radius"   min="-15" max="10"  onchange="return TShirtDesignTool.setTextSpacing(this.value)" >
+                                    <input id="textSpacing" type="number" class="radius" min="-15" max="10">
                                 </div>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                                     <label for="text-color" class=" inline"><b>Color: </b></label>
                                 </div>
                                 <div class="large-6 columns">
-                                    <input id="text-color" type="color" class="radius"  onchange="TShirtDesignTool.setTextColor(this.value)">
+                                    <input id="text-color" type="color" class="radius">
                                 </div>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                             <label for="fontSizing" class="inline"><b>Font Size: </b></label>
                         </div>
                         <div class="large-3 columns">
-                            <input id="fontSizing" type="number" class="radius"   min="15" max="45" onchange="return TShirtDesignTool.setFontSize(this.value)" >
+                            <input id="fontSizing" type="number" class="radius"   min="15" max="45">
                         </div>
                         <div class="large-7 columns" style="margin:0;padding: 0;border:0">
                             <select id="font-style" >
@@ -125,7 +125,7 @@
                         </div>
 
                         <div class="large-1 columns">
-                            <input id="textCircular" type="checkbox" onchange='return TShirtDesignTool.setTextCircular()'>
+                            <input id="textCircular" type="checkbox">
                         </div>
                         <div class="large-4 columns">
                             <label for="textCircular"><b>Circular Text </b></label>
@@ -142,7 +142,7 @@
 
                     <div class="row">
                         <div class="large-2 columns">
-                            <input id="textOutline" type="checkbox" onchange='return TShirtDesignTool.setOutline()'>
+                            <input id="textOutline" type="checkbox">
                         </div>
                         <div class="large-9 columns">
                             <label for="textOutline"><b>Add Outline</b></label>
@@ -151,7 +151,7 @@
 
                     <div class="row" id="outline-properties" style="display: none;">
                         <div class="large-4 columns">
-                            <input id="text-outline-color" type="color" class="radius" onchange="return TShirtDesignTool.setOutlineColor(this.value)">
+                            <input id="text-outline-color" type="color" class="radius">
                         </div>
                         <div class="large-8 columns">
                             <div id="text-outline-slider" class="slider" ></div>
@@ -167,15 +167,15 @@
                 <h6>Clipart:</h6>
                 <div class="clip-arts-holder">
                     <ul class="small-block-grid-3">
-                        <li><img class="th" src="clipart/leaf.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Leaf </span></li>
-                        <li><img class="th" src="clipart/santa.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption" > Santa </span></li>
-                        <li><img class="th" src="clipart/emo.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Guiter </span></li>
-                        <li><img class="th" src="clipart/dragon.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Dragon </span></li>
-                        <li><img class="th" src="clipart/fluid.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Fluid </span></li>
-                        <li><img class="th" src="clipart/buffelo.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Buffelo </span></li>
-                        <li><img class="th" src="clipart/paintSix.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Paint </span></li>
-                        <li><img class="th" src="clipart/arrow.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Arrow </span></li>
-                        <li><img class="th" src="clipart/deer.svg" onclick="TShirtDesignTool.addClipartToCanvas(this.src)"><span class="caption"> Deer </span></li>
+                        <li><img class="th" src="clipart/leaf.svg"><span class="caption"> Leaf </span></li>
+                        <li><img class="th" src="clipart/santa.svg"><span class="caption" > Santa </span></li>
+                        <li><img class="th" src="clipart/emo.svg"><span class="caption"> Guiter </span></li>
+                        <li><img class="th" src="clipart/dragon.svg"><span class="caption"> Dragon </span></li>
+                        <li><img class="th" src="clipart/star.svg"><span class="caption"> Symbol </span></li>
+                        <li><img class="th" src="clipart/buffelo.svg"><span class="caption"> Buffelo </span></li>
+                        <li><img class="th" src="clipart/paintSix.svg"><span class="caption"> Paint </span></li>
+                        <li><img class="th" src="clipart/arrow.svg"><span class="caption"> Arrow </span></li>
+                        <li><img class="th" src="clipart/deer.svg"><span class="caption"> Deer </span></li>
                        </ul>
                 </div>
             </div>
@@ -188,14 +188,14 @@
               <div class="editor-panel-tools">
                   <div class="row">
                       <div class="large-7 columns">
-                          <select id="pathList" class="radius" onchange="TShirtDesignTool.svgPathChange()">
+                          <select id="pathList" class="radius">
                           </select>
                       </div>
                       <div class="large-2 columns">
                           <label for="svgFill" class="inline"><b>color: </b></label>
                       </div>
                       <div class="large-3 columns">
-                          <input id="svgFill" type="color" class="radius"  onchange="TShirtDesignTool.setSvgPathColor(this.value)">
+                          <input id="svgFill" type="color" class="radius">
                       </div>
                   </div>
                   <div class="row">
@@ -241,10 +241,10 @@
 
           <!--TshirtImage div start-->
           <div class="medium-2 large-2 columns"  >
-              <img class="ThumbImg" src="img/Thumb-front.png" onclick="return TShirtDesignTool.changeTshirtSide('F')"> <br>
-              <img class="ThumbImg" src="img/Thumb-back.png" onclick="return TShirtDesignTool.changeTshirtSide('B')"> <br>
-              <img class="ThumbImg" src="img/Thumb-left.png" onclick="return TShirtDesignTool.changeTshirtSide('L')"> <br>
-              <img class="ThumbImg" src="img/Thumb-right.png" onclick="return TShirtDesignTool.changeTshirtSide('R')">
+              <img class="ThumbImg" src="img/Thumb-front.png" alt="F"> <br>
+              <img class="ThumbImg" src="img/Thumb-back.png" alt="B" > <br>
+              <img class="ThumbImg" src="img/Thumb-left.png" alt="L" > <br>
+              <img class="ThumbImg" src="img/Thumb-right.png" alt="R">
           </div>
           <!--TshirtImage div end-->
 
@@ -279,9 +279,8 @@
 
                <div class="row">
                    <div class="small-6 large-centered columns">
-                       <!--<input type="button" value=" save " onclick="TShirtDesignTool.saveDesign()">-->
-                       <a class="save" onclick="TShirtDesignTool.saveDesign()">save</a>
-                       <input type="button" value=" cancel " onclick={$.unblockUI();}>
+                       <a class="save">save</a>
+                       <input class="cancel" type="button" value=" cancel ">
                    </div>
                </div>
                <br>
@@ -294,7 +293,8 @@
        <script src="js/jquery-ui.js"></script>
        <script src="js/jquery.blockUI.js"></script>
        <script src="js/jquery.ddslick.js"></script>
-       <script src="js/kendo.ui.core.min.js"></script>
+       <script src="js/spectrum.js"></script>
+       <!--<script src="js/kendo.ui.core.min.js"></script>-->
        <script src="js/vendor/fastclick.js"></script>
        <script src="js/foundation.min.js"></script>
        <script src="js/fabric.js"></script>
