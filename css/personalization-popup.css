@@ -1,0 +1,34 @@
+#personalization-popup{
+
+}
+
+#personalization-popup h5{
+    font-weight: bold;
+    padding: 10px 0px 10px 10px;
+    margin: 0px;
+    border-bottom: 1px solid darkgray;
+    color: darkslategray;
+}
+
+#insertRow{
+    height: 30px; width: auto;
+    border: 1px solid dimgray;
+    color: black;
+    background-color: ghostwhite;
+    border-radius: 2px;
+    font-weight: bold;
+    margin: auto;
+    float: right;
+}
+#saveData{
+    margin-left: 40%;
+    display: block;
+    width: 100px;
+    height: auto;
+    background: #4E9CAF;
+    padding: 5px;
+    text-align: center;
+    border-radius: 2px;
+    color: white;
+    font-weight: bold;
+}

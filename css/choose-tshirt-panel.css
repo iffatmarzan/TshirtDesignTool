@@ -1,0 +1,73 @@
+#chooseTShirtPanel{
+    min-height:300px;
+    margin: 0px;
+    padding:0px;
+    border: 1px solid gray;
+    display: none;
+}
+
+
+#chooseTShirtPanel h6{
+    font-weight: bold;
+    background-color: whitesmoke;
+    padding: 10px 0px 10px 10px;
+    margin: 0px;
+    border-bottom: 1px solid darkgray;
+    color: darkslategray;
+
+}
+.selected-shirt{
+    margin: 10px 0px 0px -10px;
+    border: 1px solid #b7e1f0;
+}
+
+.tshirt-info{
+    margin: 15px 0px 10px 25px;
+    padding: 0;
+    border: 0px;
+}
+.tshirt-info input{
+    background-color: #CED5D9;
+    border: 1px solid #CED5DF;
+    border-radius: 2px;
+    width: 150px;
+    height: 32px;
+    margin-left: 10px;
+    font-family: verdana;
+    font-weight: bold;
+    font-size: 15px;
+}
+.tshirt-info h5{
+  color: goldenrod;
+}
+
+
+.color-picker-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    zoom: 1;
+}
+
+.color-picker-list li {
+    float: left;
+    margin: 2px;
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+.color-picker-canvas {
+    display: block;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+.color-picker-canvas.color-selected {
+    width: 22px;
+    height: 22px;
+    border: 1px solid #fff;
+    -webkit-box-shadow: 0 0 3px #00a2ea, 0 0 3px #00a2ea;
+    -moz-box-shadow: 0 0 3px #00a2ea, 0 0 3px #00a2ea;
+    box-shadow: 0 0 3px #00a2ea, 0 0 3px #00a2ea;
+}

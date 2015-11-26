@@ -1,0 +1,32 @@
+#personalization-panel {
+    min-height:100px;
+    margin: 0px;
+    padding:0px;
+    border: 1px solid gray;
+    display:none;
+}
+
+#personalization-panel h6{
+    font-weight: bold;
+    background-color: whitesmoke;
+    padding: 10px 0px 10px 10px;
+    margin: 0px;
+    border-bottom: 1px solid darkgray;
+    color: darkslategray;
+}
+#personalization-panel img{
+    height: 250px;
+    width: auto;
+    padding: 0px;
+    align: middle;
+}
+
+.numberBtn{
+    margin: 10px 0px 25px 60px ;
+    height: 30px;
+    background-color: ghostwhite;
+    color: grey;
+    border-radius: 2px;
+    border: 1px solid darkgray;
+    font-weight: bold;
+}
