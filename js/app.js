@@ -43,8 +43,8 @@ var TShirtDesignTool =
             {text: "Times New Roman", value: "Times New Roman", imageSrc: "img/fonts/OldSansBlack.png"},
             {text: "Monospace", value: "Monospace", imageSrc: "img/fonts/monospace.png"},
             {text: "Sansation Light", value: "Sansation_Light", imageSrc: "img/fonts/sansation-light.png"},
-            {text: "Squealer", value: "Squealer", imageSrc: "img/fonts/squealer.png"},
-            {text: "Megazine", value: "Megazine", imageSrc: "img/fonts/sans-serif.png"}]
+            {text: "Squealer", value: "Squealer", imageSrc: "img/fonts/squealer.png"}
+            ]
     },
     {
         text: "Modern",
@@ -84,6 +84,20 @@ var TShirtDesignTool =
             {text: "Le Grand Saut", value: "LeGrandSaut", imageSrc: "img/fonts/sansation-light.png"},
             {text: "Easy Rider", value: "EasyRider", imageSrc: "img/fonts/squealer.png"},
             {text: "Always In Heart", value: "AlwaysInMyHeart", imageSrc: "img/fonts/sans-serif.png"}]
+    },
+    {
+        text: "Bangla",
+        value: 5,
+        selected: false,
+        description: " ",
+        id: "Bangla",
+        submenu: [
+            {text: "SutonnyMJ", value: "SutonnyMJ", imageSrc: "img/fonts/sutuniMJ.png"},
+            {text: "SolaimanLipi", value: "SolaimanLipi", imageSrc: "img/fonts/SolaimanLipi.png"},
+            {text: "Monospace", value: "Monospace", imageSrc: "img/fonts/monospace.png"},
+            {text: "Sansation Light", value: "Sansation_Light", imageSrc: "img/fonts/sansation-light.png"},
+            {text: "Squealer", value: "Squealer", imageSrc: "img/fonts/squealer.png"},
+            {text: "SiyamRupali", value: "SiyamRupali", imageSrc: "img/fonts/sans-serif.png"}]
     }
 ]
     , tempDesignData: [
@@ -231,7 +245,7 @@ var TShirtDesignTool =
     var Text = $('#text-panel textarea').val();
     if (Text === "")
         return;
-    var SampleText = new fabric.Text(Text, {
+    var SampleText = new fabric.IText(Text, {
         strokeWidth: 0,
         fontSize: 30,
         letterSpacing: 0
@@ -421,7 +435,7 @@ var TShirtDesignTool =
     , clipartEditorPanel: function () {
     TShirtDesignTool.showPanel('edit-clipart-panel');
     var activeObject = window.canvas.getActiveObject();
-    console.log(activeObject.paths[pathList.options.selectedIndex].fill)
+    //console.log(activeObject.paths[pathList.options.selectedIndex].fill)
     $('#svgFill').spectrum("set",activeObject.paths[pathList.options.selectedIndex].fill);
     //$('.k-selected-color').get(2).style['background-color'] = activeObject.paths[pathList.options.selectedIndex];
     if (activeObject.angle) {
@@ -433,41 +447,46 @@ var TShirtDesignTool =
     , changeToUploadImagePanel: function () {
     TShirtDesignTool.showPanel('upload-image-panel');
 }
+    , changeTshirtSideInPersonalizationMode: function(sideName){
+    //alert(sideName)
+    window.canvas.clear();
+    var imageSrc = '/TshirtDesignTool/img/'+TShirtDesignTool.selectedTShirt.color+'-1-' + sideName + '.jpg';
+    var img = new Image();
+    img.src = imageSrc;
+    img.alt = sideName;
+    img.onload = function () {
+        window.canvas.setBackgroundImage(img.src, window.canvas.renderAll.bind(canvas), {
+            originX: 'left',
+            originY: 'top',
+            left: 0,
+            top: 0,
+            width: canvas.getWidth(),
+            height: canvas.getHeight()
+        });
+    };
+
+    if(sideName===nameSide.value){
+        $(TShirtDesignTool.personalizeObjects).each(function(){
+            if(this.id==='customName'){
+                window.canvas.add(this).renderAll();
+            }
+        });
+    }
+
+    if(sideName===numberSide.value){
+        $(TShirtDesignTool.personalizeObjects).each(function(){
+            if(this.id==='customNumber'){
+                window.canvas.add(this).renderAll();
+            }
+        });
+    }
+
+}
     , changeTShirtSide: function (sideName) {
 
     if(TShirtDesignTool.isPersonalizationMode){
-        window.canvas.clear();
-        var imageSrc = '/TshirtDesignTool/img/'+TShirtDesignTool.selectedTShirt.color+'-1-' + sideName + '.jpg';
-        var img = new Image();
-        img.src = imageSrc;
-        img.alt = sideName;
-        img.onload = function () {
-            window.canvas.setBackgroundImage(img.src, window.canvas.renderAll.bind(canvas), {
-                originX: 'left',
-                originY: 'top',
-                left: 0,
-                top: 0,
-                width: canvas.getWidth(),
-                height: canvas.getHeight()
-            });
-        }
-
-        if(sideName===nameSide.value){
-            $(TShirtDesignTool.personalizeObjects).each(function(){
-                if(this.id==='customName'){
-                    window.canvas.add(this).renderAll();
-                }
-            });
-        }
-
-        if(sideName===numberSide.value){
-            $(TShirtDesignTool.personalizeObjects).each(function(){
-                if(this.id==='customNumber'){
-                    window.canvas.add(this).renderAll();
-                }
-            });
-        }
-
+        //alert(sideName)
+        TShirtDesignTool.changeTshirtSideInPersonalizationMode(sideName);
         return;
     }
 
@@ -492,6 +511,7 @@ var TShirtDesignTool =
         }
         return;
     });
+
     var imageSrc = '/TshirtDesignTool/img/'+TShirtDesignTool.selectedTShirt.color+'-1-' + sideName + '.jpg';
     var img = new Image();
     img.src = imageSrc;
@@ -506,7 +526,10 @@ var TShirtDesignTool =
             width: canvas.getWidth(),
             height: canvas.getHeight()
         });
-    }
+    };
+
+
+
     TShirtDesignTool.selectedTShirt.side=sideName;
 }
     , updateText: function (text) {
@@ -521,7 +544,11 @@ var TShirtDesignTool =
     window.canvas.renderAll();
 }
     , setTextSpacing: function (e) {
+
     var activeObject = window.canvas.getActiveObject();
+    if(!activeObject)
+        return;
+
     if (activeObject.type == 'text') {
         activeObject.set('letterSpacing', parseInt(e));
     }
@@ -824,43 +851,50 @@ var TShirtDesignTool =
     , showSaveDesignPanel: function () {
     TShirtDesignTool.isPersonalizationMode=false;
     var _canvas = window.canvas;
-    var img = new Image();
-    img.setAttribute('crossOrigin', 'anonymous');
-    img = _canvas.toDataURL("image/png");
-    $('#saveImagePanel img').attr('src', img);
-    $('.save').removeAttr('download');
-    $('.save').removeAttr('href');
-    $.blockUI({
-        message: $('#saveImagePanel'),
-        fadeIn: 500,
-        css: {
-            top: '50px',
-            left: '30%',
-            width: '34%',
-            border: '1px solid gray'
-        }
-    });
+
+    //var img = new Image();
+    //img.setAttribute('crossOrigin', 'anonymous');
+    //img = _canvas.toDataURL("image/png");
+    //$('#saveImagePanel img').attr('src', img);
+    //$('.save').removeAttr('download');
+    //$('.save').removeAttr('href');
+    //$.blockUI({
+    //    message: $('#saveImagePanel'),
+    //    fadeIn: 500,
+    //    css: {
+    //        top: '50px',
+    //        left: '30%',
+    //        width: '34%',
+    //        border: '1px solid gray'
+    //    }
+    //});
+    $('#save-design-popup img').attr('src',_canvas.toDataURL("image/png"))
+
+
 }
     , saveDesign: function () {
-    var downloadData;
     if (!fileName.value) {
         fileName.placeholder = '* Required.';
         return false;
     }
-    if(fileType.value==='json'){
-        var text=JSON.stringify(window.canvas.toJSON());
-        var data=new Blob([text], {type: 'text/plain'});
-        downloadData = window.URL.createObjectURL(data);
-    } else{
+    var link = document.createElement("a");
+    link.style = "visibility:hidden";
+
+    if (fileType.value === 'json') {
+        var text = JSON.stringify(window.canvas.toJSON());
+        var data = new Blob([text], {type: 'text/plain'});
+        link.href = window.URL.createObjectURL(data);
+    } else {
         var img = new Image();
         img.setAttribute('crossOrigin', 'anonymous');
-        downloadData = window.canvas.toDataURL("image/png").replace('image/png', 'image/' + fileType.value);
+        link.href = window.canvas.toDataURL("image/png").replace('image/png', 'image/' + fileType.value);
     }
-    $('.save').attr({
-        'download': fileName.value,
-        'href': downloadData
-    });
-    setTimeout($.unblockUI, 500);
+
+    link.download = fileName.value;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setTimeout($('#save-design-popup').foundation('reveal', 'close'), 500);
     fileName.value = '';
 
 }
@@ -936,11 +970,12 @@ var TShirtDesignTool =
         top: canvas.getHeight()/2-30,
         fontFamily: 'impact',
         fontSize: 32,
-        width:40,
-        height:40,
+        //width:40,
+        //height:40,
         id: 'customNumber'
-
     });
+    personalizeNumber.setScaleX(1.5);
+    personalizeNumber.setScaleY(1.5);
     window.canvas.add(personalizeNumber).renderAll();
     TShirtDesignTool.personalizeObjects.push(personalizeNumber);
 }
@@ -1011,6 +1046,24 @@ $(document).ready(function () {
     undoBtn.addEventListener('click',TShirtDesignTool.undo );
     redoBtn.onclick= TShirtDesignTool.redo;
 
+    //$('#text-panel textarea','#textArea').avro({'bn':true},
+    //    function(s){
+    //        //alert('Bangla enabled = ' + s);
+    //    });
+
+    //$('textarea').avro({'bn':true},
+    //    function(s){
+    //        //alert('Bangla enabled = ' + s);
+    //    });
+
+    $('#text-panel a').click(function(e){
+        TShirtDesignTool.drawText();
+    });
+
+    $('#textArea').keyup(function(e){
+        TShirtDesignTool.updateText(e.target.value);
+    });
+
     $('#nav-bar-list li a').each(function(item){
        switch (item){
            case 0:
@@ -1034,20 +1087,31 @@ $(document).ready(function () {
        }
     });
 
-    $('#textSpacing').change(function(){
-        return TShirtDesignTool.setTextSpacing(textSpacing.value);
-    });
+    $('#textSpacing,#fontSizing,#textCircular,#textOutline,#pathList,#upload-image,#import-design').change(function(e){
+        switch (e.target.id) {
+            case 'textSpacing':
+                TShirtDesignTool.setTextSpacing(textSpacing.value);
+                break;
+            case 'fontSizing':
+                TShirtDesignTool.setFontSize();
+                break;
+            case 'textCircular':
+                TShirtDesignTool.setTextCircular();
+                break;
+            case 'textOutline':
+                TShirtDesignTool.setOutline();
+                break;
+            case 'pathList':
+                TShirtDesignTool.svgPathChange();
+                break;
+            case 'upload-image':
+                TShirtDesignTool.uploadImage(e);;
+                break;
+            case 'import-design':
+                TShirtDesignTool.importDesign(e);
+                break;
+        }
 
-    $('#fontSizing').change(function(){
-        return TShirtDesignTool.setFontSize();
-    });
-
-    $('#textCircular').change(function(){
-        return TShirtDesignTool.setTextCircular();
-    });
-
-    $('#textOutline').change(function(){
-        return TShirtDesignTool.setOutline();
     });
 
     $('#textArcSlider').slider({
@@ -1126,18 +1190,6 @@ $(document).ready(function () {
         }
     });
 
-    $('#pathList').change(function (e) {
-        return TShirtDesignTool.svgPathChange();
-    });
-
-    $("#upload-image").change(function (e) {
-        TShirtDesignTool.uploadImage(e);
-    });
-
-    $("#import-design").change(function (e) {
-        TShirtDesignTool.importDesign(e);
-    });
-
     $('#font-style').ddslick({
         data: TShirtDesignTool.fontStyleData,
         width: 190,
@@ -1166,21 +1218,12 @@ $(document).ready(function () {
     $('.ThumbImg').click(function(e){
         TShirtDesignTool.changeTShirtSide(e.target.alt);
     });
-
-    $('#text-panel a').click(function(e){
-        TShirtDesignTool.drawText();
-    });
-
-    $('#textArea').keyup(function(e){
-        TShirtDesignTool.updateText(e.target.value);
-    });
-
     $('.save').click(function(){
         TShirtDesignTool.saveDesign();
     });
 
     $('.cancel').click(function(){
-        $.unblockUI();
+        $('#save-design-popup').foundation('reveal', 'close');
     });
 
     $('#changeShirtBtn').click(function(e){
@@ -1198,66 +1241,31 @@ $(document).ready(function () {
             case 'addName':
                 addName.checked ? TShirtDesignTool.addPersonalizedName()
                                 : TShirtDesignTool.removePersonalizedName();
-                //$('#personalizeDataTable tbody tr:nth-child(1) td:nth-child(2) input').prop('disabled',!addName.checked);
                 break;
             case 'addNumber':
-                addNumber.checked ? TShirtDesignTool.addPersonalizedNumber():
-                    TShirtDesignTool.removePersonalizedNumber();
-                //$('#personalizeDataTable tbody tr:nth-child(1) td:nth-child(3) input').prop('disabled',!addNumber.checked);
+                addNumber.checked ? TShirtDesignTool.addPersonalizedNumber()
+                                  : TShirtDesignTool.removePersonalizedNumber();
                 break;
             case 'nameInch':
-                TShirtDesignTool.setPersonalNameSize(parseInt(nameInch.value));
+                TShirtDesignTool.setPersonalNameSize(parseFloat(nameInch.value));
                 break;
             case 'numberInch':
-                TShirtDesignTool.setPersonalNumberSize(parseInt(numberInch.value));
+                TShirtDesignTool.setPersonalNumberSize(parseFloat(numberInch.value));
                 break;
         }
 
     });
 
     $("#nameSide,#numberSide").change(function (e) {
-        window.canvas.clear();
-        var imageSrc = '/TshirtDesignTool/img/'+TShirtDesignTool.selectedTShirt.color+'-1-' + e.currentTarget.value + '.jpg';
-        var img = new Image();
-        img.src = imageSrc;
-        img.alt = e.currentTarget.value;
-        img.onload = function () {
-            window.canvas.setBackgroundImage(img.src, window.canvas.renderAll.bind(canvas), {
-                originX: 'left',
-                originY: 'top',
-                left: 0,
-                top: 0,
-                width: canvas.getWidth(),
-                height: canvas.getHeight()
-            });
-        }
-
-        if(e.currentTarget.value===nameSide.value){
-            $(TShirtDesignTool.personalizeObjects).each(function(){
-                if(this.id==='customName'){
-                    window.canvas.add(this).renderAll();
-                }
-            });
-        }
-
-        if(e.currentTarget.value===numberSide.value){
-            $(TShirtDesignTool.personalizeObjects).each(function(){
-                if(this.id==='customNumber'){
-                    window.canvas.add(this).renderAll();
-                }
-            });
-        }
-
+        TShirtDesignTool.changeTshirtSideInPersonalizationMode(e.currentTarget.value);
     });
 
-    $('#insertRow').click(function(e){
-        var row=$('#personalizeDataTable tbody tr').last().clone();
-        $(row.children()).each(function(item){
-            switch (item){
+    $('#insertRow').click(function (e) {
+        var row = $('#personalizeDataTable tbody tr').last().clone();
+        $(row.children()).each(function (item) {
+            switch (item) {
                 case 0:
-                    var value= parseInt(this.innerHTML)+1;
-                    //console.log(value);
-                    this.innerHTML=value;
+                    this.innerHTML = parseInt(this.innerHTML) + 1;
                     break;
                 case 1:
                     $(this).children().val('');
@@ -1265,134 +1273,77 @@ $(document).ready(function () {
                 case 2:
                     $(this).children().val('');
                     break;
-                case 3:
-                    break;
             }
-
         });
         $('#personalizeDataTable tbody').append(row);
+    });
 
-    })
+    $('#saveData').click(function (e) {
 
-    $('#saveData').click(function(e){
+        var zip = new JSZip(),
+            template=[];
+        ['designFront', 'designBack'].forEach(function (sideName, i) {
 
-        // 1st template
+            window.canvas.clear();
+            var imageSrc = '/TshirtDesignTool/img/' + TShirtDesignTool.selectedTShirt.color + '-1-' + sideName[6] + '.jpg';
+            window.canvas.backgroundImage._element.src= imageSrc;
 
+            if (sideName[6] === nameSide.value) {
+                $(TShirtDesignTool.personalizeObjects).each(function () {
+                    if (this.id === 'customName') {
+                        window.canvas.add(this);
+                    }
+                });
+            }
 
+            if (sideName[6] === numberSide.value) {
+                $(TShirtDesignTool.personalizeObjects).each(function () {
+                    if (this.id === 'customNumber') {
+                        window.canvas.add(this);
+                    }
+                });
+            }
 
-
-        window.canvas.clear();
-        var imageSrc = '/TshirtDesignTool/img/'+TShirtDesignTool.selectedTShirt.color+'-1-F.jpg';
-        var img = new Image();
-        img.src = imageSrc;
-        img.alt = e.currentTarget.value;
-        img.onload = function () {
-            window.canvas.setBackgroundImage(img.src, window.canvas.renderAll.bind(canvas), {
-                originX: 'left',
-                originY: 'top',
-                left: 0,
-                top: 0,
-                width: canvas.getWidth(),
-                height: canvas.getHeight()
-            });
-        }
-        if('F'===nameSide.value){
-            $(TShirtDesignTool.personalizeObjects).each(function(){
-                if(this.id==='customName'){
-                    window.canvas.add(this);
-                }
-            });
-        }
-
-        if('F'===numberSide.value){
-            $(TShirtDesignTool.personalizeObjects).each(function(){
-                if(this.id==='customNumber'){
-                    window.canvas.add(this);
-                }
-            });
-        }
-
-        TShirtDesignTool.personalizeJsonData.frontTemplate= window.canvas.toJSON();
-
-
-        // 2nd
-
-        window.canvas.clear();
-        var imageSrc = '/TshirtDesignTool/img/'+TShirtDesignTool.selectedTShirt.color+'-1-B.jpg';
-        var img = new Image();
-        img.src = imageSrc;
-        img.alt = e.currentTarget.value;
-        img.onload = function () {
-            window.canvas.setBackgroundImage(img.src, window.canvas.renderAll.bind(canvas), {
-                originX: 'left',
-                originY: 'top',
-                left: 0,
-                top: 0,
-                width: canvas.getWidth(),
-                height: canvas.getHeight()
-            });
-        }
-        if('B'===nameSide.value){
-            $(TShirtDesignTool.personalizeObjects).each(function(){
-                if(this.id==='customName'){
-                    window.canvas.add(this);
-                }
-            });
-        }
-
-        if('B'===numberSide.value){
-            $(TShirtDesignTool.personalizeObjects).each(function(){
-                if(this.id==='customNumber'){
-                    window.canvas.add(this);
-                }
-            });
-        }
-
-        TShirtDesignTool.personalizeJsonData.backTemplate= window.canvas.toJSON();
-
-        // memberlist
-
-        $('#personalizeDataTable tbody tr').each(function(){
-            var member={};
-            $($(this).children()).each(function(td){
-                switch (td){
-                    case 0:
-                        member.serialNo= this.innerHTML;
-                        break;
-                    case 1:
-                        member.name= $(this).children().val();
-                        break;
-                    case 2:
-                        member.number=$(this).children().val();
-                        break;
-                    case 3:
-                        member.size=$(this).children().val();
-                        break;
-                }
-            });
-            TShirtDesignTool.personalizeJsonData.memberList.push(member);
-
+            window.canvas.renderAll();
+            zip.file(sideName + '.txt', JSON.stringify(window.canvas.toJSON()));
+            zip.file(sideName + '.png', window.canvas.toDataURL("image/png").replace('data:image/png;base64,', ''), {base64: true});
 
         });
 
-        var zip = new JSZip();
-        zip.file("frontSide.txt", JSON.stringify(TShirtDesignTool.personalizeJsonData.frontTemplate) );
-        zip.file("backSide.txt", JSON.stringify(TShirtDesignTool.personalizeJsonData.backTemplate) );
-        zip.file("member.txt", JSON.stringify(TShirtDesignTool.personalizeJsonData.memberList) );
-        //var img = zip.folder("images");
-        //img.file("smile.gif", imgData, {base64: true});
-        //var blob = zip.generate({type:"blob"});
-        //content = zip.generate();
-        //location.href="data:application/zip;base64,"+content;
+        var memberList=[];
 
-        //var text=JSON.stringify(TShirtDesignTool.personalizeJsonData);
-        //var data=new Blob([text], {type: 'text/plain'});
-        //var downloadData = window.URL.createObjectURL(data);
-        //console.log(downloadData)
+        $('#personalizeDataTable tbody tr').each(function () {
+            var member = {};
+            $($(this).children()).each(function (td) {
+                switch (td) {
+                    case 0:
+                        member.serialNo = this.innerHTML;
+                        break;
+                    case 1:
+                        member.name = $(this).children().val();
+                        break;
+                    case 2:
+                        member.number = $(this).children().val();
+                        break;
+                    case 3:
+                        member.size = $(this).children().val();
+                        break;
+                }
+            });
+            memberList.push(member);
+        });
+
+        var csv = convertArrayOfObjectsToCSV({
+            data: memberList
+        });
+
+        zip.file("member.txt", JSON.stringify(memberList));
+        zip.file("memberlist.csv", csv);
+
 
         $('#saveData').attr({
-            'download': 'hello',
-            'href': "data:application/zip;base64,"+ zip.generate()
+            'download': 'design-data',
+            'href': "data:application/zip;base64," + zip.generate()
         });
 
         $('#personalization-popup').foundation('reveal', 'close');

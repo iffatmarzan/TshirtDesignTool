@@ -18,15 +18,24 @@
     height: 250px;
     width: auto;
     padding: 0px;
-    align: middle;
+    margin: 0px 0px 10px 40px;
 }
 
 .numberBtn{
     margin: 10px 0px 25px 60px ;
     height: 30px;
-    background-color: ghostwhite;
-    color: grey;
+    background-color: azure;
+    color: rgba(0,0,0,.7);
     border-radius: 2px;
     border: 1px solid darkgray;
     font-weight: bold;
+}
+
+#nameSide,#numberSide,#nameInch,#numberInch{
+    width: 105px;
+    height: 32px;
+    margin-left: -15px;
+    border:1px solid slategray;
+    font-weight: bold;
+    color: rgba(0,0,0,.6)
 }

@@ -61,3 +61,49 @@
     src: url('Modern/bauhaus93.ttf');
     /* IE9 */
 }
+
+@font-face {
+    font-family: SiyamRupali;
+    src: url('Bangla/SiyamRupali.ttf');
+    /* IE9 */
+}
+@font-face {
+    font-family: SutonnyMJ;
+    src: url('Bangla/SUTOM___.TTF');
+    /* IE9 */
+}
+@font-face {
+    font-family: SolaimanLipi;
+    src: url('Bangla/SolaimanLipi.ttf');
+    /* IE9 */
+}
+@font-face {
+    font-family: Boishakhi;
+    src: url('Bangla/BOISKUNI.TTF');
+    /* IE9 */
+}
+@font-face {
+    font-family: EkusheMohua;
+    src: url('Bangla/Mohua_07-09-05.ttf');
+    /* IE9 */
+}
+@font-face {
+    font-family: BongshaiMJ;
+    src: url('Bangla/BongshaiOMJ.ttf');
+    /* IE9 */
+}
+@font-face {
+    font-family: TonnySushreeMJ;
+    src: url('Bangla/TONNSMI_.TTF');
+    /* IE9 */
+}
+@font-face {
+    font-family: KumarkhaliMJ;
+    src: url('Bangla/KUMAO___.ttf');
+    /* IE9 */
+}
+@font-face {
+    font-family: NikoshGrameen;
+    src: url('Bangla/NikoshGrameen.ttf');
+    /* IE9 */
+}

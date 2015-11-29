@@ -115,3 +115,32 @@ user agent stylesheetfieldset {
 
 /*#text-outline-slider .ui-slider-range { background: #d8d8d8; }*/
 /*#text-outline-slider .ui-slider-handle { border-color: #4d4d4d; }*/
+
+#undoBtn{
+    background-color: #CED5D9;
+    border: 1px solid lightgray;
+    padding: 2px 10px 2px 10px;
+    color: darkred;
+    border-radius: 2px;
+    width: 80px;
+    height: 30px;
+    margin-top: 10px;
+    margin-left:30%;
+    font-weight: bold;
+    font-family: tahoma, arial, verdana, sans-serif;
+
+}
+#redoBtn{
+    background-color: #CED5D9;
+    border: 1px solid lightgray;
+    padding: 2px 10px 2px 10px;
+    color: darkgreen;
+    border-radius: 2px;
+    width: 80px;
+    height: 30px;
+    margin-top: 10px;
+    margin-left: 5%;
+    font-weight: bold;
+    font-family: tahoma, arial, verdana, sans-serif;
+
+}
