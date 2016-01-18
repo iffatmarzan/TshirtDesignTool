@@ -27,18 +27,17 @@
       <div class="row">
 
           <div class="small-12 medium-12 large-12 columns">
-              <ul id="nav-bar-list" class="button-group radius even-7">
-                  <li><a href="#" class="button">Choose Shirt</a></li>
-                  <li><a href="#" class="button">Add Text</a></li>
-                  <li><a href="#" class="button">Add Clip Art</a></li>
-                  <li><a href="#" class="button">Upload Image</a></li>
-                  <li><a href="#" class="button">Personalize</a></li>
-                  <li><a href="#" class="button">Free Drawing</a></li>
-                  <li><a href="#" data-reveal-id="save-design-popup" class="button"> Save Design </a></li>
-              </ul>
-              <!--<div class="nav-bar left">-->
-                  <!-- -->
-              <!--</div>-->
+              <div class="nav-bar left">
+                  <ul id="nav-bar-list" class="button-group radius">
+                      <li><a href="#" id="btnChooseShirt" class="button">Choose Shirt</a></li>
+                      <li><a href="#" id="btnAddText" class="button">Add Text</a></li>
+                      <li><a href="#" id="btnAddclipart" class="button">Add Clip Art</a></li>
+                      <li><a href="#" id="btnUploadImage" class="button">Upload Image</a></li>
+                      <li><a href="#" id="btnPersonalize" class="button">Personalize</a></li>
+                      <!--<li><a href="#" class="button">Free Drawing</a></li>-->
+                      <li><a href="#" id="btnSaveDesign" data-reveal-id="save-design-popup" class="button"> Save Design </a></li>
+                  </ul>
+              </div>
               <hr/>
           </div>
 
@@ -690,19 +689,22 @@
           <!--save design popup start-->
           <div id="save-design-popup" class="reveal-modal small" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 
+              <br/>
               <img src="">
+
               <div class="row">
+                  <br/>
                   <div class="large-4 columns">
                       <label for="fileName" class=" inline"><b>File Name: </b></label>
                   </div>
                   <div class="large-8 columns">
-                      <input id="fileName" type="text" class="radius" style="height: 32px;border: 1px solid darkgray;background: azure;color: dimgray;font-weight: bold; ">
+                      <input id="fileName" type="text" class="radius" style="height: 32px;border: 1px solid darkgray;color: dimgray;font-weight: bold;">
                   </div>
               </div>
 
               <div class="row">
                   <div class="large-4 columns">
-                      <label for="fileType" class=" inline"><b>Save as Type : </b></label>
+                      <label for="fileType" class=" inline"><b>Save as: </b></label>
                   </div>
                   <div class="large-8 columns">
                       <select id="fileType" class="radius" style="height: 32px;border: 1px solid darkgray;color: dimgray;">
@@ -714,8 +716,9 @@
                       </select>
                   </div>
               </div>
-              <input type="button" value=" save " class="save">
-              <input type="button" value="cancel" class="cancel">
+
+              <input type="button" value=" SAVE " id="btnSave" class="button tiny radius success" style=" margin-top: 0px; margin-left: 50%; height: 30px">
+              <input type="button" value="CANCEL" id="btnCancel" class="button tiny radius alert" style=" margin-top: 0px; margin-left: 2%;height: 30px">
               <a class="close-reveal-modal" aria-label="Close">&#215;</a>
           </div>
           <!--end of save design popup -->
@@ -725,8 +728,8 @@
           <div id="canvas-container" class="small-6 medium-6 large-6 columns" >
               <canvas id="canvas"></canvas>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <input type="button" value=" UNDO " onclick="TShirtDesignTool.undo()" class="button tiny radius alert" style=" margin-top: 10px; margin-left: 20%;">
-              <input type="button" value=" REDO " onclick="TShirtDesignTool.redo()" class="button tiny radius success" style=" margin-top: 10px; margin-left: 2%;">
+              <input type="button" value=" UNDO " id="undoBtn" class="button tiny radius info" style=" margin-top: 10px; margin-left: 20%; height: 30px">
+              <input type="button" value=" REDO " id="redoBtn" class="button tiny radius info" style=" margin-top: 10px; margin-left: 2%;height: 30px">
           </div>
 
           <!--TshirtImage div start-->
@@ -740,7 +743,6 @@
 
       </div>
        <!--end of second row-->
-
 
        <script src="js/vendor/modernizr.js"></script>
        <script src="js/vendor/jquery.js"  type="text/javascript" charset="utf-8"></script>
