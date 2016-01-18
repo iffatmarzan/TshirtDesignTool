@@ -2,6 +2,7 @@
  * Created by bs062 on 11/24/2015.
  */
 var tiles=[];
+
 var shirtCatalog = [
     {
         categoryName: 'T-Shirts',
