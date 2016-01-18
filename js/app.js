@@ -408,20 +408,20 @@ var TShirtDesignTool =
 
 }
     , drawText: function () {
-    var _canvas = window.canvas;
-    var Text = $('#text-panel textarea').val();
-    if (Text === "")
-        return;
-    var SampleText = new fabric.Text(Text, {
-        strokeWidth: 0,
-        fontSize: 30,
-        letterSpacing: 0
-    });
-    var left = _canvas.getWidth() / 2 - SampleText.getWidth() / 2;
-    var top = _canvas.getHeight() / 2 - SampleText.getHeight();
-    SampleText.set({'left': left, 'top': top});
-    window.canvas.add(SampleText).renderAll();
-    TShirtDesignTool.defaultEditorPanel(Text);
+        var _canvas = window.canvas;
+        var Text = $('#text-panel textarea').val();
+        if (Text === "")
+            return;
+        var SampleText = new fabric.Text(Text, {
+            strokeWidth: 0,
+            fontSize: 30,
+            letterSpacing: 0
+        });
+        var left = _canvas.getWidth() / 2 - SampleText.getWidth() / 2;
+        var top = _canvas.getHeight() / 2 - SampleText.getHeight();
+        SampleText.set({'left': left, 'top': top});
+        window.canvas.add(SampleText).renderAll();
+        TShirtDesignTool.defaultEditorPanel(Text);
 }
     , undo: function () {
     TShirtDesignTool.isUndoMode = false;
