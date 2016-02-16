@@ -20,7 +20,7 @@ fabric.util.object.extend(fabric.Object.prototype, {
         isVML() || this.transparentCorners || ctx.clearRect(left, top, size, size);
 
         var deleteIcon = new Image();
-        deleteIcon.src = 'img/delete.gif';
+        deleteIcon.src = 'img/delete.png';
 
         var scaleIcon = new Image();
         scaleIcon.src = 'img/scale.gif';

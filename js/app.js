@@ -3,7 +3,7 @@ var TShirtDesignTool =
     init: function () {
 
         TShirtDesignTool.canvasInit();
-    // All Event binding goes here
+        // All Event binding goes here
         $('#text-panel a').click(function (e) {
             TShirtDesignTool.drawText();
         });
@@ -177,9 +177,11 @@ var TShirtDesignTool =
         });
 
         $('#chooseTShirtPanel fieldset a').each(function () {
-            $(this).click(function (e) {
-                TShirtDesignTool.changeTShirtColor(e.target.title);
-            })
+            if( !$(this).hasClass("disable_a_href")){
+                $(this).click(function (e) {
+                    TShirtDesignTool.changeTShirtColor(e.target.title);
+                })
+            }
         });
 
         $('#addName,#addNumber,#nameInch,#numberInch').change(function (e) {
@@ -436,6 +438,7 @@ var TShirtDesignTool =
         var SampleText = new fabric.Text(Text, {
             strokeWidth: 0,
             fontSize: 30,
+            //textAlign: "center",
             letterSpacing: 0
         });
         var left = _canvas.getWidth() / 2 - SampleText.getWidth() / 2;
@@ -770,6 +773,7 @@ var TShirtDesignTool =
             var activeObject = TShirtDesignTool.getCanvasActiveObject();
             if (!activeObject)
                 return;
+            //console.log(activeObject);
             var arcSliderValue = parseInt($("#textArcSlider").slider("value"));
             var isSetArcToSimple = (arcSliderValue > -6 && arcSliderValue < 7) && activeObject.type === 'curvedText';
             var isSetSimpleToArc = (arcSliderValue < -5 || arcSliderValue > 6) && activeObject.type === 'text';
@@ -787,32 +791,72 @@ var TShirtDesignTool =
                     letterSpacing: activeObject.spacing + 9,
                     fill: activeObject.fill,
                     stroke: activeObject.stroke,
-                    strokeWidth: activeObject.strokeWidth
+                    strokeWidth: activeObject.strokeWidth,
+                    scaleX: activeObject.getScaleX(),
+                    scaleY: activeObject.getScaleY(),
+                    angle: activeObject.angle
                 });
                 window.canvas.remove(activeObject).add(SampleText).setActiveObject(SampleText).renderAll();
                 return;
             }
 
             if (isSetSimpleToArc) {
+
                 TShirtDesignTool.arcTextWidth = activeObject.width;
+                console.log(activeObject.originalState);
+                //debugger;
                 var curveText = new fabric.CurvedText(activeObject.text, {
-                    top: activeObject.top,
-                    left: activeObject.left,
+                    alignX: activeObject.alignX,
+                    alignY: activeObject.alignY,
+                    backgroundColor: activeObject.backgroundColor,
+                    clipTo: activeObject.clipTo,
                     fontFamily: activeObject.fontFamily,
+                    fontStyle: activeObject.fontStyle,
                     fontWeight: activeObject.fontWeight,
+                    fontSize: activeObject.fontSize,
+                    textAlign: 'center',
+                    textBackgroundColor: activeObject.textBackgroundColor,
                     textDecoration: activeObject.textDecoration,
+                    globalCompositeOperation: activeObject.globalCompositeOperation,
                     reverse: arcSliderValue > 0,
                     radius: activeObject.width * 1.5,
                     effect: 'arc',
-                    fontSize: activeObject.fontSize,
                     spacing: activeObject.letterSpacing - 9,
                     fill: activeObject.fill,
-                    textAlign: 'center',
+                    fillRule: activeObject.fillRule,
+                    flipX: activeObject.flipX,
+                    flipY: activeObject.flipY,
                     stroke: activeObject.stroke,
                     strokeWidth: activeObject.strokeWidth,
+                    //width: activeObject.width,
+                    //height: activeObject.height,
+                    top: activeObject.top,
+                    left: activeObject.left,
+                    lineHeight: activeObject.lineHeight,
+                    originX: activeObject.originX,
+                    originY: activeObject.originY,
+                    //scaleX: activeObject.getScaleX(),
+                    //scaleY: activeObject.getScaleY(),
+                    transformMatrix: activeObject.transformMatrix,
+                    visible: activeObject.visible,
                     angle: activeObject.angle
+                    //originalState: activeObject.originalState
                 });
-                window.canvas.remove(activeObject).add(curveText).setActiveObject(curveText);
+
+                //for(var property in activeObject.originalState ){
+                //    console.log(activeObject.originalState[property]);
+                //    curveText.property= activeObject.originalState[property];
+                //    debugger;
+                //
+                //}
+                //curveText.originalState= activeObject.originalState;
+                //console.log(curveText.originalState);
+
+                window.canvas.remove(activeObject).add(curveText).setActiveObject(curveText).renderAll();
+                TShirtDesignTool.getCanvasActiveObject().set({
+                    scaleX: 1.5,
+                    scaleY: 1.5
+                });
             }
             else {
                 // text is arc already. change the radius

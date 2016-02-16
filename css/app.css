@@ -43,6 +43,10 @@ fieldset {
     background-size: cover;
 }
 
+.disable_a_href{
+    pointer-events: none;
+}
+
 user agent stylesheetfieldset {
     display: block;
     -webkit-margin-start: 2px;
