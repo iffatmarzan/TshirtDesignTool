@@ -413,7 +413,7 @@
           <!--end of tshirt gallery pop-up panel-->
 
           <!--Add-text-panel start-->
-          <div id="text-panel" class="medium-4 large-4 columns">
+          <div id="text-panel" class="small-4 medium-4 large-4 columns">
               <div class="panel" >
                    <h5>Add Text:</h5>
                    <form class="content">
@@ -427,7 +427,7 @@
           <!--Add-text-panel start-->
 
           <!--Text editor-panel start-->
-          <div id="editor-panel" class="medium-4 large-4 columns">
+          <div id="editor-panel" class="small-4 medium-4 large-4 columns">
               <!--Default display none-->
                <h5 class="header">Text Properties</h5>
                 <div class="editor-panel-tools">
@@ -530,7 +530,7 @@
           <!--end of Text editor-panel -->
 
           <!--clipart-panel start-->
-          <div id="clip-art-panel" class="medium-4 large-4 columns" >
+          <div id="clip-art-panel" class="small-4 medium-4 large-4 columns" >
             <!--Default display none-->
                 <h5 class="header">Clipart</h5>
                 <div class="clip-arts-holder">
@@ -550,7 +550,7 @@
           <!--clipart-panel end-->
 
           <!--clipart editor panel start-->
-          <div id="edit-clipart-panel" class="medium-4 large-4 columns">
+          <div id="edit-clipart-panel" class="small-4 medium-4 large-4 columns">
               <h5 class="header"> customize clipart </h5>
               <div class="editor-panel-tools">
                   <div class="row">
@@ -586,8 +586,23 @@
           </div>
           <!--clipart editor panel end-->
 
+          <!--upload-image panel start-->
+          <div id="upload-image-panel" class="small-4 medium-4 large-4 columns" >
+              <!--Default display none-->
+              <h5 class="header"> Upload Image </h5>
+              <div>
+                  <span>Click Here to Upload</span>
+                  <input id="upload-image" class="input-file" type="file">
+              </div>
+              <div>
+                  <span>Import Design</span>
+                  <input id="import-design" class="input-file" type="file">
+              </div>
+          </div>
+          <!--upload-image panel end-->
+
           <!--personalization panel start-->
-          <div id="personalization-panel" class="medium-4 large-4 columns" >
+          <div id="personalization-panel" class="small-4 medium-4 large-4 columns" >
               <h5 class="header"> Team Name & Numbers </h5>
               <img src="img/personalization.jpg" alt="Jersy">
 
@@ -680,21 +695,6 @@
           </div>
           <!--end of personalization popup panel-->
 
-          <!--upload-image panel start-->
-          <div id="upload-image-panel" class="medium-4 large-4 columns" >
-              <!--Default display none-->
-              <h5 class="header"> Upload Image </h5>
-              <div>
-                  <span>Click Here to Upload</span>
-                  <input id="upload-image" class="input-file" type="file">
-              </div>
-              <div>
-                  <span>Import Design</span>
-                  <input id="import-design" class="input-file" type="file">
-              </div>
-          </div>
-          <!--upload-image panel end-->
-
           <!--save design popup start-->
           <div id="save-design-popup" class="reveal-modal small" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 
@@ -733,22 +733,23 @@
           <!--end of save design popup -->
 
 
-          <!--Canvas div-->
+          <!--canvas container div-->
           <div id="canvas-container" class="small-6 medium-6 large-6 columns" >
               <canvas id="canvas"></canvas>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <input type="button" value=" UNDO " id="undoBtn" class="button tiny radius info" style=" margin-top: 10px; margin-left: 20%; height: 30px">
               <input type="button" value=" REDO " id="redoBtn" class="button tiny radius info" style=" margin-top: 10px; margin-left: 2%;height: 30px">
           </div>
+          <!--end of canvas container div-->
 
-          <!--TshirtImage div start-->
+          <!--rightmost thumbnail image div start-->
           <div class="small-2 medium-2 large-2 columns"  >
               <img class="ThumbImg" src="img/Thumb-front.png" alt="F"> <br>
               <img class="ThumbImg" src="img/Thumb-back.png" alt="B" > <br>
               <img class="ThumbImg" src="img/Thumb-left.png" alt="L" > <br>
               <img class="ThumbImg" src="img/Thumb-right.png" alt="R">
           </div>
-          <!--TshirtImage div end-->
+          <!--rightmost thumbnail image div end-->
 
       </div>
        <!--end of second row-->
@@ -768,6 +769,12 @@
        <script src="js/text.classExtend.js"></script>
        <script src="js/curveText.class.js"></script>
        <script src="js/app.js"></script>
+       <script src="js/panel.chooseShirt.js"></script>
+       <script src="js/panel.Text.js"></script>
+       <script src="js/panel.clipart.js"></script>
+       <script src="js/panel.imageUpload.js"></script>
+       <script src="js/panel.personalization.js"></script>
+       <script src="js/panel.saveDesign.js"></script>
        <script src="js/app-data.js"></script>
 
     </body>
