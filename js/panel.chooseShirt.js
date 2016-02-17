@@ -80,3 +80,9 @@ TShirtDesignTool.changeTShirtSide = function (sideName) {
 
     TShirtDesignTool.selectedTShirt.side = sideName;
 };
+
+TShirtDesignTool.showTShirtCollection= function () {
+    // not implemented yet
+    // will show the collection of shirts
+
+};

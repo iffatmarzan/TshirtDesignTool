@@ -1,13 +1,13 @@
-#edit-clipart-panel{
-    min-height:100px;
+#edit-clipart-panel {
+    min-height: 100px;
     margin: 0px;
-    padding:0px;
+    padding: 0px;
     border: 1px solid;
-    display:none;
-    border-color:rgba(0,0,255, 0.3);
+    display: none;
+    border-color: rgba(0, 0, 255, 0.3);
     border-radius: 2px;
 }
 
-.editor-panel-tools{
+.editor-panel-tools {
     padding: 15px;
 }

@@ -1,8 +1,4 @@
-#personalization-popup{
-
-}
-
-#personalization-popup h5{
+#personalization-popup h5 {
     font-weight: bold;
     padding: 10px 0px 10px 10px;
     margin: 0px;
@@ -10,8 +6,9 @@
     color: darkslategray;
 }
 
-#insertRow{
-    height: 30px; width: auto;
+#insertRow {
+    height: 30px;
+    width: auto;
     border: 1px solid dimgray;
     color: black;
     background-color: ghostwhite;
@@ -20,7 +17,8 @@
     margin: auto;
     float: right;
 }
-#saveData{
+
+#saveData {
     margin-left: 40%;
     display: block;
     width: 100px;

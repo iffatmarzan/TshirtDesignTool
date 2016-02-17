@@ -1,20 +1,22 @@
-#text-panel{
+#text-panel {
     /*border:1px solid darkgray;*/
-    min-height:100px;
+    min-height: 100px;
     margin: 0px;
     padding: 0px;
     display: none;
 }
-#text-panel fieldset{
+
+#text-panel fieldset {
     text-align: center;
-    height:45px;
-}
-#text-panel a{
-    height:40px;
+    height: 45px;
 }
 
-#text-panel h5{
+#text-panel a {
+    height: 40px;
+}
+
+#text-panel h5 {
     padding: 10px;
-    height:30px;
+    height: 30px;
     font-weight: bold;
 }

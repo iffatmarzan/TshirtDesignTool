@@ -320,6 +320,8 @@ var TShirtDesignTool =
 
 }
     , canvasInit: function () {
+
+    // Initialization of fabric canvas
         window.canvas = new fabric.Canvas('canvas');
         canvas.setHeight($('#canvas-container').height());
         canvas.setWidth($('#canvas-container').width());
@@ -423,6 +425,8 @@ var TShirtDesignTool =
         }
 }
     , boundObjectOnCanvas: function () {
+
+    // feature is currently unused
         window.canvas.on('object:moving', function (e) {
             var obj = e.target;
             // if object is too big ignore
@@ -444,6 +448,7 @@ var TShirtDesignTool =
 
 }
     , undo: function () {
+
         TShirtDesignTool.isUndoMode = false;
         if (TShirtDesignTool.undoObjects.length > 0) {
             var object = TShirtDesignTool.undoObjects.pop();
@@ -482,185 +487,14 @@ var TShirtDesignTool =
     //TShirtDesignTool.isUndoMode=true;
 }
     , showPanel: function (panelToshow) {
-    TShirtDesignTool.panels.forEach(function (panel) {
-        panel === panelToshow ? $('#' + panel).fadeIn(500) : $('#' + panel).hide();
-    });
+
+        TShirtDesignTool.panels.forEach(function (panel) {
+            panel === panelToshow ? $('#' + panel).fadeIn(500) : $('#' + panel).hide();
+        });
 }
     , getCanvasActiveObject: function () {
-    return window.canvas.getActiveObject() || window.canvas.item(0);
-    //throw new Error('This is not an error. This is just to abort javascript');
+        return window.canvas.getActiveObject() || window.canvas.item(0);
 }
-    , defaultEditorPanel: function (Text) {
-    TShirtDesignTool.showPanel('editor-panel');
-    textArea.value = Text;
-    $('#font-family .dd-selected').get(0).innerHTML = 'Select font family';
-    $('#font-style .dd-selected').get(0).innerHTML = 'Select font style';
-    textSpacing.value = 0;
-    fontSizing.value = 30;
-    if (textOutline.checked)
-        textOutline.checked = false;
-    if (textCircular.checked)
-        textCircular.checked = false;
-    $('#textArcSlider').slider({disabled: false});
-    $('#textArcSlider').slider('value', 0);
-    $('#text-color').spectrum("set", '#000');
-    $("#outline-properties").hide();
-}
-    , showTShirtCollection: function () {
-
-}
-    , textEditorPanel: function () {
-    var selectedObject = window.canvas.getActiveObject();
-    if (!selectedObject)
-        return;
-    TShirtDesignTool.showPanel('editor-panel');
-    textArea.value = selectedObject.text;
-    $('#font-family .dd-option-value').each(function () {
-        if ($(this).val() == selectedObject.fontFamily) {
-            $($('a.dd-selected')[0]).text(selectedObject.fontFamily)
-        }
-    });
-    if (selectedObject.letterSpacing !== undefined)
-        textSpacing.value = selectedObject.letterSpacing;
-    if (selectedObject.spacing !== undefined)
-        textSpacing.value = (selectedObject.spacing );
-    fontSizing.value = selectedObject.fontSize;
-
-    $('#text-color').spectrum("set", selectedObject.fill);
-
-    $('#font-style .dd-option-text').each(function () {
-        if ((this.innerHTML == selectedObject.fontStyle) || ( this.innerHTML == selectedObject.fontWeight ) || ( this.innerHTML == selectedObject.textDecoration)) {
-            if ($(this).closest('a').children().length === 3) {
-                $(this).closest('a').find('input').after('<img class="dd-option-image" src="img/check-mark.png">');
-                //console.log($(this).closest('a').get(0).innerHTML);
-            }
-        }
-        else {
-            if ($(this).closest('a').children().length === 4) {
-                $(this).closest('a').find('img').remove();
-                //console.log($(this).closest('a').get(0).innerHTML);
-            }
-        }
-
-    });
-    if (selectedObject.effect == 'circular') {
-        if (!textCircular.checked)
-            textCircular.checked = true;
-        $('#textArcSlider').slider({disabled: true});
-    }
-    if (selectedObject.effect == 'arc') {
-        if (selectedObject.spacing !== undefined)
-            textSpacing.value = (selectedObject.spacing + 9);
-        if (textCircular.checked)
-            textCircular.checked = false;
-        $('#textArcSlider').slider({disabled: false});
-        //console.log(selectedObject.reverse)
-        var multiplier = selectedObject.reverse ? 1 : -1;
-        var sliderValue = 150 - ((100 * selectedObject.radius) / TShirtDesignTool.arcTextWidth);
-        //console.log(sliderValue)
-        $('#textArcSlider').slider('value', multiplier * sliderValue);
-    }
-    if (selectedObject.type === 'text') {
-        if (textCircular.checked)
-            textCircular.checked = false;
-        $('#textArcSlider').slider({disabled: false});
-        $('#textArcSlider').slider('value', 0);
-    }
-
-    if (selectedObject.stroke) {
-        textOutline.checked = true;
-        //console.log(selectedObject.stroke)
-        //console.log(selectedObject.strokeWidth)
-        if ($("#outline-properties").get(0).style['display'] === 'none')
-            $("#outline-properties").fadeIn(100);
-        $('#text-outline-color').spectrum("set", selectedObject.stroke);
-        $('#text-outline-slider .ui-slider-range').css('background', selectedObject.stroke);
-        $('#text-outline-slider').slider('value', selectedObject.strokeWidth * 100);
-    }
-    else {
-        textOutline.checked = false;
-        $("#outline-properties").hide();
-    }
-
-    //if(selectedObject.strokeWidth)
-    //     $('#text-outline-slider').slider('value', selectedObject.strokeWidth*100);
-
-}
-    , clipartEditorPanel: function () {
-
-        TShirtDesignTool.showPanel('edit-clipart-panel');
-        var activeObject = window.canvas.getActiveObject();
-        //console.log(activeObject.paths[pathList.options.selectedIndex].fill)
-        $('#svgFill').spectrum("set", activeObject.paths[pathList.options.selectedIndex].fill);
-        //$('.k-selected-color').get(2).style['background-color'] = activeObject.paths[pathList.options.selectedIndex];
-        if (activeObject.angle) {
-            $('#svgAngle').slider('value', activeObject.angle);
-        }
-        if (activeObject.opacity)
-            $('#svgOpacity').slider('value', activeObject.opacity * 100);
-}
-    , changeTshirtSideInPersonalizationMode: function (sideName) {
-    //alert(sideName)
-    window.canvas.clear();
-    var imageSrc = '/TshirtDesignTool/img/' + TShirtDesignTool.selectedTShirt.color + '-1-' + sideName + '.jpg';
-    var img = new Image();
-    img.src = imageSrc;
-    img.alt = sideName;
-    img.onload = function () {
-        window.canvas.setBackgroundImage(img.src, window.canvas.renderAll.bind(canvas), {
-            originX: 'left',
-            originY: 'top',
-            left: 0,
-            top: 0,
-            width: canvas.getWidth(),
-            height: canvas.getHeight()
-        });
-    };
-
-    if (sideName === nameSide.value) {
-        $(TShirtDesignTool.personalizeObjects).each(function () {
-            if (this.id === 'customName') {
-                window.canvas.add(this).renderAll();
-            }
-        });
-    }
-
-    if (sideName === numberSide.value) {
-        $(TShirtDesignTool.personalizeObjects).each(function () {
-            if (this.id === 'customNumber') {
-                window.canvas.add(this).renderAll();
-            }
-        });
-    }
-
-}
-    , showPersonalizationPanel: function () {
-    TShirtDesignTool.showPanel('personalization-panel');
-    TShirtDesignTool.isPersonalizationMode = true;
-}
-    , showPersonalizationPopup: function () {
-    $('#personalizeDataTable tbody').html('');
-    var row = '<tr>' +
-        '<td>1</td>' +
-        '<td><input type="text" disabled placeholder="Enter Name"></td>' +
-        '<td><input type="text" disabled placeholder="Enter #"></td>' +
-        '<td>' +
-        '<select>' +
-        '<option selected disabled>select product size</option>' +
-        '<option>S(small) White Glidan cotton </option>' +
-        '<option>M(medium) White Glidan cotton </option>' +
-        '<option>L(large) White Glidan cotton </option>' +
-        '<option>XL(extra-large) White Glidan cotton </option>' +
-        '<option>2XL(double-extra-large) White Glidan cotton </option>' +
-        '</select>' +
-        '</td>' +
-        '</tr>';
-    $('#personalizeDataTable tbody').append(row);
-    $('#personalizeDataTable tbody tr:nth-child(1) td:nth-child(2) input').prop('disabled', !addName.checked);
-    $('#personalizeDataTable tbody tr:nth-child(1) td:nth-child(3) input').prop('disabled', !addNumber.checked);
-
-}
-
 };
 
 
@@ -699,12 +533,5 @@ TShirtDesignTool.tempDesignData=[
 TShirtDesignTool.undoObjects= [];
 TShirtDesignTool.redoObjects= [];
 TShirtDesignTool.isUndoMode= true;
-TShirtDesignTool.arcTextWidth= 0;
 TShirtDesignTool.isPersonalizationMode=false;
-TShirtDesignTool.personalizeJsonData= {
-    frontTemplate: null,
-        backTemplate: null,
-        memberList: []
-};
-TShirtDesignTool.personalizeObjects= [];
 TShirtDesignTool.lastSelectedObject=null;

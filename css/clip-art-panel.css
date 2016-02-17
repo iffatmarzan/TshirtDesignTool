@@ -1,25 +1,22 @@
-#clip-art-panel{
-    border:1px solid;
-    min-height:300px;
+#clip-art-panel {
+    border: 1px solid;
+    min-height: 300px;
     margin: 0px;
     padding: 0px;
     display: none;
-    border-color:rgba(0,0,255, 0.3);
+    border-color: rgba(0, 0, 255, 0.3);
     border-radius: 2px;
 }
-
-.clipartImage{
-    padding:10px;
+.clipartImage {
+    padding: 10px;
 }
-
-.caption{
+.caption {
     display: block;
     text-align: center;
 }
-
-.clip-arts-holder{
+.clip-arts-holder {
     padding: 20px;
 }
-.clip-arts-holder img{
+.clip-arts-holder img {
     height: 90px;
 }

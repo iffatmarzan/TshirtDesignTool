@@ -1,28 +1,28 @@
-#editor-panel{
-    min-height:300px;
+#editor-panel {
+    min-height: 300px;
     margin: 0px;
-    padding:0px;
+    padding: 0px;
     border: 1px solid;
-    border-color:rgba(0,0,255, 0.3);
+    border-color: rgba(0, 0, 255, 0.3);
     border-radius: 2px;
-    display:none;
+    display: none;
 }
 
-.editor-panel-tools{
+.editor-panel-tools {
     padding: 15px;
 }
 
-
-#editor-panel input[type=color]{
+#editor-panel input[type=color] {
     /*display:inline-block;
     width:30px;*/
     cursor: pointer;
 }
 
-#editor-panel select{
+#editor-panel select {
     cursor: pointer;
 }
-#editor-panel input[type=color]{
+
+#editor-panel input[type=color] {
     display: block;
     text-align: center;
     vertical-align: middle;

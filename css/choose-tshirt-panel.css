@@ -8,16 +8,6 @@
     /*display: none;*/
 }
 
-
-.header{
-    font-weight: bold;
-    background-color: #008CBA;
-    padding: 10px 0px 10px 10px;
-    margin: 0px;
-    border-bottom: 1px solid darkgray;
-    color: white;
-
-}
 .selected-shirt{
     margin: 10px 0px 0px -10px;
     border: 1px solid #b7e1f0;
@@ -68,4 +58,7 @@
     -webkit-box-shadow: 0 0 3px #00a2ea, 0 0 3px #00a2ea;
     -moz-box-shadow: 0 0 3px #00a2ea, 0 0 3px #00a2ea;
     box-shadow: 0 0 3px #00a2ea, 0 0 3px #00a2ea;
+}
+.disable_a_href{
+    pointer-events: none;
 }

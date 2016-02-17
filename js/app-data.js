@@ -239,78 +239,78 @@ function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
     document.body.removeChild(link);
 }
 
-$(document).ready(function () {
-
-    $('.main em a').click(function (e) {
-        var i;
-        tiles=[];
-        switch (e.currentTarget.innerText) {
-            case 'T-Shirts':
-                i = 0;
-                break;
-            case 'Ladies & Juniors':
-                i = 1;
-                break;
-            case 'Athletics':
-                i = 2;
-                break;
-
-        }
-        $(shirtCatalog[i].subCategory).each(function () {
-            $(this.items).each(function () {
-                tiles.push(this);
-            })
-        });
-
-    });
-
-    $('.main li a').click(function(e){
-        console.log( $(e.currentTarget.parentNode).closest('em'))
-        console.log(e)
-    });
-
-    $(shirtCatalog[0].subCategory).each(function () {
-        $(this.items).each(function () {
-            tiles.push(this);
-        })
-    });
-
-    //console.log(tiles)
-    //tiles.forEach(function(){
-    //    var tile='<div class="productListItem">'+
-    //             '<h5>'+this.name+'</h5>'+
-    //             '<p class="productThumbnail">'+
-    //             '<a href="" class="displayItemDetails">'+
-    //             '<img alt='+this.name+' class="displayItemDetails" height="120" src="img/tshirt/5.jpg" width="125"></a>' +
-    //             '</p>'+
-    //
-    //    <div class="productDetails">
-    //        <dl>
-    //        <dt>Sizes:</dt>
-    //    <dd>YXS-3XL</dd>
-    //
-    //    <dt>Colors Available:</dt>
-    //    <dd>21</dd>
-    //
-    //    <dt>Min Qty:</dt>
-    //    <dd>6</dd>
-    //
-    //    <dt><a href="" class="price-help"
-    //    data-popup-name="CI_PriceGuide"
-    //    data-popup-options="width=390,height=300,scrollbars=yes,toolbar=yes,menubar=no,location=yes,resizable=yes"
-    //    rel="popup"><b>Price Guide:</b></a></dt>
-    //    <dd>$ (out of $$$)</dd>
-    //    </dl>
-    //    <a href="" class="displayItemDetails"></a>
-    //        <a href=""
-    //    class="sg-btn sg-btn-size-sm sg-btn-text-only sg-btn-color-secondary displayItemDetails"><span
-    //    class="sg-btn-text">Details</span></a>
-    //    <a href=""
-    //    class="sg-btn sg-btn-size-sm sg-btn-text-only sg-btn-color-default displayItemDetails"><span
-    //    class="sg-btn-text">Pick a Color</span></a>
-    //    </div>
-    //        <!--/productDetails-->
-    //    </div>
-    //})
-
-});
+//$(document).ready(function () {
+//
+//    $('.main em a').click(function (e) {
+//        var i;
+//        tiles=[];
+//        switch (e.currentTarget.innerText) {
+//            case 'T-Shirts':
+//                i = 0;
+//                break;
+//            case 'Ladies & Juniors':
+//                i = 1;
+//                break;
+//            case 'Athletics':
+//                i = 2;
+//                break;
+//
+//        }
+//        $(shirtCatalog[i].subCategory).each(function () {
+//            $(this.items).each(function () {
+//                tiles.push(this);
+//            })
+//        });
+//
+//    });
+//
+//    $('.main li a').click(function(e){
+//        console.log( $(e.currentTarget.parentNode).closest('em'))
+//        console.log(e)
+//    });
+//
+//    $(shirtCatalog[0].subCategory).each(function () {
+//        $(this.items).each(function () {
+//            tiles.push(this);
+//        })
+//    });
+//
+//    //console.log(tiles)
+//    //tiles.forEach(function(){
+//    //    var tile='<div class="productListItem">'+
+//    //             '<h5>'+this.name+'</h5>'+
+//    //             '<p class="productThumbnail">'+
+//    //             '<a href="" class="displayItemDetails">'+
+//    //             '<img alt='+this.name+' class="displayItemDetails" height="120" src="img/tshirt/5.jpg" width="125"></a>' +
+//    //             '</p>'+
+//    //
+//    //    <div class="productDetails">
+//    //        <dl>
+//    //        <dt>Sizes:</dt>
+//    //    <dd>YXS-3XL</dd>
+//    //
+//    //    <dt>Colors Available:</dt>
+//    //    <dd>21</dd>
+//    //
+//    //    <dt>Min Qty:</dt>
+//    //    <dd>6</dd>
+//    //
+//    //    <dt><a href="" class="price-help"
+//    //    data-popup-name="CI_PriceGuide"
+//    //    data-popup-options="width=390,height=300,scrollbars=yes,toolbar=yes,menubar=no,location=yes,resizable=yes"
+//    //    rel="popup"><b>Price Guide:</b></a></dt>
+//    //    <dd>$ (out of $$$)</dd>
+//    //    </dl>
+//    //    <a href="" class="displayItemDetails"></a>
+//    //        <a href=""
+//    //    class="sg-btn sg-btn-size-sm sg-btn-text-only sg-btn-color-secondary displayItemDetails"><span
+//    //    class="sg-btn-text">Details</span></a>
+//    //    <a href=""
+//    //    class="sg-btn sg-btn-size-sm sg-btn-text-only sg-btn-color-default displayItemDetails"><span
+//    //    class="sg-btn-text">Pick a Color</span></a>
+//    //    </div>
+//    //        <!--/productDetails-->
+//    //    </div>
+//    //})
+//
+//});

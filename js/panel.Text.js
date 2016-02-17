@@ -20,6 +20,103 @@ TShirtDesignTool.drawText = function () {
     TShirtDesignTool.defaultEditorPanel(Text);
 };
 
+TShirtDesignTool.defaultEditorPanel = function (Text) {
+
+    TShirtDesignTool.showPanel('editor-panel');
+    textArea.value = Text;
+    $('#font-family .dd-selected').get(0).innerHTML = 'Select font family';
+    $('#font-style .dd-selected').get(0).innerHTML = 'Select font style';
+    textSpacing.value = 0;
+    fontSizing.value = 30;
+    if (textOutline.checked)
+        textOutline.checked = false;
+    if (textCircular.checked)
+        textCircular.checked = false;
+    $('#textArcSlider').slider({disabled: false});
+    $('#textArcSlider').slider('value', 0);
+    $('#text-color').spectrum("set", '#000');
+    $("#outline-properties").hide();
+};
+
+TShirtDesignTool.textEditorPanel = function () {
+
+        var selectedObject = window.canvas.getActiveObject();
+        if (!selectedObject)
+            return;
+        TShirtDesignTool.showPanel('editor-panel');
+        textArea.value = selectedObject.text;
+        $('#font-family .dd-option-value').each(function () {
+            if ($(this).val() == selectedObject.fontFamily) {
+                $($('a.dd-selected')[0]).text(selectedObject.fontFamily)
+            }
+        });
+        if (selectedObject.letterSpacing !== undefined)
+            textSpacing.value = selectedObject.letterSpacing;
+        if (selectedObject.spacing !== undefined)
+            textSpacing.value = (selectedObject.spacing );
+        fontSizing.value = selectedObject.fontSize;
+
+        $('#text-color').spectrum("set", selectedObject.fill);
+
+        $('#font-style .dd-option-text').each(function () {
+            if ((this.innerHTML == selectedObject.fontStyle) || ( this.innerHTML == selectedObject.fontWeight ) || ( this.innerHTML == selectedObject.textDecoration)) {
+                if ($(this).closest('a').children().length === 3) {
+                    $(this).closest('a').find('input').after('<img class="dd-option-image" src="img/check-mark.png">');
+                    //console.log($(this).closest('a').get(0).innerHTML);
+                }
+            }
+            else {
+                if ($(this).closest('a').children().length === 4) {
+                    $(this).closest('a').find('img').remove();
+                    //console.log($(this).closest('a').get(0).innerHTML);
+                }
+            }
+
+        });
+        if (selectedObject.effect == 'circular') {
+            if (!textCircular.checked)
+                textCircular.checked = true;
+            $('#textArcSlider').slider({disabled: true});
+        }
+        if (selectedObject.effect == 'arc') {
+            if (selectedObject.spacing !== undefined)
+                textSpacing.value = (selectedObject.spacing + 9);
+            if (textCircular.checked)
+                textCircular.checked = false;
+            $('#textArcSlider').slider({disabled: false});
+            //console.log(selectedObject.reverse)
+            var multiplier = selectedObject.reverse ? 1 : -1;
+            var sliderValue = 150 - ((100 * selectedObject.radius) / TShirtDesignTool.arcTextWidth);
+            //console.log(sliderValue)
+            $('#textArcSlider').slider('value', multiplier * sliderValue);
+        }
+        if (selectedObject.type === 'text') {
+            if (textCircular.checked)
+                textCircular.checked = false;
+            $('#textArcSlider').slider({disabled: false});
+            $('#textArcSlider').slider('value', 0);
+        }
+
+        if (selectedObject.stroke) {
+            textOutline.checked = true;
+            //console.log(selectedObject.stroke)
+            //console.log(selectedObject.strokeWidth)
+            if ($("#outline-properties").get(0).style['display'] === 'none')
+                $("#outline-properties").fadeIn(100);
+            $('#text-outline-color').spectrum("set", selectedObject.stroke);
+            $('#text-outline-slider .ui-slider-range').css('background', selectedObject.stroke);
+            $('#text-outline-slider').slider('value', selectedObject.strokeWidth * 100);
+        }
+        else {
+            textOutline.checked = false;
+            $("#outline-properties").hide();
+        }
+
+        //if(selectedObject.strokeWidth)
+        //     $('#text-outline-slider').slider('value', selectedObject.strokeWidth*100);
+
+};
+
 TShirtDesignTool.updateText = function (text) {
     if (window.canvas.getActiveObject()) {
         window.canvas.getActiveObject().setText(text);
@@ -322,8 +419,8 @@ TShirtDesignTool.setOutlineWidth = function () {
     window.canvas.renderAll();
 };
 
- // text font data
-TShirtDesignTool.fontStyleData=[
+// text font data
+TShirtDesignTool.fontStyleData = [
     {
         text: "bold",
         value: 1,
@@ -354,7 +451,7 @@ TShirtDesignTool.fontStyleData=[
     }
 ];
 
-TShirtDesignTool.fontFamilyData=[
+TShirtDesignTool.fontFamilyData = [
     {
         text: "Standard",
         value: 1,
@@ -423,3 +520,5 @@ TShirtDesignTool.fontFamilyData=[
     //        {text: "SiyamRupali", value: "SiyamRupali", imageSrc: "img/fonts/sans-serif.png"}]
     //}
 ];
+
+TShirtDesignTool.arcTextWidth= 0;

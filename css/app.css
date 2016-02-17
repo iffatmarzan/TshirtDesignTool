@@ -43,10 +43,6 @@ fieldset {
     background-size: cover;
 }
 
-.disable_a_href{
-    pointer-events: none;
-}
-
 user agent stylesheetfieldset {
     display: block;
     -webkit-margin-start: 2px;
@@ -112,6 +108,16 @@ user agent stylesheetfieldset {
 .row.full-width {
     width: 100%;
     max-width: 100%;
+}
+
+.header{
+    font-weight: bold;
+    background-color: #008CBA;
+    padding: 10px 0px 10px 10px;
+    margin: 0px;
+    border-bottom: 1px solid darkgray;
+    color: white;
+
 }
 
 #text-arc-slider .ui-slider-range { background: #729fcf; }

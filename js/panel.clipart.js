@@ -2,7 +2,7 @@
  * Created by bs062 on 2/16/2016.
  */
 
-TShirtDesignTool.addClipartToCanvas= function (imageSrc) {
+TShirtDesignTool.addClipartToCanvas = function (imageSrc) {
     fabric.loadSVGFromURL(imageSrc, function (objects, options) {
         var _canvas = window.canvas;
         var obj = fabric.util.groupSVGElements(objects, options);
@@ -17,7 +17,20 @@ TShirtDesignTool.addClipartToCanvas= function (imageSrc) {
 
 };
 
-TShirtDesignTool.setSvgPathColor= function (fillColor) {
+TShirtDesignTool.clipartEditorPanel = function () {
+    TShirtDesignTool.showPanel('edit-clipart-panel');
+    var activeObject = window.canvas.getActiveObject();
+    //console.log(activeObject.paths[pathList.options.selectedIndex].fill)
+    $('#svgFill').spectrum("set", activeObject.paths[pathList.options.selectedIndex].fill);
+    //$('.k-selected-color').get(2).style['background-color'] = activeObject.paths[pathList.options.selectedIndex];
+    if (activeObject.angle) {
+        $('#svgAngle').slider('value', activeObject.angle);
+    }
+    if (activeObject.opacity)
+        $('#svgOpacity').slider('value', activeObject.opacity * 100);
+};
+
+TShirtDesignTool.setSvgPathColor = function (fillColor) {
     var activeObject = window.canvas.getActiveObject();
     if (!activeObject)
         return;
@@ -28,14 +41,14 @@ TShirtDesignTool.setSvgPathColor= function (fillColor) {
     window.canvas.renderAll();
 };
 
-TShirtDesignTool.svgPathChange= function () {
+TShirtDesignTool.svgPathChange = function () {
     var activeObject = window.canvas.getActiveObject();
     if (!activeObject)
         return;
     $('#svgFill').spectrum("set", activeObject.paths[pathList.options.selectedIndex].fill);
 };
 
-TShirtDesignTool.setSvgStroke= function (stroke) {
+TShirtDesignTool.setSvgStroke = function (stroke) {
     var activeObject = window.canvas.getActiveObject();
     if (!activeObject)
         return;
@@ -45,7 +58,7 @@ TShirtDesignTool.setSvgStroke= function (stroke) {
 
 };
 
-TShirtDesignTool.setSvgAngle= function () {
+TShirtDesignTool.setSvgAngle = function () {
     var activeObject = window.canvas.getActiveObject();
     if (!activeObject)
         return;
@@ -53,7 +66,7 @@ TShirtDesignTool.setSvgAngle= function () {
     window.canvas.renderAll();
 };
 
-TShirtDesignTool.setSvgOpacity= function () {
+TShirtDesignTool.setSvgOpacity = function () {
     var activeObject = window.canvas.getActiveObject();
     if (!activeObject)
         return;
