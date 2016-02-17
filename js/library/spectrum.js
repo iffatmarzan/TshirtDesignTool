@@ -7,7 +7,7 @@
     "use strict";
 
     if (typeof define === 'function' && define.amd) { // AMD
-        define(['jquery'], factory);
+        define(['jquery.blockUI.js'], factory);
     }
     else if (typeof exports == "object" && typeof module == "object") { // CommonJS
         module.exports = factory;

@@ -2,11 +2,6 @@
  * Created by bs062 on 2/16/2016.
  */
 
-TShirtDesignTool.showSaveDesignPanel = function () {
-    TShirtDesignTool.isPersonalizationMode = false;
-    $('#save-design-popup img').attr('src', window.canvas.toDataURL("image/png"));
-};
-
 TShirtDesignTool.saveDesign = function () {
     if (!fileName.value) {
         fileName.placeholder = '* Required.';
