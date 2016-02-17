@@ -1,22 +1,16 @@
 #upload-image-panel
 {
-    border:1px solid rgba(100,100,100,.4);
-    min-height:200px;
+    border:1px solid;
+    min-height:250px;
     margin: 0px;
     padding: 0px;
     display: none;
+    border-color:rgba(0,0,255, 0.3);
+    border-radius: 2px;
 
 }
 
-#upload-image-panel h6
-{
-    font-weight: bold;
-    background-color: whitesmoke;
-    padding: 10px 0px 10px 10px;
-    margin: 0px;
-    border-bottom: 1px solid lightgrey;
-    color: darkslategray;
-}
+
 
 #upload-image-panel div
 {

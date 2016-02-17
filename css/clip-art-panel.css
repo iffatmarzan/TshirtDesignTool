@@ -1,18 +1,11 @@
 #clip-art-panel{
-    border:1px solid darkgray;
+    border:1px solid;
     min-height:300px;
     margin: 0px;
     padding: 0px;
     display: none;
-}
-
-#clip-art-panel h6{
-    font-weight: bold;
-    background-color: whitesmoke;
-    padding: 10px 0px 10px 10px;
-    margin: 0px;
-    border-bottom: 1px solid darkgray;
-    color: darkslategray;
+    border-color:rgba(0,0,255, 0.3);
+    border-radius: 2px;
 }
 
 .clipartImage{

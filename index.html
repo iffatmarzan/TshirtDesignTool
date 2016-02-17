@@ -5,12 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TShirtDesign | Welcome</title>
       <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-      <!--<link href="http://kendo.cdn.telerik.com/2014.2.716/styles/kendo.common.min.css" rel="stylesheet" />-->
-      <!--<link href="http://kendo.cdn.telerik.com/2014.2.716/styles/kendo.default.min.css" rel="stylesheet" />-->
-      <link rel="stylesheet" href="css/spectrum.css">
-      <!--<link rel="stylesheet" href="css/kendo.common.min.css"  />-->
-      <!--<link rel="stylesheet" href="css/kendo.default.min.css"  />-->
-      <link rel="stylesheet" href="css/foundation.min.css" />
+      <link rel="stylesheet" href="css/library/spectrum.css">
+      <link rel="stylesheet" href="css/library/foundation.min.css" />
       <link rel="stylesheet" href="css/app.css" />
       <link rel="stylesheet" href="css/add-text-panel.css">
       <link rel="stylesheet" href="css/text-editor-panel.css">
@@ -20,7 +16,6 @@
       <link rel="stylesheet" href="css/edit-clipart-panel.css">
       <link rel="stylesheet" href="css/choose-tshirt-panel.css">
       <link rel="stylesheet" href="css/tshirt-gallery-popup.css">
-      <!--<link rel="stylesheet" href="css/test1.css">-->
       <link rel="stylesheet" href="css/personalization-panel.css">
       <link rel="stylesheet" href="css/personalization-popup.css">
       <link rel="stylesheet" href="fonts/font.css" />
@@ -30,20 +25,18 @@
 
        <!--start of First Row Nav bar-->
       <div class="row">
-          <div class="large-12 columns">
-              <div class="nav-bar left">
-                  <ul id="nav-bar-list" class="button-group">
-                      <li><a href="#" class="button">Choose Shirt</a></li>
-                      <li><a href="#" class="button">Add Text</a></li>
-                      <li><a href="#" class="button">Add Clip Art</a></li>
-                      <li><a href="#" class="button">Upload Image</a></li>
-                      <li><a href="#" class="button">Personalize</a></li>
-                      <!--<li><a href="#" class="button">Free Drawing</a></li>-->
-                      <li><a href="#" data-reveal-id="save-design-popup" class="button"> Save Design </a></li>
-                  </ul>
-              </div>
-              <hr/>
+          <div class="small-12 medium-12 large-12 columns">
+              <ul class="button-group radius">
+                  <li><a href="#" id="btnChooseShirt" class="button">Choose Shirt</a></li>
+                  <li><a href="#" id="btnAddText" class="button">Add Text</a></li>
+                  <li><a href="#" id="btnAddclipart" class="button">Add Clip Art</a></li>
+                  <li><a href="#" id="btnUploadImage" class="button">Upload Image</a></li>
+                  <li><a href="#" id="btnPersonalize" class="button">Personalize</a></li>
+                  <!--<li><a href="#" class="button">Free Drawing</a></li>-->
+                  <li><a href="#" id="btnSaveDesign" data-reveal-id="save-design-popup" class="button"> Save Design </a></li>
+              </ul>
           </div>
+          <hr/>
       </div>
        <!--End of First Row Nav bar-->
 
@@ -51,249 +44,264 @@
       <div class="row">
 
           <!--choose tshirt panel start-->
-          <div id="chooseTShirtPanel" class="medium-4 large-4 columns">
-              <h6>Choose shirt:</h6>
+          <div id="chooseTShirtPanel" class="small-4 medium-4 large-4 columns">
+              <h5 class="header"> choose color </h5>
               <div class="row">
-                  <div class="large-6 columns tshirt-info">
-                      <small><b class="">T-Shirts</b></small>
-                      <h5 class="">Gildan Cotton T-Shirt</h5>
-                      <input data-reveal-id="tshirtGallery" id="" type="button" value=" Change Shirt ">
+                  <div class="small-6 medium-6 large-6 columns tshirt-info">
+                      <!--<small><b class="">T-Shirts</b></small>-->
+                      <h5 style="color: goldenrod;">Cotton T-shirts</h5>
+                      <!--<input data-reveal-id="tshirtGallery" id="" type="button" value=" Change Shirt ">-->
                   </div>
-                  <div class="large-5 columns">
+                  <div class="small-5 medium-5 large-5 columns">
                       <img src="img/White-1-F.jpg" alt="T-shirts" class="selected-shirt">
                   </div>
               </div>
+              <br/>
               <fieldset style="margin-left: 10px;margin-bottom: 10px">
-                  <label style="font-weight: bold">Choose Color</label>
+
+                  <label style="font-weight: bold"> colors </label>
+
                   <ul class="color-picker-list regular-colors">
+
                       <li class="color-picker-element regular-color">
-                          <a class="color-picker-canvas regular-color-canvas color-selected" data-id="224"
+                          <a class="color-picker-canvas regular-color-canvas color-selected" data-color="Blue"
+                             data-hex="2445AB" style="background-color: deepskyblue;" title="Blue"></a>
+                      </li>
+
+                      <li class="color-picker-element regular-color">
+                          <a class="color-picker-canvas regular-color-canvas"
+                             data-color="White" style="background-color: ghostwhite;" title="White"></a>
+                      </li>
+
+                      <li class="color-picker-element regular-color">
+                          <a class="color-picker-canvas regular-color-canvas" data-color="Yellow"
+                             style="background-color: yellow;" title="Yellow"></a>
+                      </li>
+
+                      <li class="color-picker-element regular-color">
+                          <a class="color-picker-canvas regular-color-canvas" data-color="Black"
+                             data-hex="#000" style="background-color: #000;" title="Black"></a>
+                      </li>
+
+                      <li class="color-picker-element regular-color">
+                          <a class="color-picker-canvas regular-color-canvas" data-color="Red"
+                             data-hex="e00928" style="background-color: #e00928;" title="Red"></a>
+                      </li>
+
+                      <li class="color-picker-element regular-color">
+                          <a class="color-picker-canvas regular-color-canvas" data-color="Pink"
+                             style="background-color: deeppink;" title="Pink"></a>
+                      </li>
+
+                      <!--unavilable colors-->
+
+                      <li class="color-picker-element regular-color">
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href"
                              data-color="White" data-hex="f6f6f6" style="background-color: #f6f6f6;" title="White"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="225">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="225" data-color="Natural"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-color="Natural"
                              data-hex="e9e3cb" style="background-color: #e9e3cb;" title="Natural"></a>
                       </li>
-                      <li class="color-picker-element regular-color" data-value="226">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="226" data-color="Black"
-                             data-hex="171717" style="background-color: #171717;" title="Black"></a>
-                      </li>
+
                       <li class="color-picker-element regular-color" data-value="227">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="227" data-color="Charcoal"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-color="Charcoal"
                              data-hex="69696b" style="background-color: #69696b;" title="Charcoal"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="228">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="228" data-color="Ash"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-color="Ash"
                              data-hex="e3e4e6" style="background-color: #e3e4e6;" title="Ash"></a>
                       </li>
-                      <li class="color-picker-element regular-color" data-value="229">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="229" data-color="Sports Grey"
-                             data-hex="e1e1e9" style="background-color: #e1e1e9;" title="Sports Grey"></a>
-                      </li>
                       <li class="color-picker-element regular-color" data-value="230">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="230" data-color="Navy"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-color="Navy"
                              data-hex="1c203b" style="background-color: #1c203b;" title="Navy"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="231">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="231" data-color="Royal Blue"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-color="Royal Blue"
                              data-hex="2b5fb2" style="background-color: #2b5fb2;" title="Royal Blue"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="232">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="232" data-color="Sapphire"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-color="Sapphire"
                              data-hex="0387b8" style="background-color: #0387b8;" title="Sapphire"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="235">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="235" data-color="Light Blue"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-color="Light Blue"
                              data-hex="afcdf3" style="background-color: #afcdf3;" title="Light Blue"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="236">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="236" data-color="Indigo Blue"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="236" data-color="Indigo Blue"
                              data-hex="658095" style="background-color: #658095;" title="Indigo Blue"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="237">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="237" data-color="Purple"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-color="Purple"
                              data-hex="4f237a" style="background-color: #4f237a;" title="Purple"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="239">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="239" data-color="Red"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="239" data-color="Red"
                              data-hex="e00928" style="background-color: #e00928;" title="Red"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="240">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="240" data-color="Maroon"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="240" data-color="Maroon"
                              data-hex="721e38" style="background-color: #721e38;" title="Maroon"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="241">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="241" data-color="Cardinal Red"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="241" data-color="Cardinal Red"
                              data-hex="922238" style="background-color: #922238;" title="Cardinal Red"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="244">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="244" data-color="Gold"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="244" data-color="Gold"
                              data-hex="ec8a2a" style="background-color: #ec8a2a;" title="Gold"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="247">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="247" data-color="Sand"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="247" data-color="Sand"
                              data-hex="d1c8b7" style="background-color: #d1c8b7;" title="Sand"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="249">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="249" data-color="Orange"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="249" data-color="Orange"
                              data-hex="ec4c2a" style="background-color: #ec4c2a;" title="Orange"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="250">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="250" data-color="Forest Green"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="250" data-color="Forest Green"
                              data-hex="14370d" style="background-color: #14370d;" title="Forest Green"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="255">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="255" data-color="Dark Chocolate"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="255" data-color="Dark Chocolate"
                              data-hex="2f281c" style="background-color: #2f281c;" title="Dark Chocolate"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2007">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2007" data-color="Yellow Haze"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2007" data-color="Yellow Haze"
                              data-hex="f8c691" style="background-color: #f8c691;" title="Yellow Haze"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2008">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2008" data-color="Violet"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2008" data-color="Violet"
                              data-hex="9395c6" style="background-color: #9395c6;" title="Violet"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2009">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2009"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2009"
                              data-color="Tennessee Orange" data-hex="f67824" style="background-color: #f67824;"
                              title="Tennessee Orange"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2012">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2012" data-color="Old Gold"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2012" data-color="Old Gold"
                              data-hex="e0b06e" style="background-color: #e0b06e;" title="Old Gold"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2013">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2013" data-color="Lime"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2013" data-color="Lime"
                              data-hex="85be49" style="background-color: #85be49;" title="Lime"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2014">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2014" data-color="Light Pink"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2014" data-color="Light Pink"
                              data-hex="FFE4E4" style="background-color: #FFE4E4;" title="Light Pink"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2016">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2016" data-color="Heliconia"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2016" data-color="Heliconia"
                              data-hex="ec2870" style="background-color: #ec2870;" title="Heliconia"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2018">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2018" data-color="Daisy"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2018" data-color="Daisy"
                              data-hex="fbb939" style="background-color: #fbb939;" title="Daisy"></a>
                       </li>
-                      <li class="color-picker-element regular-color" data-value="2019">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2019" data-color="Carolina Blue"
-                             data-hex="6299DD" style="background-color: #6299DD;" title="Carolina Blue"></a>
-                      </li>
                       <li class="color-picker-element regular-color" data-value="2020">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2020" data-color="Azalea"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2020" data-color="Azalea"
                              data-hex="FF76A0" style="background-color: #FF76A0;" title="Azalea"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2305">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2305" data-color="Irish Green"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2305" data-color="Irish Green"
                              data-hex="259858" style="background-color: #259858;" title="Irish Green"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2334">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2334" data-color="Kiwi"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2334" data-color="Kiwi"
                              data-hex="8fbb62" style="background-color: #8fbb62;" title="Kiwi"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2335">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2335" data-color="Military Green"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2335" data-color="Military Green"
                              data-hex="42472a" style="background-color: #42472a;" title="Military Green"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2336">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2336" data-color="Sky"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2336" data-color="Sky"
                              data-hex="9bcfe5" style="background-color: #9bcfe5;" title="Sky"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2344">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2344" data-color="Garnet"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2344" data-color="Garnet"
                              data-hex="761e1c" style="background-color: #761e1c;" title="Garnet"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2456">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2456"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2456"
                              data-color="Antique Cherry Red" data-hex="c93452" style="background-color: #c93452;"
                              title="Antique Cherry Red"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2457">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2457"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2457"
                              data-color="Antique Irish Green" data-hex="02a469" style="background-color: #02a469;"
                              title="Antique Irish Green"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2458">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2458"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2458"
                              data-color="Antique Jade Dome" data-hex="00817f" style="background-color: #00817f;"
                              title="Antique Jade Dome"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2459">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2459" data-color="Antique Orange"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2459" data-color="Antique Orange"
                              data-hex="fc7154" style="background-color: #fc7154;" title="Antique Orange"></a>
                       </li>
-                      <li class="color-picker-element regular-color" data-value="2460">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2460"
-                             data-color="Antique Sapphire" data-hex="0f8fc0" style="background-color: #0f8fc0;"
-                             title="Antique Sapphire"></a>
-                      </li>
+
                       <li class="color-picker-element regular-color" data-value="2461">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2461" data-color="Berry"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2461" data-color="Berry"
                              data-hex="b53f66" style="background-color: #b53f66;" title="Berry"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2462">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2462" data-color="Blackberry"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2462" data-color="Blackberry"
                              data-hex="504259" style="background-color: #504259;" title="Blackberry"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2463">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2463" data-color="Brown Savana"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2463" data-color="Brown Savana"
                              data-hex="9f877b" style="background-color: #9f877b;" title="Brown Savana"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2464">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2464" data-color="Coral Silk"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2464" data-color="Coral Silk"
                              data-hex="ff777f" style="background-color: #ff777f;" title="Coral Silk"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2465">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2465" data-color="Electric Green"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2465" data-color="Electric Green"
                              data-hex="63A54C" style="background-color: #63A54C;" title="Electric Green"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2466">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2466" data-color="Gravel"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2466" data-color="Gravel"
                              data-hex="b3b2b7" style="background-color: #b3b2b7;" title="Gravel"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2467">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2467" data-color="Heather Red"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2467" data-color="Heather Red"
                              data-hex="d64a65" style="background-color: #d64a65;" title="Heather Red"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2468">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2468"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2468"
                              data-color="Heather Sapphire" data-hex="8d596f" style="background-color: #8d596f;"
                              title="Heather Sapphire"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2469">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2469"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2469"
                              data-color="Hthr Military Green" data-hex="888983" style="background-color: #888983;"
                              title="Hthr Military Green"></a>
                       </li>
-                      <li class="color-picker-element regular-color" data-value="2470">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2470" data-color="Ice Grey"
-                             data-hex="BDBECF" style="background-color: #BDBECF;" title="Ice Grey"></a>
-                      </li>
-                      <li class="color-picker-element regular-color" data-value="2471">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2471" data-color="Lilac"
-                             data-hex="433F76" style="background-color: #433F76;" title="Lilac"></a>
-                      </li>
                       <li class="color-picker-element regular-color" data-value="2472">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2472" data-color="Midnight"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2472" data-color="Midnight"
                              data-hex="433F76" style="background-color: #433F76;" title="Midnight"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2473">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2473" data-color="Russet"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2473" data-color="Russet"
                              data-hex="593f4c" style="background-color: #593f4c;" title="Russet"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="2474">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="2474" data-color="Sunset"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="2474" data-color="Sunset"
                              data-hex="C45C3D" style="background-color: #C45C3D;" title="Sunset"></a>
                       </li>
                       <li class="color-picker-element regular-color" data-value="3948">
-                          <a class="color-picker-canvas regular-color-canvas" data-id="3948" data-color="Cobalt"
+                          <a class="color-picker-canvas regular-color-canvas disable_a_href" data-id="3948" data-color="Cobalt"
                              data-hex="2445AB" style="background-color: #2445AB;" title="Cobalt"></a>
                       </li>
+
                   </ul>
+
               </fieldset>
           </div>
           <!--end of choose tshirt panel -->
@@ -405,7 +413,7 @@
           <!--end of tshirt gallery pop-up panel-->
 
           <!--Add-text-panel start-->
-          <div id="text-panel" class="medium-4 large-4 columns">
+          <div id="text-panel" class="small-4 medium-4 large-4 columns">
               <div class="panel" >
                    <h5>Add Text:</h5>
                    <form class="content">
@@ -419,9 +427,9 @@
           <!--Add-text-panel start-->
 
           <!--Text editor-panel start-->
-          <div id="editor-panel" class="medium-4 large-4 columns">
+          <div id="editor-panel" class="small-4 medium-4 large-4 columns">
               <!--Default display none-->
-               <h6>Text Properties:</h6>
+               <h5 class="header">Text Properties</h5>
                 <div class="editor-panel-tools">
 
                     <div class="row">
@@ -522,9 +530,9 @@
           <!--end of Text editor-panel -->
 
           <!--clipart-panel start-->
-          <div id="clip-art-panel" class="medium-4 large-4 columns" >
+          <div id="clip-art-panel" class="small-4 medium-4 large-4 columns" >
             <!--Default display none-->
-                <h6>Clipart:</h6>
+                <h5 class="header">Clipart</h5>
                 <div class="clip-arts-holder">
                     <ul class="small-block-grid-3">
                         <li><img class="th" src="clipart/leaf.svg"><span class="caption"> Leaf </span></li>
@@ -542,8 +550,8 @@
           <!--clipart-panel end-->
 
           <!--clipart editor panel start-->
-          <div id="edit-clipart-panel" class="medium-4 large-4 columns">
-              <h6> Customize: </h6>
+          <div id="edit-clipart-panel" class="small-4 medium-4 large-4 columns">
+              <h5 class="header"> customize clipart </h5>
               <div class="editor-panel-tools">
                   <div class="row">
                       <div class="large-7 columns">
@@ -578,9 +586,24 @@
           </div>
           <!--clipart editor panel end-->
 
+          <!--upload-image panel start-->
+          <div id="upload-image-panel" class="small-4 medium-4 large-4 columns" >
+              <!--Default display none-->
+              <h5 class="header"> Upload Image </h5>
+              <div>
+                  <span>Click Here to Upload</span>
+                  <input id="upload-image" class="input-file" type="file">
+              </div>
+              <div>
+                  <span>Import Design</span>
+                  <input id="import-design" class="input-file" type="file">
+              </div>
+          </div>
+          <!--upload-image panel end-->
+
           <!--personalization panel start-->
-          <div id="personalization-panel" class="medium-4 large-4 columns" >
-              <h6> Team Name & Numbers: </h6>
+          <div id="personalization-panel" class="small-4 medium-4 large-4 columns" >
+              <h5 class="header"> Team Name & Numbers </h5>
               <img src="img/personalization.jpg" alt="Jersy">
 
               <div class="row">
@@ -672,37 +695,25 @@
           </div>
           <!--end of personalization popup panel-->
 
-          <!--upload-image panel start-->
-          <div id="upload-image-panel" class="medium-4 large-4 columns" >
-              <!--Default display none-->
-              <h6>Upload Image :</h6>
-              <div>
-                  <span>Click Here to Upload</span>
-                  <input id="upload-image" class="input-file" type="file">
-              </div>
-              <div>
-                  <span>Import Design</span>
-                  <input id="import-design" class="input-file" type="file">
-              </div>
-          </div>
-          <!--upload-image panel end-->
-
           <!--save design popup start-->
           <div id="save-design-popup" class="reveal-modal small" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 
+              <br/>
               <img src="">
+
               <div class="row">
+                  <br/>
                   <div class="large-4 columns">
                       <label for="fileName" class=" inline"><b>File Name: </b></label>
                   </div>
                   <div class="large-8 columns">
-                      <input id="fileName" type="text" class="radius" style="height: 32px;border: 1px solid darkgray;background: azure;color: dimgray;font-weight: bold; ">
+                      <input id="fileName" type="text" class="radius" style="height: 32px;border: 1px solid darkgray;color: dimgray;font-weight: bold;">
                   </div>
               </div>
 
               <div class="row">
                   <div class="large-4 columns">
-                      <label for="fileType" class=" inline"><b>Save as Type : </b></label>
+                      <label for="fileType" class=" inline"><b>Save as: </b></label>
                   </div>
                   <div class="large-8 columns">
                       <select id="fileType" class="radius" style="height: 32px;border: 1px solid darkgray;color: dimgray;">
@@ -714,49 +725,57 @@
                       </select>
                   </div>
               </div>
-              <input type="button" value=" save " class="save">
-              <input type="button" value="cancel" class="cancel">
+
+              <input type="button" value=" SAVE " id="btnSave" class="button tiny radius success" style=" margin-top: 0px; margin-left: 40%; height: 30px">
+              <input type="button" value="CANCEL" id="btnCancel" class="button tiny radius alert" style=" margin-top: 0px; margin-left: 2%;height: 30px">
               <a class="close-reveal-modal" aria-label="Close">&#215;</a>
           </div>
           <!--end of save design popup -->
 
 
-          <!--Canvas div-->
-          <div id="canvas-container" class="medium-4 large-6 columns" >
+          <!--canvas container div-->
+          <div id="canvas-container" class="small-6 medium-6 large-6 columns" >
               <canvas id="canvas"></canvas>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <input type="button" value=" UNDO " id="undoBtn" class="button tiny radius info" style=" margin-top: 10px; margin-left: 20%; height: 30px">
+              <input type="button" value=" REDO " id="redoBtn" class="button tiny radius info" style=" margin-top: 10px; margin-left: 2%;height: 30px">
           </div>
+          <!--end of canvas container div-->
 
-          <!--TshirtImage div start-->
-          <div class="medium-2 large-2 columns"  >
+          <!--rightmost thumbnail image div start-->
+          <div class="small-2 medium-2 large-2 columns"  >
               <img class="ThumbImg" src="img/Thumb-front.png" alt="F"> <br>
               <img class="ThumbImg" src="img/Thumb-back.png" alt="B" > <br>
               <img class="ThumbImg" src="img/Thumb-left.png" alt="L" > <br>
               <img class="ThumbImg" src="img/Thumb-right.png" alt="R">
           </div>
-          <!--TshirtImage div end-->
+          <!--rightmost thumbnail image div end-->
 
       </div>
        <!--end of second row-->
 
-
-       <script src="js/vendor/modernizr.js"></script>
-       <script src="js/vendor/jquery.js"  type="text/javascript" charset="utf-8"></script>
-       <script src="js/jquery-ui.js"></script>
-       <!--<script src="js/jquery.blockUI.js"></script>-->
-       <script src="js/jquery.ddslick.js"></script>
-       <script src="js/spectrum.js"></script>
-       <!--<script src="js/kendo.ui.core.min.js"></script>-->
-       <script src="js/vendor/fastclick.js"></script>
-       <script src="js/foundation.min.js"></script>
-       <script src="js/fabric.js" type="text/javascript" charset="utf-8" ></script>
-       <script src="js/jszip.js"></script>
-       <script src="js/avro-bangla.js" type="text/javascript" charset="utf-8"></script>
+       <script src="js/library/modernizr.js"></script>
+       <script src="js/library/jquery.js"  type="text/javascript" charset="utf-8"></script>
+       <script src="js/library/jquery-ui.js"></script>
+       <script src="js/library/jquery.ddslick.js"></script>
+       <script src="js/library/spectrum.js"></script>
+       <script src="js/library/fastclick.js"></script>
+       <script src="js/library/foundation.min.js"></script>
+       <script src="js/library/fabric.js" type="text/javascript" charset="utf-8" ></script>
+       <script src="js/library/jszip.js"></script>
+       <script src="js/library/avro-bangla.js" type="text/javascript" charset="utf-8"></script>
        <script src="js/fabric.object.classExtend.js"></script>
        <script src="js/fabric.canvas.classExtend.js"></script>
        <script src="js/text.classExtend.js"></script>
        <script src="js/curveText.class.js"></script>
        <script src="js/app.js"></script>
-       <script src="js/tshirt-data.js"></script>
+       <script src="js/panel.chooseShirt.js"></script>
+       <script src="js/panel.Text.js"></script>
+       <script src="js/panel.clipart.js"></script>
+       <script src="js/panel.imageUpload.js"></script>
+       <script src="js/panel.personalization.js"></script>
+       <script src="js/panel.saveDesign.js"></script>
+       <script src="js/app-data.js"></script>
 
     </body>
 </html>

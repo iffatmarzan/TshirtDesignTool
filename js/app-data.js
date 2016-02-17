@@ -2,6 +2,7 @@
  * Created by bs062 on 11/24/2015.
  */
 var tiles=[];
+
 var shirtCatalog = [
     {
         categoryName: 'T-Shirts',
@@ -263,13 +264,10 @@ $(document).ready(function () {
 
     });
 
-
     $('.main li a').click(function(e){
         console.log( $(e.currentTarget.parentNode).closest('em'))
         console.log(e)
     });
-
-
 
     $(shirtCatalog[0].subCategory).each(function () {
         $(this.items).each(function () {
