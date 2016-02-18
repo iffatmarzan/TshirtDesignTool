@@ -104,7 +104,10 @@ var TShirtDesignTool =
             range: "min",
             max: 100,
             value: 0,
-            slide: TShirtDesignTool.setOutlineWidth
+            slide: function( event, ui ) {
+                return TShirtDesignTool.setOutlineWidth(ui.value *.01);
+            }
+
         });
 
         $("#text-color,#text-outline-color,#svgFill,#numberColor,#nameColor").spectrum({
@@ -404,6 +407,10 @@ var TShirtDesignTool =
 
                 if(TShirtDesignTool.lastSelectedObject && TShirtDesignTool.lastSelectedObject.type==='path-group'){
                     TShirtDesignTool.showPanel('clip-art-panel');
+                }
+
+                if(TShirtDesignTool.lastSelectedObject && TShirtDesignTool.lastSelectedObject.type==='image'){
+                    TShirtDesignTool.showPanel('upload-image-panel');
                 }
 
             }

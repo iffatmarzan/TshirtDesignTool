@@ -40,8 +40,8 @@ fabric.util.object.extend(fabric.Canvas.prototype, {
             action = this._getActionFromCorner(target, corner),
             origin = this._getOriginFromCorner(target, corner);
 
-        if (action == 'remove')
-        {
+        if (action == 'remove'){
+
             //alert('fired in extend');
             if (this.getActiveGroup() && this.getActiveGroup()!= 'undefined')
             {
@@ -53,13 +53,29 @@ fabric.util.object.extend(fabric.Canvas.prototype, {
             }
             else
             {
-                var activeObject=window.canvas.getActiveObject();
-                window.canvas.remove(activeObject);
+                //var activeObject=window.canvas.getActiveObject();
+                //console.log(activeObject);
+                window.canvas.remove(target);
+                //console.log(target);
             }
-            TShirtDesignTool.addTextPanel();
-            //window.canvas.renderAll();
+
+            if( target.type==='text' || target.type==='curvedText' ){
+                TShirtDesignTool.showPanel('text-panel');
+                $('#text-panel textarea').val('');
+            }
+            else if( target.type==='path-group' ){
+                TShirtDesignTool.showPanel('clip-art-panel');
+            }
+            else if( target.type==='image' ){
+                TShirtDesignTool.showPanel('upload-image-panel');
+            }
+            else{
+                TShirtDesignTool.showPanel('chooseTShirtPanel');
+            }
+
             return;
         }
+
         this._currentTransform = {
             target: target,
             action: action,

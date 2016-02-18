@@ -118,11 +118,12 @@ TShirtDesignTool.textEditorPanel = function () {
 };
 
 TShirtDesignTool.updateText = function (text) {
-    if (window.canvas.getActiveObject()) {
-        window.canvas.getActiveObject().setText(text);
-        canvas.renderAll();
-    }
+    var activeObject = TShirtDesignTool.getCanvasActiveObject();
+    if (!activeObject)
+        return;
 
+    activeObject.setText(text);
+    TShirtDesignTool.setTextColor(activeObject.fill);
 };
 
 TShirtDesignTool.setTextFontFamily = function (fontFamily) {
@@ -130,7 +131,7 @@ TShirtDesignTool.setTextFontFamily = function (fontFamily) {
     if (!activeObject)
         return;
     activeObject.setFontFamily(fontFamily);
-    window.canvas.renderAll();
+    TShirtDesignTool.setTextColor(activeObject.fill);
 };
 
 TShirtDesignTool.setTextSpacing = function (e) {
@@ -148,18 +149,30 @@ TShirtDesignTool.setTextSpacing = function (e) {
             spacing: -9 + parseInt(e) * 2
         });
 
-    //if(activeObject.effect=='STRAIGHT')
-    //   var ctext=activeObject.text.split("").join(String.fromCharCode(8239));
-    //activeObject.setText(ctext);
-
-    canvas.renderAll();
+    TShirtDesignTool.setTextColor(activeObject.fill);
 };
 
 TShirtDesignTool.setTextColor = function (textColor) {
+
     var activeObject = TShirtDesignTool.getCanvasActiveObject();
     if (!activeObject)
         return;
+
+    if(activeObject.type==='curvedText' && ( activeObject.getScaleX()!== 1 || activeObject.getScaleY()!== 1 )){
+        var scaleX= activeObject.getScaleX();
+        var scaleY= activeObject.getScaleY();
+        activeObject.setScaleX(1);
+        activeObject.setScaleY(1);
+    }
+
     activeObject.setFill(textColor);
+
+    if(scaleX){
+        activeObject.setScaleX(scaleX);
+    }
+    if(scaleY){
+        activeObject.setScaleY(scaleY);
+    }
     canvas.renderAll();
 };
 
@@ -180,9 +193,10 @@ TShirtDesignTool.setTextArc = function () {
             left: activeObject.left,
             textAlign: 'left',
             fontFamily: activeObject.fontFamily,
+            fontStyle: activeObject.fontStyle,
             fontWeight: activeObject.fontWeight,
-            textDecoration: activeObject.textDecoration,
             fontSize: activeObject.fontSize,
+            textDecoration: activeObject.textDecoration,
             letterSpacing: activeObject.spacing + 9,
             fill: activeObject.fill,
             stroke: activeObject.stroke,
@@ -198,11 +212,10 @@ TShirtDesignTool.setTextArc = function () {
     if (isSetSimpleToArc) {
 
         TShirtDesignTool.arcTextWidth = activeObject.width;
-        console.log(activeObject.originalState);
-        //debugger;
+
         var curveText = new fabric.CurvedText(activeObject.text, {
-            alignX: activeObject.alignX,
-            alignY: activeObject.alignY,
+            scaleX: activeObject.scaleX,
+            scaleY: activeObject.scaleY,
             backgroundColor: activeObject.backgroundColor,
             clipTo: activeObject.clipTo,
             fontFamily: activeObject.fontFamily,
@@ -223,35 +236,17 @@ TShirtDesignTool.setTextArc = function () {
             flipY: activeObject.flipY,
             stroke: activeObject.stroke,
             strokeWidth: activeObject.strokeWidth,
-            //width: activeObject.width,
-            //height: activeObject.height,
             top: activeObject.top,
             left: activeObject.left,
             lineHeight: activeObject.lineHeight,
             originX: activeObject.originX,
-            originY: activeObject.originY,
-            //scaleX: activeObject.getScaleX(),
-            //scaleY: activeObject.getScaleY(),
             transformMatrix: activeObject.transformMatrix,
             visible: activeObject.visible,
             angle: activeObject.angle
-            //originalState: activeObject.originalState
         });
-
-        //for(var property in activeObject.originalState ){
-        //    console.log(activeObject.originalState[property]);
-        //    curveText.property= activeObject.originalState[property];
-        //    debugger;
-        //
-        //}
-        //curveText.originalState= activeObject.originalState;
-        //console.log(curveText.originalState);
 
         window.canvas.remove(activeObject).add(curveText).setActiveObject(curveText).renderAll();
-        TShirtDesignTool.getCanvasActiveObject().set({
-            scaleX: 1.5,
-            scaleY: 1.5
-        });
+
     }
     else {
         // text is arc already. change the radius
@@ -260,28 +255,31 @@ TShirtDesignTool.setTextArc = function () {
             radius: TShirtDesignTool.arcTextWidth * 1.5 - ((TShirtDesignTool.arcTextWidth / 100) * Math.abs(arcSliderValue))
         });
     }
-    canvas.renderAll();
+    TShirtDesignTool.setTextColor(activeObject.fill);
 };
 
 TShirtDesignTool.setTextCircular = function () {
     var activeObject = window.canvas.getActiveObject();
     if (!activeObject)
         return;
-    //var isChecked=$('#text-circular').is(':checked');
-    //console.log(isChecked);
+
     if (textCircular.checked && activeObject.effect !== 'circular') {
+
         $('#textArcSlider').slider({disabled: true});
         var curveText = new fabric.CurvedText(activeObject.text, {
+            scaleX: activeObject.scaleX,
+            scaleY: activeObject.scaleY,
             top: activeObject.top,
             left: activeObject.left,
             fontFamily: activeObject.fontFamily,
+            fontStyle: activeObject.fontStyle,
             fontWeight: activeObject.fontWeight,
+            fontSize: activeObject.fontSize,
             textDecoration: activeObject.textDecoration,
             width: activeObject.width,
             height: activeObject.height,
-            radius: ((activeObject.width / 2 / 3.14) + activeObject.height / 2),
-            effect: 'circular',
-            fontSize: activeObject.fontSize,
+            radius: ((activeObject.width / 2 / 3.14) + activeObject.height / 2),            effect: 'circular',
+
             spacing: 0,
             fill: activeObject.fill,
             textAlign: 'center',
@@ -289,35 +287,39 @@ TShirtDesignTool.setTextCircular = function () {
             strokeWidth: activeObject.strokeWidth,
             angle: activeObject.angle
         });
-        window.canvas.remove(activeObject).add(curveText).setActiveObject(curveText).renderAll();
+        window.canvas.remove(activeObject).add(curveText).setActiveObject(curveText);
     }
 
     if (!textCircular.checked && activeObject.type !== 'text') {
         $('#textArcSlider').slider({disabled: false});
         var SampleText = new fabric.Text(activeObject.text, {
+            scaleX: activeObject.scaleX,
+            scaleY: activeObject.scaleY,
             top: activeObject.top,
             left: activeObject.left,
             textAlign: 'left',
             fontFamily: activeObject.fontFamily,
+            fontStyle: activeObject.fontStyle,
             fontWeight: activeObject.fontWeight,
-            textDecoration: activeObject.textDecoration,
             fontSize: activeObject.fontSize,
+            textDecoration: activeObject.textDecoration,
             letterSpacing: 0,
             fill: activeObject.fill,
             stroke: activeObject.stroke,
             strokeWidth: activeObject.strokeWidth
         });
-        window.canvas.remove(activeObject).add(SampleText).setActiveObject(SampleText).renderAll();
+        window.canvas.remove(activeObject).add(SampleText).setActiveObject(SampleText);
     }
-    //window.canvas.renderAll();
+    TShirtDesignTool.setTextColor(activeObject.fill);
 };
 
 TShirtDesignTool.setFontSize = function () {
     var activeObject = TShirtDesignTool.getCanvasActiveObject();
     if (!activeObject)
         return;
+
     activeObject.set('fontSize', parseInt(fontSizing.value));
-    window.canvas.renderAll();
+    TShirtDesignTool.setTextColor(activeObject.fill);
 };
 
 TShirtDesignTool.setFontStyle = function (fontStyle) {
@@ -357,7 +359,8 @@ TShirtDesignTool.setFontStyle = function (fontStyle) {
             activeObject.setFontStyle('');
         }
     }
-    window.canvas.renderAll();
+
+    TShirtDesignTool.setTextColor(activeObject.fill);
 
     $('#font-style .dd-option-text').each(function () {
         if ((this.innerHTML == activeObject.fontStyle) || ( this.innerHTML == activeObject.fontWeight ) || ( this.innerHTML == activeObject.textDecoration)) {
@@ -376,6 +379,7 @@ TShirtDesignTool.setFontStyle = function (fontStyle) {
 TShirtDesignTool.setOutline = function () {
 
     var activeObject = window.canvas.getActiveObject();
+
     if (textOutline.checked) {
         $("#outline-properties").fadeIn(200);
         if (!activeObject)
@@ -383,18 +387,13 @@ TShirtDesignTool.setOutline = function () {
         $('#text-outline-slider .ui-slider-range').css('background', 'rgb(181,230,29)');
         $('#text-outline-slider .ui-slider-handle').css('background', '#fff');
         $('#text-outline-color').spectrum("set", '#b5e61d');
-        //$('#text-outline-color').val('#b5e61d');
         $('#text-outline-slider').slider('value', 0);
-        return;
+
     }
     else {
-
         $("#outline-properties").hide();
-        if (!activeObject)
-            return;
-        activeObject.setStrokeWidth(0);
+        TShirtDesignTool.setOutlineWidth(0);
     }
-    window.canvas.renderAll();
 };
 
 TShirtDesignTool.setOutlineColor = function (strokeColor) {
@@ -402,21 +401,23 @@ TShirtDesignTool.setOutlineColor = function (strokeColor) {
     var activeObject = TShirtDesignTool.getCanvasActiveObject();
     if (!activeObject)
         return;
+
     activeObject.setStroke(strokeColor);
     var strokeWidth = $("#text-outline-slider").slider("value");
     activeObject.setStrokeWidth(strokeWidth * .01);
     $('#text-outline-slider .ui-slider-range').css('background', strokeColor);
-    window.canvas.renderAll();
+    TShirtDesignTool.setTextColor(activeObject.fill);
 };
 
-TShirtDesignTool.setOutlineWidth = function () {
+TShirtDesignTool.setOutlineWidth = function (strokeWidth) {
+
     var activeObject = TShirtDesignTool.getCanvasActiveObject();
     if (!activeObject)
         return;
+
     activeObject.setStroke($('#text-outline-color').spectrum('get').toHexString());
-    var strokeWidth = ($('#text-outline-slider').slider('value')) * .01;
     activeObject.setStrokeWidth(strokeWidth);
-    window.canvas.renderAll();
+    TShirtDesignTool.setTextColor(activeObject.fill);
 };
 
 // text font data
