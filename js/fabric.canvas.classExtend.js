@@ -42,7 +42,6 @@ fabric.util.object.extend(fabric.Canvas.prototype, {
 
         if (action == 'remove'){
 
-            //alert('fired in extend');
             if (this.getActiveGroup() && this.getActiveGroup()!= 'undefined')
             {
                 this.getActiveGroup().forEachObject(function(o)
@@ -51,29 +50,9 @@ fabric.util.object.extend(fabric.Canvas.prototype, {
                 });
                 this.discardActiveGroup();
             }
-            else
-            {
-                //var activeObject=window.canvas.getActiveObject();
-                //console.log(activeObject);
-                window.canvas.remove(target);
-                //console.log(target);
-            }
-
-            if( target.type==='text' || target.type==='curvedText' ){
-                TShirtDesignTool.showPanel('text-panel');
-                $('#text-panel textarea').val('');
-            }
-            else if( target.type==='path-group' ){
-                TShirtDesignTool.showPanel('clip-art-panel');
-            }
-            else if( target.type==='image' ){
-                TShirtDesignTool.showPanel('upload-image-panel');
-            }
             else{
-                TShirtDesignTool.showPanel('chooseTShirtPanel');
+                window.canvas.remove(target);
             }
-
-            return;
         }
 
         this._currentTransform = {

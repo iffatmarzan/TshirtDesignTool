@@ -78,7 +78,9 @@ var TShirtDesignTool =
             min: -107,
             max: 108,
             value: 0,
-            slide: TShirtDesignTool.setTextArc
+            slide: function( event, ui ) {
+                return TShirtDesignTool.setTextArc(ui.value);
+            }
         });
 
         $('#svgAngle').slider({
@@ -365,7 +367,7 @@ var TShirtDesignTool =
             }
             if (obj.type === 'text' || obj.type === 'curvedText') {
                 obj.on('selected', function () {
-                    TShirtDesignTool.textEditorPanel();
+                    TShirtDesignTool.textEditorPanel(obj);
                 });
             }
             if (obj.type === 'path-group') {
@@ -394,25 +396,12 @@ var TShirtDesignTool =
                     object: obj
                 });
             }
+            TShirtDesignTool.changePanelOnRemove(obj);
         });
 
         canvas.on('mouse:down', function(e){
-
             if(e.target=== undefined){
-
-                if(TShirtDesignTool.lastSelectedObject && TShirtDesignTool.lastSelectedObject.type==='text'){
-                    TShirtDesignTool.showPanel('text-panel');
-                    $('#text-panel textarea').val('');
-                }
-
-                if(TShirtDesignTool.lastSelectedObject && TShirtDesignTool.lastSelectedObject.type==='path-group'){
-                    TShirtDesignTool.showPanel('clip-art-panel');
-                }
-
-                if(TShirtDesignTool.lastSelectedObject && TShirtDesignTool.lastSelectedObject.type==='image'){
-                    TShirtDesignTool.showPanel('upload-image-panel');
-                }
-
+                TShirtDesignTool.changePanelOnRemove(TShirtDesignTool.lastSelectedObject);
             }
         });
 
@@ -423,11 +412,9 @@ var TShirtDesignTool =
         document.onkeydown = function (e) {
             if (46 === e.keyCode || e.keyCode === 110) {
                 var activeObject = window.canvas.getActiveObject();
-                if (activeObject !== null) {
-                    window.canvas.remove(activeObject);
+                if (activeObject) {
+                    window.canvas.remove(activeObject).renderAll();
                 }
-                window.canvas.renderAll();
-                TShirtDesignTool.addTextPanel();
             }
         }
 }
@@ -494,13 +481,27 @@ var TShirtDesignTool =
     //TShirtDesignTool.isUndoMode=true;
 }
     , showPanel: function (panelToshow) {
-
         TShirtDesignTool.panels.forEach(function (panel) {
             panel === panelToshow ? $('#' + panel).fadeIn(500) : $('#' + panel).hide();
         });
 }
     , getCanvasActiveObject: function () {
         return window.canvas.getActiveObject() || window.canvas.item(0);
+}
+    , changePanelOnRemove: function(target){
+        if( target.type==='text' || target.type==='curvedText' ){
+            TShirtDesignTool.showPanel('text-panel');
+            $('#text-panel textarea').val('');
+        }
+        else if( target.type==='path-group' ){
+            TShirtDesignTool.showPanel('clip-art-panel');
+        }
+        else if( target.type==='image' ){
+            TShirtDesignTool.showPanel('upload-image-panel');
+        }
+        else{
+            TShirtDesignTool.showPanel('chooseTShirtPanel');
+        }
 }
 };
 
