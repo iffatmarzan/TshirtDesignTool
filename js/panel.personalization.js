@@ -2,7 +2,7 @@
  * Created by bs062 on 2/16/2016.
  */
 
-TShirtDesignTool.showPersonalizationPopup = function () {
+TShirtDesignTool.prototype.showPersonalizationPopup = function () {
     $('#personalizeDataTable tbody').html('');
     var row = '<tr>' +
         '<td>1</td>' +
@@ -25,7 +25,7 @@ TShirtDesignTool.showPersonalizationPopup = function () {
 
 };
 
-TShirtDesignTool.addPersonalizedName = function () {
+TShirtDesignTool.prototype.addPersonalizedName = function () {
     var personalizeName = new fabric.Text('SAMPLE', {
         left: canvas.getWidth() / 2 - 30,
         top: canvas.getHeight() / 2 - 30,
@@ -37,7 +37,7 @@ TShirtDesignTool.addPersonalizedName = function () {
     TShirtDesignTool.personalizeObjects.push(personalizeName);
 };
 
-TShirtDesignTool.removePersonalizedName = function () {
+TShirtDesignTool.prototype.removePersonalizedName = function () {
     if (window.canvas.getObjects()) {
         $(window.canvas.getObjects()).each(function () {
             if (this.id === 'customName') {
@@ -52,7 +52,7 @@ TShirtDesignTool.removePersonalizedName = function () {
     })
 };
 
-TShirtDesignTool.addPersonalizedNumber = function () {
+TShirtDesignTool.prototype.addPersonalizedNumber = function () {
     var personalizeNumber = new fabric.Text('00', {
         left: canvas.getWidth() / 2 - 30,
         top: canvas.getHeight() / 2 - 30,
@@ -68,7 +68,7 @@ TShirtDesignTool.addPersonalizedNumber = function () {
     TShirtDesignTool.personalizeObjects.push(personalizeNumber);
 };
 
-TShirtDesignTool.removePersonalizedNumber = function () {
+TShirtDesignTool.prototype.removePersonalizedNumber = function () {
     if (window.canvas.getObjects()) {
         $(window.canvas.getObjects()).each(function () {
             if (this.id === 'customNumber') {
@@ -83,7 +83,7 @@ TShirtDesignTool.removePersonalizedNumber = function () {
     })
 };
 
-TShirtDesignTool.setPersonalizedNameColor = function (color) {
+TShirtDesignTool.prototype.setPersonalizedNameColor = function (color) {
     if (window.canvas.getObjects()) {
         $(window.canvas.getObjects()).each(function () {
             if (this.id === 'customName') {
@@ -94,7 +94,7 @@ TShirtDesignTool.setPersonalizedNameColor = function (color) {
     window.canvas.renderAll();
 };
 
-TShirtDesignTool.setPersonalizedNumberColor = function (color) {
+TShirtDesignTool.prototype.setPersonalizedNumberColor = function (color) {
     if (window.canvas.getObjects()) {
         $(window.canvas.getObjects()).each(function () {
             if (this.id === 'customNumber') {
@@ -105,7 +105,7 @@ TShirtDesignTool.setPersonalizedNumberColor = function (color) {
     window.canvas.renderAll();
 };
 
-TShirtDesignTool.setPersonalNameSize = function (inches) {
+TShirtDesignTool.prototype.setPersonalNameSize = function (inches) {
     if (window.canvas.getObjects()) {
         $(window.canvas.getObjects()).each(function () {
             if (this.id === 'customName') {
@@ -117,7 +117,7 @@ TShirtDesignTool.setPersonalNameSize = function (inches) {
     window.canvas.renderAll();
 };
 
-TShirtDesignTool.setPersonalNumberSize = function (inches) {
+TShirtDesignTool.prototype.setPersonalNumberSize = function (inches) {
     if (window.canvas.getObjects()) {
         $(window.canvas.getObjects()).each(function () {
             if (this.id === 'customNumber') {
@@ -129,7 +129,7 @@ TShirtDesignTool.setPersonalNumberSize = function (inches) {
     window.canvas.renderAll();
 };
 
-TShirtDesignTool.changeTshirtSideInPersonalizationMode = function (sideName) {
+TShirtDesignTool.prototype.changeTshirtSideInPersonalizationMode = function (sideName) {
     window.canvas.clear();
     var imageSrc = '/TshirtDesignTool/img/' + TShirtDesignTool.selectedTShirt.color + '-1-' + sideName + '.jpg';
     var img = new Image();
@@ -165,10 +165,10 @@ TShirtDesignTool.changeTshirtSideInPersonalizationMode = function (sideName) {
 };
 
 // store personalization data
-TShirtDesignTool.personalizeJsonData = {
+TShirtDesignTool.prototype.personalizeJsonData = {
     frontTemplate: null,
     backTemplate: null,
     memberList: []
 };
 
-TShirtDesignTool.personalizeObjects = [];
+TShirtDesignTool.prototype.personalizeObjects = [];

@@ -2,7 +2,7 @@
  * Created by bs062 on 2/16/2016.
  */
 
-TShirtDesignTool.saveDesign = function () {
+TShirtDesignTool.prototype.saveDesign = function () {
     if (!fileName.value) {
         fileName.placeholder = '* Required.';
         return false;

@@ -3,9 +3,9 @@
  */
 
  //default selection
-TShirtDesignTool.selectedTShirt= {color: 'Blue', side: 'F'};
+TShirtDesignTool.prototype.selectedTShirt= {color: 'Blue', side: 'F'};
 
-TShirtDesignTool.changeTShirtColor = function (color) {
+TShirtDesignTool.prototype.changeTShirtColor = function (color) {
     var img = new Image();
     img.onload = function () {
         window.canvas.backgroundImage._element.src = img.src;
@@ -31,7 +31,7 @@ TShirtDesignTool.changeTShirtColor = function (color) {
 
 };
 
-TShirtDesignTool.changeTShirtSide = function (sideName) {
+TShirtDesignTool.prototype.changeTShirtSide = function (sideName) {
 
     if (TShirtDesignTool.isPersonalizationMode) {
         //alert(sideName)
@@ -81,7 +81,7 @@ TShirtDesignTool.changeTShirtSide = function (sideName) {
     TShirtDesignTool.selectedTShirt.side = sideName;
 };
 
-TShirtDesignTool.showTShirtCollection= function () {
+TShirtDesignTool.prototype.showTShirtCollection= function () {
     // not implemented yet
     // will show the collection of shirts
 

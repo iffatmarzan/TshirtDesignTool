@@ -2,7 +2,7 @@
  * Created by bs062 on 2/16/2016.
  */
 
-TShirtDesignTool.addClipartToCanvas = function (imageSrc) {
+TShirtDesignTool.prototype.addClipartToCanvas = function (imageSrc) {
     fabric.loadSVGFromURL(imageSrc, function (objects, options) {
         var _canvas = window.canvas;
         var obj = fabric.util.groupSVGElements(objects, options);
@@ -14,11 +14,10 @@ TShirtDesignTool.addClipartToCanvas = function (imageSrc) {
         _canvas.add(obj).renderAll();
     });
 
-
 };
 
-TShirtDesignTool.clipartEditorPanel = function () {
-    TShirtDesignTool.showPanel('edit-clipart-panel');
+TShirtDesignTool.prototype.clipartEditorPanel = function () {
+    this.showPanel('edit-clipart-panel');
     var activeObject = window.canvas.getActiveObject();
     //console.log(activeObject.paths[pathList.options.selectedIndex].fill)
     $('#svgFill').spectrum("set", activeObject.paths[pathList.options.selectedIndex].fill);
@@ -30,10 +29,11 @@ TShirtDesignTool.clipartEditorPanel = function () {
         $('#svgOpacity').slider('value', activeObject.opacity * 100);
 };
 
-TShirtDesignTool.setSvgPathColor = function (fillColor) {
+TShirtDesignTool.prototype.setSvgPathColor = function (fillColor) {
     var activeObject = window.canvas.getActiveObject();
-    if (!activeObject)
+    if (!activeObject){
         return;
+    }
     activeObject.paths[pathList.options.selectedIndex].fill = fillColor;
     //activeObject.paths[pathList.options.selectedIndex].stroke='red';
     //activeObject.paths[pathList.options.selectedIndex].strokeWidth=5;
@@ -41,14 +41,14 @@ TShirtDesignTool.setSvgPathColor = function (fillColor) {
     window.canvas.renderAll();
 };
 
-TShirtDesignTool.svgPathChange = function () {
+TShirtDesignTool.prototype.svgPathChange = function () {
     var activeObject = window.canvas.getActiveObject();
     if (!activeObject)
         return;
     $('#svgFill').spectrum("set", activeObject.paths[pathList.options.selectedIndex].fill);
 };
 
-TShirtDesignTool.setSvgStroke = function (stroke) {
+TShirtDesignTool.prototype.setSvgStroke = function (stroke) {
     var activeObject = window.canvas.getActiveObject();
     if (!activeObject)
         return;
@@ -58,7 +58,7 @@ TShirtDesignTool.setSvgStroke = function (stroke) {
 
 };
 
-TShirtDesignTool.setSvgAngle = function () {
+TShirtDesignTool.prototype.setSvgAngle = function () {
     var activeObject = window.canvas.getActiveObject();
     if (!activeObject)
         return;
@@ -66,7 +66,7 @@ TShirtDesignTool.setSvgAngle = function () {
     window.canvas.renderAll();
 };
 
-TShirtDesignTool.setSvgOpacity = function () {
+TShirtDesignTool.prototype.setSvgOpacity = function () {
     var activeObject = window.canvas.getActiveObject();
     if (!activeObject)
         return;

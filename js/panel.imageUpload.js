@@ -2,7 +2,7 @@
  * Created by bs062 on 2/16/2016.
  */
 
-TShirtDesignTool.uploadImage = function (e) {
+TShirtDesignTool.prototype.uploadImage = function (e) {
     //console.log(e);
     var reader = new FileReader();
     reader.onload = function (event) {
@@ -26,7 +26,7 @@ TShirtDesignTool.uploadImage = function (e) {
 
 };
 
-TShirtDesignTool.importDesign = function (e) {
+TShirtDesignTool.prototype.importDesign = function (e) {
     var reader = new FileReader();
     reader.onload = function (event) {
         //console.log(event.target.result);
