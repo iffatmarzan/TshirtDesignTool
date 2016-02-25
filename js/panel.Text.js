@@ -95,7 +95,7 @@ TShirtDesignTool.prototype.textEditorPanel = function (selectedObject) {
             $('#textArcSlider').slider({disabled: false});
             //console.log(selectedObject.reverse)
             var multiplier = selectedObject.reverse ? 1 : -1;
-            var sliderValue = 150 - ((100 * selectedObject.radius) / TShirtDesignTool.arcTextWidth);
+            var sliderValue = 150 - ((100 * selectedObject.radius) / this.arcTextWidth);
             //console.log(sliderValue)
             $('#textArcSlider').slider('value', multiplier * sliderValue);
         }
@@ -124,20 +124,20 @@ TShirtDesignTool.prototype.textEditorPanel = function (selectedObject) {
 };
 
 TShirtDesignTool.prototype.updateText = function (text) {
-    var activeObject = TShirtDesignTool.getCanvasActiveObject();
+    var activeObject = window.canvas.getActiveObject();
     if (!activeObject)
         return;
 
     activeObject.setText(text);
-    TShirtDesignTool.setTextColor(activeObject.fill);
+    this.setTextColor(activeObject.fill);
 };
 
 TShirtDesignTool.prototype.setTextFontFamily = function (fontFamily) {
-    var activeObject = TShirtDesignTool.getCanvasActiveObject();
+    var activeObject = window.canvas.getActiveObject();;
     if (!activeObject)
         return;
     activeObject.setFontFamily(fontFamily);
-    TShirtDesignTool.setTextColor(activeObject.fill);
+    this.setTextColor(activeObject.fill);
 };
 
 TShirtDesignTool.prototype.setTextSpacing = function (e) {
@@ -156,12 +156,12 @@ TShirtDesignTool.prototype.setTextSpacing = function (e) {
             spacing: -9 + parseInt(e) * 2
         });
 
-    TShirtDesignTool.setTextColor(activeObject.fill);
+    this.setTextColor(activeObject.fill);
 };
 
 TShirtDesignTool.prototype.setTextColor = function (textColor) {
 
-    var activeObject = TShirtDesignTool.getCanvasActiveObject();
+    var activeObject = window.canvas.getActiveObject();;
     if (!activeObject){
         return;
     }
@@ -188,23 +188,23 @@ TShirtDesignTool.prototype.setTextArc= function(value){
         return;
     }
     if( activeObject.type ==='curvedText' &&  ( value > -6 && value < 7) ){
-        TShirtDesignTool.setTextArcToSimple(activeObject);
+        this.setTextArcToSimple(activeObject);
     }
     else if( activeObject.type==='text' &&  ( value < -5 || value > 6) ){
-        TShirtDesignTool.setTextSimpleToArc(activeObject, value);
+        this.setTextSimpleToArc(activeObject, value);
     }
     else{
         activeObject.set({
             reverse: value > 0,
-            radius: TShirtDesignTool.arcTextWidth * 1.5 - ((TShirtDesignTool.arcTextWidth / 100) * Math.abs(value))
+            radius: this.arcTextWidth * 1.5 - ((this.arcTextWidth / 100) * Math.abs(value))
         });
     }
-    TShirtDesignTool.setTextColor(activeObject.fill);
+    this.setTextColor(activeObject.fill);
 }
 
 TShirtDesignTool.prototype.setTextSimpleToArc = function (activeObject, value) {
 
-    TShirtDesignTool.arcTextWidth = activeObject.width;
+    this.arcTextWidth = activeObject.width;
     var curveText = new fabric.CurvedText(activeObject.text, {
         scaleX: activeObject.scaleX,
         scaleY: activeObject.scaleY,
@@ -231,7 +231,7 @@ TShirtDesignTool.prototype.setTextSimpleToArc = function (activeObject, value) {
 
 TShirtDesignTool.prototype.setTextArcToSimple= function(activeObject){
 
-    TShirtDesignTool.arcTextWidth = 0;
+    this.arcTextWidth = 0;
     var SampleText = new fabric.Text(activeObject.text, {
         top: activeObject.top,
         left: activeObject.left,
@@ -305,20 +305,20 @@ TShirtDesignTool.prototype.setTextCircular = function () {
         });
         window.canvas.remove(activeObject).add(SampleText).setActiveObject(SampleText);
     }
-    TShirtDesignTool.setTextColor(activeObject.fill);
+    this.setTextColor(activeObject.fill);
 };
 
 TShirtDesignTool.prototype.setFontSize = function () {
-    var activeObject = TShirtDesignTool.getCanvasActiveObject();
+    var activeObject = window.canvas.getActiveObject();
     if (!activeObject)
         return;
 
     activeObject.set('fontSize', parseInt(fontSizing.value));
-    TShirtDesignTool.setTextColor(activeObject.fill);
+    this.setTextColor(activeObject.fill);
 };
 
 TShirtDesignTool.prototype.setFontStyle = function (fontStyle) {
-    var activeObject = TShirtDesignTool.getCanvasActiveObject();
+    var activeObject = window.canvas.getActiveObject();;
     if (!activeObject)
         return;
 
@@ -355,7 +355,7 @@ TShirtDesignTool.prototype.setFontStyle = function (fontStyle) {
         }
     }
 
-    TShirtDesignTool.setTextColor(activeObject.fill);
+    this.setTextColor(activeObject.fill);
 
     $('#font-style .dd-option-text').each(function () {
         if ((this.innerHTML == activeObject.fontStyle) || ( this.innerHTML == activeObject.fontWeight ) || ( this.innerHTML == activeObject.textDecoration)) {
@@ -387,13 +387,13 @@ TShirtDesignTool.prototype.setOutline = function () {
     }
     else {
         $("#outline-properties").hide();
-        TShirtDesignTool.setOutlineWidth(0);
+        this.setOutlineWidth(0);
     }
 };
 
 TShirtDesignTool.prototype.setOutlineColor = function (strokeColor) {
 
-    var activeObject = TShirtDesignTool.getCanvasActiveObject();
+    var activeObject = window.canvas.getActiveObject();
     if (!activeObject)
         return;
 
@@ -401,18 +401,18 @@ TShirtDesignTool.prototype.setOutlineColor = function (strokeColor) {
     var strokeWidth = $("#text-outline-slider").slider("value");
     activeObject.setStrokeWidth(strokeWidth * .01);
     $('#text-outline-slider .ui-slider-range').css('background', strokeColor);
-    TShirtDesignTool.setTextColor(activeObject.fill);
+    this.setTextColor(activeObject.fill);
 };
 
 TShirtDesignTool.prototype.setOutlineWidth = function (strokeWidth) {
 
-    var activeObject = TShirtDesignTool.getCanvasActiveObject();
+    var activeObject = window.canvas.getActiveObject();
     if (!activeObject)
         return;
 
     activeObject.setStroke($('#text-outline-color').spectrum('get').toHexString());
     activeObject.setStrokeWidth(strokeWidth);
-    TShirtDesignTool.setTextColor(activeObject.fill);
+    this.setTextColor(activeObject.fill);
 };
 
 // text font data

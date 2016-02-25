@@ -34,7 +34,7 @@ TShirtDesignTool.prototype.addPersonalizedName = function () {
         id: 'customName'
     });
     window.canvas.add(personalizeName).renderAll();
-    TShirtDesignTool.personalizeObjects.push(personalizeName);
+    this.personalizeObjects.push(personalizeName);
 };
 
 TShirtDesignTool.prototype.removePersonalizedName = function () {
@@ -45,9 +45,9 @@ TShirtDesignTool.prototype.removePersonalizedName = function () {
             }
         });
     }
-    $(TShirtDesignTool.personalizeObjects).each(function (item) {
+    $(this.personalizeObjects).each(function (item) {
         if (this.id === 'customName') {
-            TShirtDesignTool.personalizeObjects.splice(item, 1);
+            this.personalizeObjects.splice(item, 1);
         }
     })
 };
@@ -65,7 +65,7 @@ TShirtDesignTool.prototype.addPersonalizedNumber = function () {
     personalizeNumber.setScaleX(1.5);
     personalizeNumber.setScaleY(1.5);
     window.canvas.add(personalizeNumber).renderAll();
-    TShirtDesignTool.personalizeObjects.push(personalizeNumber);
+    this.personalizeObjects.push(personalizeNumber);
 };
 
 TShirtDesignTool.prototype.removePersonalizedNumber = function () {
@@ -76,9 +76,9 @@ TShirtDesignTool.prototype.removePersonalizedNumber = function () {
             }
         });
     }
-    $(TShirtDesignTool.personalizeObjects).each(function (item) {
+    $(this.personalizeObjects).each(function (item) {
         if (this.id === 'customNumber') {
-            TShirtDesignTool.personalizeObjects.splice(item, 1);
+            this.personalizeObjects.splice(item, 1);
         }
     })
 };
@@ -131,7 +131,7 @@ TShirtDesignTool.prototype.setPersonalNumberSize = function (inches) {
 
 TShirtDesignTool.prototype.changeTshirtSideInPersonalizationMode = function (sideName) {
     window.canvas.clear();
-    var imageSrc = '/TshirtDesignTool/img/' + TShirtDesignTool.selectedTShirt.color + '-1-' + sideName + '.jpg';
+    var imageSrc = '/TshirtDesignTool/img/' + this.selectedTShirt.color + '-1-' + sideName + '.jpg';
     var img = new Image();
     img.src = imageSrc;
     img.alt = sideName;
@@ -147,7 +147,7 @@ TShirtDesignTool.prototype.changeTshirtSideInPersonalizationMode = function (sid
     };
 
     if (sideName === nameSide.value) {
-        $(TShirtDesignTool.personalizeObjects).each(function () {
+        $(this.personalizeObjects).each(function () {
             if (this.id === 'customName') {
                 window.canvas.add(this).renderAll();
             }
@@ -155,7 +155,7 @@ TShirtDesignTool.prototype.changeTshirtSideInPersonalizationMode = function (sid
     }
 
     if (sideName === numberSide.value) {
-        $(TShirtDesignTool.personalizeObjects).each(function () {
+        $(this.personalizeObjects).each(function () {
             if (this.id === 'customNumber') {
                 window.canvas.add(this).renderAll();
             }
