@@ -1,6 +1,10 @@
-/**
- * Created by bs062 on 10/26/2015.
- */
+/// -------------------------------------------------------------------------
+// <copyright company="BrainStation 23 Ltd.">
+//     Copyright (c) 2016 [BrainStation 23 Ltd.](http://brainstation-23.com/)
+// </copyright>
+// <updated>29-04-2016</updated>
+// <author>Mahbubur Rahman Manik</author>
+// -------------------------------------------------------------------------
 
 var cursorOffset = {
     mt: 0, // n

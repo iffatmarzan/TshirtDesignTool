@@ -1,6 +1,12 @@
-/**
- * Created by Laptop Dream on 10/11/2015.
- */
+// -------------------------------------------------------------------------
+// <copyright company="BrainStation 23 Ltd.">
+//     Copyright (c) 2016 [BrainStation 23 Ltd.](http://brainstation-23.com/)
+// </copyright>
+// <updated>29-04-2016</updated>
+// <author>Mahbubur Rahman Manik</author>
+// -------------------------------------------------------------------------
+
+
 (function (global) {
 
     "use strict";
